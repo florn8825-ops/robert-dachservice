@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { business } from "@/content/site";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
+import { supabaseClient } from "@/lib/supabaseClient";
 
 const TITLE = "Angebot anfordern – Kontakt | Robert Dachservice";
 const DESCRIPTION =
@@ -55,11 +56,38 @@ const labelClass = "block text-sm font-semibold text-navy";
 function KontaktPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
 
-  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function filesToBase64(fileList: FileList | null) {
+    if (!fileList) return [] as Array<{ name: string; type: string; data: string; size: number }>;
+    const arr: Array<{ name: string; type: string; data: string; size: number }> = [];
+    for (let i = 0; i < fileList.length; i++) {
+      const file = fileList[i];
+      const data = await new Promise<string>((res, rej) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const result = reader.result as string;
+          // result like data:<mime>;base64,XXXX
+          const base64 = result.split(",")[1] || "";
+          res(base64);
+        };
+        reader.onerror = (e) => rej(e);
+        reader.readAsDataURL(file);
+      });
+      arr.push({ name: file.name, type: file.type, data, size: file.size });
+    }
+    return arr;
+  }
+
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = Object.fromEntries(new FormData(event.currentTarget).entries());
-    const parsed = schema.safeParse({ ...data, datenschutz: data["datenschutz"] === "on" });
+    setServerError(null);
+    const form = event.currentTarget;
+    const fd = new FormData(form);
+
+    const dataObj = Object.fromEntries(fd.entries());
+    const parsed = schema.safeParse({ ...dataObj, datenschutz: dataObj["datenschutz"] === "on" });
     if (!parsed.success) {
       const next: Record<string, string> = {};
       for (const issue of parsed.error.issues) next[String(issue.path[0])] = issue.message;
@@ -67,8 +95,66 @@ function KontaktPage() {
       setSubmitted(false);
       return;
     }
+
     setErrors({});
-    setSubmitted(true);
+    setLoading(true);
+
+    try {
+      const fileInput = form.querySelector<HTMLInputElement>("#fotos");
+      const files = fileInput?.files || null;
+      const filesPayload = await filesToBase64(files);
+
+      // Limit files and sizes client-side as well
+      if (filesPayload.length > 8) {
+        setServerError("Maximal 8 Fotos erlaubt.");
+        setLoading(false);
+        return;
+      }
+      for (const f of filesPayload) {
+        if (f.size > 6 * 1024 * 1024) {
+          setServerError("Ein Foto darf maximal 6 MB groß sein.");
+          setLoading(false);
+          return;
+        }
+      }
+
+      const payload = {
+        vorname: String(fd.get("vorname") || ""),
+        nachname: String(fd.get("nachname") || ""),
+        telefon: String(fd.get("telefon") || ""),
+        email: String(fd.get("email") || ""),
+        plz: String(fd.get("plz") || ""),
+        ort: String(fd.get("ort") || ""),
+        leistung: String(fd.get("leistung") || ""),
+        beschreibung: String(fd.get("beschreibung") || ""),
+        datenschutz: fd.get("datenschutz") === "on",
+        photos: filesPayload,
+      };
+
+      const res = await fetch("/api/requests", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ message: "Beim Senden ist ein Fehler aufgetreten." }));
+        setServerError(err.message || "Beim Senden ist ein Fehler aufgetreten.");
+        setLoading(false);
+        setSubmitted(false);
+        return;
+      }
+
+      // success
+      setSubmitted(true);
+      form.reset();
+    } catch (e) {
+      console.error(e);
+      setServerError("Beim Senden ist ein Fehler aufgetreten.");
+      setSubmitted(false);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -203,7 +289,7 @@ function KontaktPage() {
                 type="file"
                 multiple
                 accept="image/*"
-                className="mt-2 w-full border border-dashed border-navy/25 bg-card px-4 py-3 text-sm text-muted-foreground file:mr-4 file:border-0 file:bg-navy file:px-4 file:py-2 file:text-sm file:font-semibold file:text-navy-foreground"
+                className="mt-2 w-full border border-dashed border-navy/25 bg-card px-4 py-3 text-sm text-muted-foreground file:mr-4 file:border-0 file:bg-navy file:px-4 file:py-2 file:text-sm file:font-medium"
               />
               <p className="mt-2 text-xs text-muted-foreground">
                 Eigene Fotos des Daches helfen bei der ersten Einschätzung.
@@ -226,9 +312,10 @@ function KontaktPage() {
 
             <button
               type="submit"
-              className="inline-flex items-center justify-center bg-copper px-8 py-3.5 font-[family-name:var(--font-display)] text-sm font-semibold text-copper-foreground transition-colors hover:bg-copper-deep"
+              disabled={loading}
+              className="inline-flex items-center justify-center bg-copper px-8 py-3.5 font-[family-name:var(--font-display)] text-sm font-semibold text-copper-foreground transition-colors hover:bg-copper/90 disabled:opacity-60"
             >
-              Anfrage senden
+              {loading ? "Sende..." : "Anfrage senden"}
             </button>
 
             <p className="text-xs leading-relaxed text-muted-foreground">
@@ -242,6 +329,11 @@ function KontaktPage() {
                   Ihre Angaben sind vollständig. Bitte rufen Sie uns für eine verbindliche Anfrage
                   unter {business.phonePrimary} an – der E-Mail-Versand des Formulars ist noch nicht
                   eingerichtet.
+                </p>
+              )}
+              {serverError && (
+                <p className="border border-destructive/30 bg-destructive/5 px-5 py-4 text-sm text-destructive mt-4">
+                  {serverError}
                 </p>
               )}
             </div>
