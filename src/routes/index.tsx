@@ -8,6 +8,10 @@ const TITLE = "Dachdecker Köln & Bonn | Robert Dachservice";
 const DESCRIPTION =
   "Robert Dachservice – Dachdeckermeisterbetrieb für Köln, Bonn und Umgebung. Dachreparaturen, Dacheindeckung, Dachsanierung, Flachdach, Dämmung und 24/7 Dachnotdienst.";
 
+// Production URL used for canonical links, Open Graph and structured data.
+// If a custom domain is connected later, change this one value.
+const SITE_URL = "https://robert-dachservice.vercel.app";
+
 const faq = [
   {
     q: "Muss bei einer alten Dacheindeckung das komplette Dach erneuert werden?",
@@ -80,24 +84,62 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:site_name", content: "Robert Dachservice" },
+      { property: "og:locale", content: "de_DE" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: SITE_URL }],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faq.map((f) => ({
-            "@type": "Question",
-            name: f.q,
-            acceptedAnswer: { "@type": "Answer", text: f.a },
-          })),
+          "@graph": [
+            {
+              "@type": "LocalBusiness",
+              "@id": `${SITE_URL}/#business`,
+              name: "Robert Dachservice",
+              url: SITE_URL,
+              telephone: business.phonePrimary,
+              description: DESCRIPTION,
+              areaServed: [
+                { "@type": "City", name: "Köln" },
+                { "@type": "City", name: "Bonn" },
+              ],
+              serviceType: [
+                "Dachreparatur",
+                "Dacheindeckung",
+                "Dachsanierung",
+                "Flachdach",
+                "Dämmung",
+                "Dachnotdienst",
+              ],
+            },
+            {
+              "@type": "WebSite",
+              "@id": `${SITE_URL}/#website`,
+              url: SITE_URL,
+              name: "Robert Dachservice",
+              description: DESCRIPTION,
+              publisher: { "@id": `${SITE_URL}/#business` },
+              inLanguage: "de-DE",
+            },
+            {
+              "@type": "FAQPage",
+              mainEntity: faq.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            },
+          ],
         }),
       },
     ],
