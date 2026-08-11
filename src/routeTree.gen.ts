@@ -16,6 +16,7 @@ import { Route as DachdeckerKoelnRouteImport } from './routes/dachdecker-koeln'
 import { Route as DachnotdienstRouteImport } from './routes/dachnotdienst'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as ReferenzenRouteImport } from './routes/referenzen'
 import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
 import { Route as LeistungenDachreparaturRouteImport } from './routes/leistungen/dachreparatur'
@@ -88,6 +89,11 @@ const DatenschutzRoute = DatenschutzRouteImport.update({
 const ImpressumRoute = ImpressumRouteImport.update({
   id: '/impressum',
   path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReferenzenRoute = ReferenzenRouteImport.update({
@@ -319,6 +325,7 @@ export interface FileRoutesByFullPath {
   '/dachnotdienst': typeof DachnotdienstRoute
   '/datenschutz': typeof DatenschutzRoute
   '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
   '/referenzen': typeof ReferenzenRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/leistungen/dachreparatur': typeof LeistungenDachreparaturRoute
@@ -366,6 +373,7 @@ export interface FileRoutesByTo {
   '/dachnotdienst': typeof DachnotdienstRoute
   '/datenschutz': typeof DatenschutzRoute
   '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
   '/referenzen': typeof ReferenzenRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/leistungen/dachreparatur': typeof LeistungenDachreparaturRoute
@@ -414,6 +422,7 @@ export interface FileRoutesById {
   '/dachnotdienst': typeof DachnotdienstRoute
   '/datenschutz': typeof DatenschutzRoute
   '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
   '/referenzen': typeof ReferenzenRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/leistungen/dachreparatur': typeof LeistungenDachreparaturRoute
@@ -463,6 +472,7 @@ export interface FileRouteTypes {
     | '/dachnotdienst'
     | '/datenschutz'
     | '/impressum'
+    | '/kontakt'
     | '/referenzen'
     | '/ueber-uns'
     | '/leistungen/dachreparatur'
@@ -510,6 +520,7 @@ export interface FileRouteTypes {
     | '/dachnotdienst'
     | '/datenschutz'
     | '/impressum'
+    | '/kontakt'
     | '/referenzen'
     | '/ueber-uns'
     | '/leistungen/dachreparatur'
@@ -557,6 +568,7 @@ export interface FileRouteTypes {
     | '/dachnotdienst'
     | '/datenschutz'
     | '/impressum'
+    | '/kontakt'
     | '/referenzen'
     | '/ueber-uns'
     | '/leistungen/dachreparatur'
@@ -605,6 +617,7 @@ export interface RootRouteChildren {
   DachnotdienstRoute: typeof DachnotdienstRoute
   DatenschutzRoute: typeof DatenschutzRoute
   ImpressumRoute: typeof ImpressumRoute
+  KontaktRoute: typeof KontaktRoute
   ReferenzenRoute: typeof ReferenzenRoute
   UeberUnsRoute: typeof UeberUnsRoute
   LeistungenDachreparaturRoute: typeof LeistungenDachreparaturRoute
@@ -694,6 +707,13 @@ declare module '@tanstack/react-router' {
       path: '/impressum'
       fullPath: '/impressum'
       preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/referenzen': {
@@ -973,6 +993,7 @@ const rootRouteChildren: RootRouteChildren = {
   DachnotdienstRoute: DachnotdienstRoute,
   DatenschutzRoute: DatenschutzRoute,
   ImpressumRoute: ImpressumRoute,
+  KontaktRoute: KontaktRoute,
   ReferenzenRoute: ReferenzenRoute,
   UeberUnsRoute: UeberUnsRoute,
   LeistungenDachreparaturRoute: LeistungenDachreparaturRoute,
@@ -1033,3 +1054,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
