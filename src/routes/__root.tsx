@@ -91,6 +91,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "de_DE" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "Dachdecker Köln & Bonn | Robert Dachservice" },
+      { name: "twitter:title", content: "Dachdecker Köln & Bonn | Robert Dachservice" },
+      { property: "og:description", content: "Robert Dachservice – Dachdeckermeisterbetrieb für Köln, Bonn und Umgebung. Dachreparaturen, Dacheindeckung, Dachsanierung, Flachdach, Dämmung und 24/7 Dachnotdienst." },
+      { name: "twitter:description", content: "Robert Dachservice – Dachdeckermeisterbetrieb für Köln, Bonn und Umgebung. Dachreparaturen, Dacheindeckung, Dachsanierung, Flachdach, Dämmung und 24/7 Dachnotdienst." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/f0244069-759a-474b-8776-8c3d9e809784" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/f0244069-759a-474b-8776-8c3d9e809784" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
