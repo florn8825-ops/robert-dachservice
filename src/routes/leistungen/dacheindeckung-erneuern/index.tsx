@@ -4,7 +4,7 @@ import { getPage, pageHead } from "@/content/pages";
 
 const PATH = "/leistungen/dacheindeckung-erneuern";
 
-export const Route = createFileRoute("/leistungen/dacheindeckung-erneuern")({
+export const Route = createFileRoute("/leistungen/dacheindeckung-erneuern/")({
   head: () => pageHead(PATH),
   component: PageRoute,
 });

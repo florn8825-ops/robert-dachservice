@@ -4,7 +4,7 @@ import { getPage, pageHead } from "@/content/pages";
 
 const PATH = "/ratgeber";
 
-export const Route = createFileRoute("/ratgeber")({
+export const Route = createFileRoute("/ratgeber/")({
   head: () => pageHead(PATH),
   component: PageRoute,
 });

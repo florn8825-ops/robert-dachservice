@@ -4,7 +4,7 @@ import { getPage, pageHead } from "@/content/pages";
 
 const PATH = "/leistungen/spenglerarbeiten";
 
-export const Route = createFileRoute("/leistungen/spenglerarbeiten")({
+export const Route = createFileRoute("/leistungen/spenglerarbeiten/")({
   head: () => pageHead(PATH),
   component: PageRoute,
 });
