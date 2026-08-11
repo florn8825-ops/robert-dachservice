@@ -10,33 +10,652 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CookieEinstellungenRouteImport } from './routes/cookie-einstellungen'
+import { Route as DachdeckerBonnRouteImport } from './routes/dachdecker-bonn'
+import { Route as DachdeckerKoelnRouteImport } from './routes/dachdecker-koeln'
+import { Route as DachnotdienstRouteImport } from './routes/dachnotdienst'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
+import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as ReferenzenRouteImport } from './routes/referenzen'
+import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
+import { Route as LeistungenDachreparaturRouteImport } from './routes/leistungen/dachreparatur'
+import { Route as LeistungenDachsanierungRouteImport } from './routes/leistungen/dachsanierung'
+import { Route as LeistungenNeubauNeueindeckungRouteImport } from './routes/leistungen/neubau-neueindeckung'
+import { Route as RatgeberIndexRouteImport } from './routes/ratgeber/index'
+import { Route as RatgeberDacheindeckungErneuernZeitpunktRouteImport } from './routes/ratgeber/dacheindeckung-erneuern-zeitpunkt'
+import { Route as RatgeberDacheindeckungOderDachsanierungRouteImport } from './routes/ratgeber/dacheindeckung-oder-dachsanierung'
+import { Route as RatgeberDachnotdienstWannNoetigRouteImport } from './routes/ratgeber/dachnotdienst-wann-noetig'
+import { Route as RatgeberDachziegelBeschaedigtRouteImport } from './routes/ratgeber/dachziegel-beschaedigt'
+import { Route as RatgeberFlachdachBitumenEpdmPvcRouteImport } from './routes/ratgeber/flachdach-bitumen-epdm-pvc'
+import { Route as RatgeberSchieferDacheindeckungRouteImport } from './routes/ratgeber/schiefer-dacheindeckung'
+import { Route as RatgeberSturmschadenAmDachRouteImport } from './routes/ratgeber/sturmschaden-am-dach'
+import { Route as RatgeberTondachziegelOderBetondachsteineRouteImport } from './routes/ratgeber/tondachziegel-oder-betondachsteine'
+import { Route as RatgeberUndichtesDachRouteImport } from './routes/ratgeber/undichtes-dach'
+import { Route as RatgeberWelcheDachdaemmungRouteImport } from './routes/ratgeber/welche-dachdaemmung'
+import { Route as LeistungenDachdaemmungIndexRouteImport } from './routes/leistungen/dachdaemmung/index'
+import { Route as LeistungenDachdaemmungAufsparrendaemmungRouteImport } from './routes/leistungen/dachdaemmung/aufsparrendaemmung'
+import { Route as LeistungenDachdaemmungDampfbremseRouteImport } from './routes/leistungen/dachdaemmung/dampfbremse'
+import { Route as LeistungenDachdaemmungUntersparrendaemmungRouteImport } from './routes/leistungen/dachdaemmung/untersparrendaemmung'
+import { Route as LeistungenDachdaemmungZwischensparrendaemmungRouteImport } from './routes/leistungen/dachdaemmung/zwischensparrendaemmung'
+import { Route as LeistungenDacheindeckungErneuernIndexRouteImport } from './routes/leistungen/dacheindeckung-erneuern/index'
+import { Route as LeistungenDacheindeckungErneuernBetondachsteineRouteImport } from './routes/leistungen/dacheindeckung-erneuern/betondachsteine'
+import { Route as LeistungenDacheindeckungErneuernBitumenschindelnRouteImport } from './routes/leistungen/dacheindeckung-erneuern/bitumenschindeln'
+import { Route as LeistungenDacheindeckungErneuernMetallBlechRouteImport } from './routes/leistungen/dacheindeckung-erneuern/metall-blech'
+import { Route as LeistungenDacheindeckungErneuernSchieferRouteImport } from './routes/leistungen/dacheindeckung-erneuern/schiefer'
+import { Route as LeistungenDacheindeckungErneuernTondachziegelRouteImport } from './routes/leistungen/dacheindeckung-erneuern/tondachziegel'
+import { Route as LeistungenFlachdachIndexRouteImport } from './routes/leistungen/flachdach/index'
+import { Route as LeistungenFlachdachBitumenRouteImport } from './routes/leistungen/flachdach/bitumen'
+import { Route as LeistungenFlachdachEpdmRouteImport } from './routes/leistungen/flachdach/epdm'
+import { Route as LeistungenFlachdachPvcRouteImport } from './routes/leistungen/flachdach/pvc'
+import { Route as LeistungenSpenglerarbeitenIndexRouteImport } from './routes/leistungen/spenglerarbeiten/index'
+import { Route as LeistungenSpenglerarbeitenBlechverwahrungenRouteImport } from './routes/leistungen/spenglerarbeiten/blechverwahrungen'
+import { Route as LeistungenSpenglerarbeitenDachanschluesseRouteImport } from './routes/leistungen/spenglerarbeiten/dachanschluesse'
+import { Route as LeistungenSpenglerarbeitenDachrinnenRouteImport } from './routes/leistungen/spenglerarbeiten/dachrinnen'
+import { Route as LeistungenSpenglerarbeitenFallrohreRouteImport } from './routes/leistungen/spenglerarbeiten/fallrohre'
+import { Route as LeistungenSpenglerarbeitenKehlenRouteImport } from './routes/leistungen/spenglerarbeiten/kehlen'
+import { Route as LeistungenSpenglerarbeitenOrtgangFirstRouteImport } from './routes/leistungen/spenglerarbeiten/ortgang-first'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CookieEinstellungenRoute = CookieEinstellungenRouteImport.update({
+  id: '/cookie-einstellungen',
+  path: '/cookie-einstellungen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DachdeckerBonnRoute = DachdeckerBonnRouteImport.update({
+  id: '/dachdecker-bonn',
+  path: '/dachdecker-bonn',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DachdeckerKoelnRoute = DachdeckerKoelnRouteImport.update({
+  id: '/dachdecker-koeln',
+  path: '/dachdecker-koeln',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DachnotdienstRoute = DachnotdienstRouteImport.update({
+  id: '/dachnotdienst',
+  path: '/dachnotdienst',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressumRoute = ImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferenzenRoute = ReferenzenRouteImport.update({
+  id: '/referenzen',
+  path: '/referenzen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UeberUnsRoute = UeberUnsRouteImport.update({
+  id: '/ueber-uns',
+  path: '/ueber-uns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeistungenDachreparaturRoute = LeistungenDachreparaturRouteImport.update({
+  id: '/leistungen/dachreparatur',
+  path: '/leistungen/dachreparatur',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeistungenDachsanierungRoute = LeistungenDachsanierungRouteImport.update({
+  id: '/leistungen/dachsanierung',
+  path: '/leistungen/dachsanierung',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeistungenNeubauNeueindeckungRoute =
+  LeistungenNeubauNeueindeckungRouteImport.update({
+    id: '/leistungen/neubau-neueindeckung',
+    path: '/leistungen/neubau-neueindeckung',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RatgeberIndexRoute = RatgeberIndexRouteImport.update({
+  id: '/ratgeber/',
+  path: '/ratgeber/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RatgeberDacheindeckungErneuernZeitpunktRoute =
+  RatgeberDacheindeckungErneuernZeitpunktRouteImport.update({
+    id: '/ratgeber/dacheindeckung-erneuern-zeitpunkt',
+    path: '/ratgeber/dacheindeckung-erneuern-zeitpunkt',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RatgeberDacheindeckungOderDachsanierungRoute =
+  RatgeberDacheindeckungOderDachsanierungRouteImport.update({
+    id: '/ratgeber/dacheindeckung-oder-dachsanierung',
+    path: '/ratgeber/dacheindeckung-oder-dachsanierung',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RatgeberDachnotdienstWannNoetigRoute =
+  RatgeberDachnotdienstWannNoetigRouteImport.update({
+    id: '/ratgeber/dachnotdienst-wann-noetig',
+    path: '/ratgeber/dachnotdienst-wann-noetig',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RatgeberDachziegelBeschaedigtRoute =
+  RatgeberDachziegelBeschaedigtRouteImport.update({
+    id: '/ratgeber/dachziegel-beschaedigt',
+    path: '/ratgeber/dachziegel-beschaedigt',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RatgeberFlachdachBitumenEpdmPvcRoute =
+  RatgeberFlachdachBitumenEpdmPvcRouteImport.update({
+    id: '/ratgeber/flachdach-bitumen-epdm-pvc',
+    path: '/ratgeber/flachdach-bitumen-epdm-pvc',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RatgeberSchieferDacheindeckungRoute =
+  RatgeberSchieferDacheindeckungRouteImport.update({
+    id: '/ratgeber/schiefer-dacheindeckung',
+    path: '/ratgeber/schiefer-dacheindeckung',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RatgeberSturmschadenAmDachRoute =
+  RatgeberSturmschadenAmDachRouteImport.update({
+    id: '/ratgeber/sturmschaden-am-dach',
+    path: '/ratgeber/sturmschaden-am-dach',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RatgeberTondachziegelOderBetondachsteineRoute =
+  RatgeberTondachziegelOderBetondachsteineRouteImport.update({
+    id: '/ratgeber/tondachziegel-oder-betondachsteine',
+    path: '/ratgeber/tondachziegel-oder-betondachsteine',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RatgeberUndichtesDachRoute = RatgeberUndichtesDachRouteImport.update({
+  id: '/ratgeber/undichtes-dach',
+  path: '/ratgeber/undichtes-dach',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RatgeberWelcheDachdaemmungRoute =
+  RatgeberWelcheDachdaemmungRouteImport.update({
+    id: '/ratgeber/welche-dachdaemmung',
+    path: '/ratgeber/welche-dachdaemmung',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenDachdaemmungIndexRoute =
+  LeistungenDachdaemmungIndexRouteImport.update({
+    id: '/leistungen/dachdaemmung/',
+    path: '/leistungen/dachdaemmung/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenDachdaemmungAufsparrendaemmungRoute =
+  LeistungenDachdaemmungAufsparrendaemmungRouteImport.update({
+    id: '/leistungen/dachdaemmung/aufsparrendaemmung',
+    path: '/leistungen/dachdaemmung/aufsparrendaemmung',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenDachdaemmungDampfbremseRoute =
+  LeistungenDachdaemmungDampfbremseRouteImport.update({
+    id: '/leistungen/dachdaemmung/dampfbremse',
+    path: '/leistungen/dachdaemmung/dampfbremse',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenDachdaemmungUntersparrendaemmungRoute =
+  LeistungenDachdaemmungUntersparrendaemmungRouteImport.update({
+    id: '/leistungen/dachdaemmung/untersparrendaemmung',
+    path: '/leistungen/dachdaemmung/untersparrendaemmung',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenDachdaemmungZwischensparrendaemmungRoute =
+  LeistungenDachdaemmungZwischensparrendaemmungRouteImport.update({
+    id: '/leistungen/dachdaemmung/zwischensparrendaemmung',
+    path: '/leistungen/dachdaemmung/zwischensparrendaemmung',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenDacheindeckungErneuernIndexRoute =
+  LeistungenDacheindeckungErneuernIndexRouteImport.update({
+    id: '/leistungen/dacheindeckung-erneuern/',
+    path: '/leistungen/dacheindeckung-erneuern/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenDacheindeckungErneuernBetondachsteineRoute =
+  LeistungenDacheindeckungErneuernBetondachsteineRouteImport.update({
+    id: '/leistungen/dacheindeckung-erneuern/betondachsteine',
+    path: '/leistungen/dacheindeckung-erneuern/betondachsteine',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenDacheindeckungErneuernBitumenschindelnRoute =
+  LeistungenDacheindeckungErneuernBitumenschindelnRouteImport.update({
+    id: '/leistungen/dacheindeckung-erneuern/bitumenschindeln',
+    path: '/leistungen/dacheindeckung-erneuern/bitumenschindeln',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenDacheindeckungErneuernMetallBlechRoute =
+  LeistungenDacheindeckungErneuernMetallBlechRouteImport.update({
+    id: '/leistungen/dacheindeckung-erneuern/metall-blech',
+    path: '/leistungen/dacheindeckung-erneuern/metall-blech',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenDacheindeckungErneuernSchieferRoute =
+  LeistungenDacheindeckungErneuernSchieferRouteImport.update({
+    id: '/leistungen/dacheindeckung-erneuern/schiefer',
+    path: '/leistungen/dacheindeckung-erneuern/schiefer',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenDacheindeckungErneuernTondachziegelRoute =
+  LeistungenDacheindeckungErneuernTondachziegelRouteImport.update({
+    id: '/leistungen/dacheindeckung-erneuern/tondachziegel',
+    path: '/leistungen/dacheindeckung-erneuern/tondachziegel',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenFlachdachIndexRoute =
+  LeistungenFlachdachIndexRouteImport.update({
+    id: '/leistungen/flachdach/',
+    path: '/leistungen/flachdach/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenFlachdachBitumenRoute =
+  LeistungenFlachdachBitumenRouteImport.update({
+    id: '/leistungen/flachdach/bitumen',
+    path: '/leistungen/flachdach/bitumen',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenFlachdachEpdmRoute = LeistungenFlachdachEpdmRouteImport.update({
+  id: '/leistungen/flachdach/epdm',
+  path: '/leistungen/flachdach/epdm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeistungenFlachdachPvcRoute = LeistungenFlachdachPvcRouteImport.update({
+  id: '/leistungen/flachdach/pvc',
+  path: '/leistungen/flachdach/pvc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeistungenSpenglerarbeitenIndexRoute =
+  LeistungenSpenglerarbeitenIndexRouteImport.update({
+    id: '/leistungen/spenglerarbeiten/',
+    path: '/leistungen/spenglerarbeiten/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenSpenglerarbeitenBlechverwahrungenRoute =
+  LeistungenSpenglerarbeitenBlechverwahrungenRouteImport.update({
+    id: '/leistungen/spenglerarbeiten/blechverwahrungen',
+    path: '/leistungen/spenglerarbeiten/blechverwahrungen',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenSpenglerarbeitenDachanschluesseRoute =
+  LeistungenSpenglerarbeitenDachanschluesseRouteImport.update({
+    id: '/leistungen/spenglerarbeiten/dachanschluesse',
+    path: '/leistungen/spenglerarbeiten/dachanschluesse',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenSpenglerarbeitenDachrinnenRoute =
+  LeistungenSpenglerarbeitenDachrinnenRouteImport.update({
+    id: '/leistungen/spenglerarbeiten/dachrinnen',
+    path: '/leistungen/spenglerarbeiten/dachrinnen',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenSpenglerarbeitenFallrohreRoute =
+  LeistungenSpenglerarbeitenFallrohreRouteImport.update({
+    id: '/leistungen/spenglerarbeiten/fallrohre',
+    path: '/leistungen/spenglerarbeiten/fallrohre',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenSpenglerarbeitenKehlenRoute =
+  LeistungenSpenglerarbeitenKehlenRouteImport.update({
+    id: '/leistungen/spenglerarbeiten/kehlen',
+    path: '/leistungen/spenglerarbeiten/kehlen',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenSpenglerarbeitenOrtgangFirstRoute =
+  LeistungenSpenglerarbeitenOrtgangFirstRouteImport.update({
+    id: '/leistungen/spenglerarbeiten/ortgang-first',
+    path: '/leistungen/spenglerarbeiten/ortgang-first',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cookie-einstellungen': typeof CookieEinstellungenRoute
+  '/dachdecker-bonn': typeof DachdeckerBonnRoute
+  '/dachdecker-koeln': typeof DachdeckerKoelnRoute
+  '/dachnotdienst': typeof DachnotdienstRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
+  '/referenzen': typeof ReferenzenRoute
+  '/ueber-uns': typeof UeberUnsRoute
+  '/leistungen/dachreparatur': typeof LeistungenDachreparaturRoute
+  '/leistungen/dachsanierung': typeof LeistungenDachsanierungRoute
+  '/leistungen/neubau-neueindeckung': typeof LeistungenNeubauNeueindeckungRoute
+  '/ratgeber/dacheindeckung-erneuern-zeitpunkt': typeof RatgeberDacheindeckungErneuernZeitpunktRoute
+  '/ratgeber/dacheindeckung-oder-dachsanierung': typeof RatgeberDacheindeckungOderDachsanierungRoute
+  '/ratgeber/dachnotdienst-wann-noetig': typeof RatgeberDachnotdienstWannNoetigRoute
+  '/ratgeber/dachziegel-beschaedigt': typeof RatgeberDachziegelBeschaedigtRoute
+  '/ratgeber/flachdach-bitumen-epdm-pvc': typeof RatgeberFlachdachBitumenEpdmPvcRoute
+  '/ratgeber/schiefer-dacheindeckung': typeof RatgeberSchieferDacheindeckungRoute
+  '/ratgeber/sturmschaden-am-dach': typeof RatgeberSturmschadenAmDachRoute
+  '/ratgeber/tondachziegel-oder-betondachsteine': typeof RatgeberTondachziegelOderBetondachsteineRoute
+  '/ratgeber/undichtes-dach': typeof RatgeberUndichtesDachRoute
+  '/ratgeber/welche-dachdaemmung': typeof RatgeberWelcheDachdaemmungRoute
+  '/ratgeber/': typeof RatgeberIndexRoute
+  '/leistungen/dachdaemmung/aufsparrendaemmung': typeof LeistungenDachdaemmungAufsparrendaemmungRoute
+  '/leistungen/dachdaemmung/dampfbremse': typeof LeistungenDachdaemmungDampfbremseRoute
+  '/leistungen/dachdaemmung/untersparrendaemmung': typeof LeistungenDachdaemmungUntersparrendaemmungRoute
+  '/leistungen/dachdaemmung/zwischensparrendaemmung': typeof LeistungenDachdaemmungZwischensparrendaemmungRoute
+  '/leistungen/dacheindeckung-erneuern/betondachsteine': typeof LeistungenDacheindeckungErneuernBetondachsteineRoute
+  '/leistungen/dacheindeckung-erneuern/bitumenschindeln': typeof LeistungenDacheindeckungErneuernBitumenschindelnRoute
+  '/leistungen/dacheindeckung-erneuern/metall-blech': typeof LeistungenDacheindeckungErneuernMetallBlechRoute
+  '/leistungen/dacheindeckung-erneuern/schiefer': typeof LeistungenDacheindeckungErneuernSchieferRoute
+  '/leistungen/dacheindeckung-erneuern/tondachziegel': typeof LeistungenDacheindeckungErneuernTondachziegelRoute
+  '/leistungen/flachdach/bitumen': typeof LeistungenFlachdachBitumenRoute
+  '/leistungen/flachdach/epdm': typeof LeistungenFlachdachEpdmRoute
+  '/leistungen/flachdach/pvc': typeof LeistungenFlachdachPvcRoute
+  '/leistungen/spenglerarbeiten/blechverwahrungen': typeof LeistungenSpenglerarbeitenBlechverwahrungenRoute
+  '/leistungen/spenglerarbeiten/dachanschluesse': typeof LeistungenSpenglerarbeitenDachanschluesseRoute
+  '/leistungen/spenglerarbeiten/dachrinnen': typeof LeistungenSpenglerarbeitenDachrinnenRoute
+  '/leistungen/spenglerarbeiten/fallrohre': typeof LeistungenSpenglerarbeitenFallrohreRoute
+  '/leistungen/spenglerarbeiten/kehlen': typeof LeistungenSpenglerarbeitenKehlenRoute
+  '/leistungen/spenglerarbeiten/ortgang-first': typeof LeistungenSpenglerarbeitenOrtgangFirstRoute
+  '/leistungen/dachdaemmung/': typeof LeistungenDachdaemmungIndexRoute
+  '/leistungen/dacheindeckung-erneuern/': typeof LeistungenDacheindeckungErneuernIndexRoute
+  '/leistungen/flachdach/': typeof LeistungenFlachdachIndexRoute
+  '/leistungen/spenglerarbeiten/': typeof LeistungenSpenglerarbeitenIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cookie-einstellungen': typeof CookieEinstellungenRoute
+  '/dachdecker-bonn': typeof DachdeckerBonnRoute
+  '/dachdecker-koeln': typeof DachdeckerKoelnRoute
+  '/dachnotdienst': typeof DachnotdienstRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
+  '/referenzen': typeof ReferenzenRoute
+  '/ueber-uns': typeof UeberUnsRoute
+  '/leistungen/dachreparatur': typeof LeistungenDachreparaturRoute
+  '/leistungen/dachsanierung': typeof LeistungenDachsanierungRoute
+  '/leistungen/neubau-neueindeckung': typeof LeistungenNeubauNeueindeckungRoute
+  '/ratgeber/dacheindeckung-erneuern-zeitpunkt': typeof RatgeberDacheindeckungErneuernZeitpunktRoute
+  '/ratgeber/dacheindeckung-oder-dachsanierung': typeof RatgeberDacheindeckungOderDachsanierungRoute
+  '/ratgeber/dachnotdienst-wann-noetig': typeof RatgeberDachnotdienstWannNoetigRoute
+  '/ratgeber/dachziegel-beschaedigt': typeof RatgeberDachziegelBeschaedigtRoute
+  '/ratgeber/flachdach-bitumen-epdm-pvc': typeof RatgeberFlachdachBitumenEpdmPvcRoute
+  '/ratgeber/schiefer-dacheindeckung': typeof RatgeberSchieferDacheindeckungRoute
+  '/ratgeber/sturmschaden-am-dach': typeof RatgeberSturmschadenAmDachRoute
+  '/ratgeber/tondachziegel-oder-betondachsteine': typeof RatgeberTondachziegelOderBetondachsteineRoute
+  '/ratgeber/undichtes-dach': typeof RatgeberUndichtesDachRoute
+  '/ratgeber/welche-dachdaemmung': typeof RatgeberWelcheDachdaemmungRoute
+  '/ratgeber': typeof RatgeberIndexRoute
+  '/leistungen/dachdaemmung/aufsparrendaemmung': typeof LeistungenDachdaemmungAufsparrendaemmungRoute
+  '/leistungen/dachdaemmung/dampfbremse': typeof LeistungenDachdaemmungDampfbremseRoute
+  '/leistungen/dachdaemmung/untersparrendaemmung': typeof LeistungenDachdaemmungUntersparrendaemmungRoute
+  '/leistungen/dachdaemmung/zwischensparrendaemmung': typeof LeistungenDachdaemmungZwischensparrendaemmungRoute
+  '/leistungen/dacheindeckung-erneuern/betondachsteine': typeof LeistungenDacheindeckungErneuernBetondachsteineRoute
+  '/leistungen/dacheindeckung-erneuern/bitumenschindeln': typeof LeistungenDacheindeckungErneuernBitumenschindelnRoute
+  '/leistungen/dacheindeckung-erneuern/metall-blech': typeof LeistungenDacheindeckungErneuernMetallBlechRoute
+  '/leistungen/dacheindeckung-erneuern/schiefer': typeof LeistungenDacheindeckungErneuernSchieferRoute
+  '/leistungen/dacheindeckung-erneuern/tondachziegel': typeof LeistungenDacheindeckungErneuernTondachziegelRoute
+  '/leistungen/flachdach/bitumen': typeof LeistungenFlachdachBitumenRoute
+  '/leistungen/flachdach/epdm': typeof LeistungenFlachdachEpdmRoute
+  '/leistungen/flachdach/pvc': typeof LeistungenFlachdachPvcRoute
+  '/leistungen/spenglerarbeiten/blechverwahrungen': typeof LeistungenSpenglerarbeitenBlechverwahrungenRoute
+  '/leistungen/spenglerarbeiten/dachanschluesse': typeof LeistungenSpenglerarbeitenDachanschluesseRoute
+  '/leistungen/spenglerarbeiten/dachrinnen': typeof LeistungenSpenglerarbeitenDachrinnenRoute
+  '/leistungen/spenglerarbeiten/fallrohre': typeof LeistungenSpenglerarbeitenFallrohreRoute
+  '/leistungen/spenglerarbeiten/kehlen': typeof LeistungenSpenglerarbeitenKehlenRoute
+  '/leistungen/spenglerarbeiten/ortgang-first': typeof LeistungenSpenglerarbeitenOrtgangFirstRoute
+  '/leistungen/dachdaemmung': typeof LeistungenDachdaemmungIndexRoute
+  '/leistungen/dacheindeckung-erneuern': typeof LeistungenDacheindeckungErneuernIndexRoute
+  '/leistungen/flachdach': typeof LeistungenFlachdachIndexRoute
+  '/leistungen/spenglerarbeiten': typeof LeistungenSpenglerarbeitenIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cookie-einstellungen': typeof CookieEinstellungenRoute
+  '/dachdecker-bonn': typeof DachdeckerBonnRoute
+  '/dachdecker-koeln': typeof DachdeckerKoelnRoute
+  '/dachnotdienst': typeof DachnotdienstRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
+  '/referenzen': typeof ReferenzenRoute
+  '/ueber-uns': typeof UeberUnsRoute
+  '/leistungen/dachreparatur': typeof LeistungenDachreparaturRoute
+  '/leistungen/dachsanierung': typeof LeistungenDachsanierungRoute
+  '/leistungen/neubau-neueindeckung': typeof LeistungenNeubauNeueindeckungRoute
+  '/ratgeber/dacheindeckung-erneuern-zeitpunkt': typeof RatgeberDacheindeckungErneuernZeitpunktRoute
+  '/ratgeber/dacheindeckung-oder-dachsanierung': typeof RatgeberDacheindeckungOderDachsanierungRoute
+  '/ratgeber/dachnotdienst-wann-noetig': typeof RatgeberDachnotdienstWannNoetigRoute
+  '/ratgeber/dachziegel-beschaedigt': typeof RatgeberDachziegelBeschaedigtRoute
+  '/ratgeber/flachdach-bitumen-epdm-pvc': typeof RatgeberFlachdachBitumenEpdmPvcRoute
+  '/ratgeber/schiefer-dacheindeckung': typeof RatgeberSchieferDacheindeckungRoute
+  '/ratgeber/sturmschaden-am-dach': typeof RatgeberSturmschadenAmDachRoute
+  '/ratgeber/tondachziegel-oder-betondachsteine': typeof RatgeberTondachziegelOderBetondachsteineRoute
+  '/ratgeber/undichtes-dach': typeof RatgeberUndichtesDachRoute
+  '/ratgeber/welche-dachdaemmung': typeof RatgeberWelcheDachdaemmungRoute
+  '/ratgeber/': typeof RatgeberIndexRoute
+  '/leistungen/dachdaemmung/aufsparrendaemmung': typeof LeistungenDachdaemmungAufsparrendaemmungRoute
+  '/leistungen/dachdaemmung/dampfbremse': typeof LeistungenDachdaemmungDampfbremseRoute
+  '/leistungen/dachdaemmung/untersparrendaemmung': typeof LeistungenDachdaemmungUntersparrendaemmungRoute
+  '/leistungen/dachdaemmung/zwischensparrendaemmung': typeof LeistungenDachdaemmungZwischensparrendaemmungRoute
+  '/leistungen/dacheindeckung-erneuern/betondachsteine': typeof LeistungenDacheindeckungErneuernBetondachsteineRoute
+  '/leistungen/dacheindeckung-erneuern/bitumenschindeln': typeof LeistungenDacheindeckungErneuernBitumenschindelnRoute
+  '/leistungen/dacheindeckung-erneuern/metall-blech': typeof LeistungenDacheindeckungErneuernMetallBlechRoute
+  '/leistungen/dacheindeckung-erneuern/schiefer': typeof LeistungenDacheindeckungErneuernSchieferRoute
+  '/leistungen/dacheindeckung-erneuern/tondachziegel': typeof LeistungenDacheindeckungErneuernTondachziegelRoute
+  '/leistungen/flachdach/bitumen': typeof LeistungenFlachdachBitumenRoute
+  '/leistungen/flachdach/epdm': typeof LeistungenFlachdachEpdmRoute
+  '/leistungen/flachdach/pvc': typeof LeistungenFlachdachPvcRoute
+  '/leistungen/spenglerarbeiten/blechverwahrungen': typeof LeistungenSpenglerarbeitenBlechverwahrungenRoute
+  '/leistungen/spenglerarbeiten/dachanschluesse': typeof LeistungenSpenglerarbeitenDachanschluesseRoute
+  '/leistungen/spenglerarbeiten/dachrinnen': typeof LeistungenSpenglerarbeitenDachrinnenRoute
+  '/leistungen/spenglerarbeiten/fallrohre': typeof LeistungenSpenglerarbeitenFallrohreRoute
+  '/leistungen/spenglerarbeiten/kehlen': typeof LeistungenSpenglerarbeitenKehlenRoute
+  '/leistungen/spenglerarbeiten/ortgang-first': typeof LeistungenSpenglerarbeitenOrtgangFirstRoute
+  '/leistungen/dachdaemmung/': typeof LeistungenDachdaemmungIndexRoute
+  '/leistungen/dacheindeckung-erneuern/': typeof LeistungenDacheindeckungErneuernIndexRoute
+  '/leistungen/flachdach/': typeof LeistungenFlachdachIndexRoute
+  '/leistungen/spenglerarbeiten/': typeof LeistungenSpenglerarbeitenIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/cookie-einstellungen'
+    | '/dachdecker-bonn'
+    | '/dachdecker-koeln'
+    | '/dachnotdienst'
+    | '/datenschutz'
+    | '/impressum'
+    | '/kontakt'
+    | '/referenzen'
+    | '/ueber-uns'
+    | '/leistungen/dachreparatur'
+    | '/leistungen/dachsanierung'
+    | '/leistungen/neubau-neueindeckung'
+    | '/ratgeber/dacheindeckung-erneuern-zeitpunkt'
+    | '/ratgeber/dacheindeckung-oder-dachsanierung'
+    | '/ratgeber/dachnotdienst-wann-noetig'
+    | '/ratgeber/dachziegel-beschaedigt'
+    | '/ratgeber/flachdach-bitumen-epdm-pvc'
+    | '/ratgeber/schiefer-dacheindeckung'
+    | '/ratgeber/sturmschaden-am-dach'
+    | '/ratgeber/tondachziegel-oder-betondachsteine'
+    | '/ratgeber/undichtes-dach'
+    | '/ratgeber/welche-dachdaemmung'
+    | '/ratgeber/'
+    | '/leistungen/dachdaemmung/aufsparrendaemmung'
+    | '/leistungen/dachdaemmung/dampfbremse'
+    | '/leistungen/dachdaemmung/untersparrendaemmung'
+    | '/leistungen/dachdaemmung/zwischensparrendaemmung'
+    | '/leistungen/dacheindeckung-erneuern/betondachsteine'
+    | '/leistungen/dacheindeckung-erneuern/bitumenschindeln'
+    | '/leistungen/dacheindeckung-erneuern/metall-blech'
+    | '/leistungen/dacheindeckung-erneuern/schiefer'
+    | '/leistungen/dacheindeckung-erneuern/tondachziegel'
+    | '/leistungen/flachdach/bitumen'
+    | '/leistungen/flachdach/epdm'
+    | '/leistungen/flachdach/pvc'
+    | '/leistungen/spenglerarbeiten/blechverwahrungen'
+    | '/leistungen/spenglerarbeiten/dachanschluesse'
+    | '/leistungen/spenglerarbeiten/dachrinnen'
+    | '/leistungen/spenglerarbeiten/fallrohre'
+    | '/leistungen/spenglerarbeiten/kehlen'
+    | '/leistungen/spenglerarbeiten/ortgang-first'
+    | '/leistungen/dachdaemmung/'
+    | '/leistungen/dacheindeckung-erneuern/'
+    | '/leistungen/flachdach/'
+    | '/leistungen/spenglerarbeiten/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/cookie-einstellungen'
+    | '/dachdecker-bonn'
+    | '/dachdecker-koeln'
+    | '/dachnotdienst'
+    | '/datenschutz'
+    | '/impressum'
+    | '/kontakt'
+    | '/referenzen'
+    | '/ueber-uns'
+    | '/leistungen/dachreparatur'
+    | '/leistungen/dachsanierung'
+    | '/leistungen/neubau-neueindeckung'
+    | '/ratgeber/dacheindeckung-erneuern-zeitpunkt'
+    | '/ratgeber/dacheindeckung-oder-dachsanierung'
+    | '/ratgeber/dachnotdienst-wann-noetig'
+    | '/ratgeber/dachziegel-beschaedigt'
+    | '/ratgeber/flachdach-bitumen-epdm-pvc'
+    | '/ratgeber/schiefer-dacheindeckung'
+    | '/ratgeber/sturmschaden-am-dach'
+    | '/ratgeber/tondachziegel-oder-betondachsteine'
+    | '/ratgeber/undichtes-dach'
+    | '/ratgeber/welche-dachdaemmung'
+    | '/ratgeber'
+    | '/leistungen/dachdaemmung/aufsparrendaemmung'
+    | '/leistungen/dachdaemmung/dampfbremse'
+    | '/leistungen/dachdaemmung/untersparrendaemmung'
+    | '/leistungen/dachdaemmung/zwischensparrendaemmung'
+    | '/leistungen/dacheindeckung-erneuern/betondachsteine'
+    | '/leistungen/dacheindeckung-erneuern/bitumenschindeln'
+    | '/leistungen/dacheindeckung-erneuern/metall-blech'
+    | '/leistungen/dacheindeckung-erneuern/schiefer'
+    | '/leistungen/dacheindeckung-erneuern/tondachziegel'
+    | '/leistungen/flachdach/bitumen'
+    | '/leistungen/flachdach/epdm'
+    | '/leistungen/flachdach/pvc'
+    | '/leistungen/spenglerarbeiten/blechverwahrungen'
+    | '/leistungen/spenglerarbeiten/dachanschluesse'
+    | '/leistungen/spenglerarbeiten/dachrinnen'
+    | '/leistungen/spenglerarbeiten/fallrohre'
+    | '/leistungen/spenglerarbeiten/kehlen'
+    | '/leistungen/spenglerarbeiten/ortgang-first'
+    | '/leistungen/dachdaemmung'
+    | '/leistungen/dacheindeckung-erneuern'
+    | '/leistungen/flachdach'
+    | '/leistungen/spenglerarbeiten'
+  id:
+    | '__root__'
+    | '/'
+    | '/cookie-einstellungen'
+    | '/dachdecker-bonn'
+    | '/dachdecker-koeln'
+    | '/dachnotdienst'
+    | '/datenschutz'
+    | '/impressum'
+    | '/kontakt'
+    | '/referenzen'
+    | '/ueber-uns'
+    | '/leistungen/dachreparatur'
+    | '/leistungen/dachsanierung'
+    | '/leistungen/neubau-neueindeckung'
+    | '/ratgeber/dacheindeckung-erneuern-zeitpunkt'
+    | '/ratgeber/dacheindeckung-oder-dachsanierung'
+    | '/ratgeber/dachnotdienst-wann-noetig'
+    | '/ratgeber/dachziegel-beschaedigt'
+    | '/ratgeber/flachdach-bitumen-epdm-pvc'
+    | '/ratgeber/schiefer-dacheindeckung'
+    | '/ratgeber/sturmschaden-am-dach'
+    | '/ratgeber/tondachziegel-oder-betondachsteine'
+    | '/ratgeber/undichtes-dach'
+    | '/ratgeber/welche-dachdaemmung'
+    | '/ratgeber/'
+    | '/leistungen/dachdaemmung/aufsparrendaemmung'
+    | '/leistungen/dachdaemmung/dampfbremse'
+    | '/leistungen/dachdaemmung/untersparrendaemmung'
+    | '/leistungen/dachdaemmung/zwischensparrendaemmung'
+    | '/leistungen/dacheindeckung-erneuern/betondachsteine'
+    | '/leistungen/dacheindeckung-erneuern/bitumenschindeln'
+    | '/leistungen/dacheindeckung-erneuern/metall-blech'
+    | '/leistungen/dacheindeckung-erneuern/schiefer'
+    | '/leistungen/dacheindeckung-erneuern/tondachziegel'
+    | '/leistungen/flachdach/bitumen'
+    | '/leistungen/flachdach/epdm'
+    | '/leistungen/flachdach/pvc'
+    | '/leistungen/spenglerarbeiten/blechverwahrungen'
+    | '/leistungen/spenglerarbeiten/dachanschluesse'
+    | '/leistungen/spenglerarbeiten/dachrinnen'
+    | '/leistungen/spenglerarbeiten/fallrohre'
+    | '/leistungen/spenglerarbeiten/kehlen'
+    | '/leistungen/spenglerarbeiten/ortgang-first'
+    | '/leistungen/dachdaemmung/'
+    | '/leistungen/dacheindeckung-erneuern/'
+    | '/leistungen/flachdach/'
+    | '/leistungen/spenglerarbeiten/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CookieEinstellungenRoute: typeof CookieEinstellungenRoute
+  DachdeckerBonnRoute: typeof DachdeckerBonnRoute
+  DachdeckerKoelnRoute: typeof DachdeckerKoelnRoute
+  DachnotdienstRoute: typeof DachnotdienstRoute
+  DatenschutzRoute: typeof DatenschutzRoute
+  ImpressumRoute: typeof ImpressumRoute
+  KontaktRoute: typeof KontaktRoute
+  ReferenzenRoute: typeof ReferenzenRoute
+  UeberUnsRoute: typeof UeberUnsRoute
+  LeistungenDachreparaturRoute: typeof LeistungenDachreparaturRoute
+  LeistungenDachsanierungRoute: typeof LeistungenDachsanierungRoute
+  LeistungenNeubauNeueindeckungRoute: typeof LeistungenNeubauNeueindeckungRoute
+  RatgeberDacheindeckungErneuernZeitpunktRoute: typeof RatgeberDacheindeckungErneuernZeitpunktRoute
+  RatgeberDacheindeckungOderDachsanierungRoute: typeof RatgeberDacheindeckungOderDachsanierungRoute
+  RatgeberDachnotdienstWannNoetigRoute: typeof RatgeberDachnotdienstWannNoetigRoute
+  RatgeberDachziegelBeschaedigtRoute: typeof RatgeberDachziegelBeschaedigtRoute
+  RatgeberFlachdachBitumenEpdmPvcRoute: typeof RatgeberFlachdachBitumenEpdmPvcRoute
+  RatgeberSchieferDacheindeckungRoute: typeof RatgeberSchieferDacheindeckungRoute
+  RatgeberSturmschadenAmDachRoute: typeof RatgeberSturmschadenAmDachRoute
+  RatgeberTondachziegelOderBetondachsteineRoute: typeof RatgeberTondachziegelOderBetondachsteineRoute
+  RatgeberUndichtesDachRoute: typeof RatgeberUndichtesDachRoute
+  RatgeberWelcheDachdaemmungRoute: typeof RatgeberWelcheDachdaemmungRoute
+  RatgeberIndexRoute: typeof RatgeberIndexRoute
+  LeistungenDachdaemmungAufsparrendaemmungRoute: typeof LeistungenDachdaemmungAufsparrendaemmungRoute
+  LeistungenDachdaemmungDampfbremseRoute: typeof LeistungenDachdaemmungDampfbremseRoute
+  LeistungenDachdaemmungUntersparrendaemmungRoute: typeof LeistungenDachdaemmungUntersparrendaemmungRoute
+  LeistungenDachdaemmungZwischensparrendaemmungRoute: typeof LeistungenDachdaemmungZwischensparrendaemmungRoute
+  LeistungenDacheindeckungErneuernBetondachsteineRoute: typeof LeistungenDacheindeckungErneuernBetondachsteineRoute
+  LeistungenDacheindeckungErneuernBitumenschindelnRoute: typeof LeistungenDacheindeckungErneuernBitumenschindelnRoute
+  LeistungenDacheindeckungErneuernMetallBlechRoute: typeof LeistungenDacheindeckungErneuernMetallBlechRoute
+  LeistungenDacheindeckungErneuernSchieferRoute: typeof LeistungenDacheindeckungErneuernSchieferRoute
+  LeistungenDacheindeckungErneuernTondachziegelRoute: typeof LeistungenDacheindeckungErneuernTondachziegelRoute
+  LeistungenFlachdachBitumenRoute: typeof LeistungenFlachdachBitumenRoute
+  LeistungenFlachdachEpdmRoute: typeof LeistungenFlachdachEpdmRoute
+  LeistungenFlachdachPvcRoute: typeof LeistungenFlachdachPvcRoute
+  LeistungenSpenglerarbeitenBlechverwahrungenRoute: typeof LeistungenSpenglerarbeitenBlechverwahrungenRoute
+  LeistungenSpenglerarbeitenDachanschluesseRoute: typeof LeistungenSpenglerarbeitenDachanschluesseRoute
+  LeistungenSpenglerarbeitenDachrinnenRoute: typeof LeistungenSpenglerarbeitenDachrinnenRoute
+  LeistungenSpenglerarbeitenFallrohreRoute: typeof LeistungenSpenglerarbeitenFallrohreRoute
+  LeistungenSpenglerarbeitenKehlenRoute: typeof LeistungenSpenglerarbeitenKehlenRoute
+  LeistungenSpenglerarbeitenOrtgangFirstRoute: typeof LeistungenSpenglerarbeitenOrtgangFirstRoute
+  LeistungenDachdaemmungIndexRoute: typeof LeistungenDachdaemmungIndexRoute
+  LeistungenDacheindeckungErneuernIndexRoute: typeof LeistungenDacheindeckungErneuernIndexRoute
+  LeistungenFlachdachIndexRoute: typeof LeistungenFlachdachIndexRoute
+  LeistungenSpenglerarbeitenIndexRoute: typeof LeistungenSpenglerarbeitenIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +667,390 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cookie-einstellungen': {
+      id: '/cookie-einstellungen'
+      path: '/cookie-einstellungen'
+      fullPath: '/cookie-einstellungen'
+      preLoaderRoute: typeof CookieEinstellungenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dachdecker-bonn': {
+      id: '/dachdecker-bonn'
+      path: '/dachdecker-bonn'
+      fullPath: '/dachdecker-bonn'
+      preLoaderRoute: typeof DachdeckerBonnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dachdecker-koeln': {
+      id: '/dachdecker-koeln'
+      path: '/dachdecker-koeln'
+      fullPath: '/dachdecker-koeln'
+      preLoaderRoute: typeof DachdeckerKoelnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dachnotdienst': {
+      id: '/dachnotdienst'
+      path: '/dachnotdienst'
+      fullPath: '/dachnotdienst'
+      preLoaderRoute: typeof DachnotdienstRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impressum': {
+      id: '/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/referenzen': {
+      id: '/referenzen'
+      path: '/referenzen'
+      fullPath: '/referenzen'
+      preLoaderRoute: typeof ReferenzenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ueber-uns': {
+      id: '/ueber-uns'
+      path: '/ueber-uns'
+      fullPath: '/ueber-uns'
+      preLoaderRoute: typeof UeberUnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/dachreparatur': {
+      id: '/leistungen/dachreparatur'
+      path: '/leistungen/dachreparatur'
+      fullPath: '/leistungen/dachreparatur'
+      preLoaderRoute: typeof LeistungenDachreparaturRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/dachsanierung': {
+      id: '/leistungen/dachsanierung'
+      path: '/leistungen/dachsanierung'
+      fullPath: '/leistungen/dachsanierung'
+      preLoaderRoute: typeof LeistungenDachsanierungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/neubau-neueindeckung': {
+      id: '/leistungen/neubau-neueindeckung'
+      path: '/leistungen/neubau-neueindeckung'
+      fullPath: '/leistungen/neubau-neueindeckung'
+      preLoaderRoute: typeof LeistungenNeubauNeueindeckungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber/': {
+      id: '/ratgeber/'
+      path: '/ratgeber'
+      fullPath: '/ratgeber/'
+      preLoaderRoute: typeof RatgeberIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber/dacheindeckung-erneuern-zeitpunkt': {
+      id: '/ratgeber/dacheindeckung-erneuern-zeitpunkt'
+      path: '/ratgeber/dacheindeckung-erneuern-zeitpunkt'
+      fullPath: '/ratgeber/dacheindeckung-erneuern-zeitpunkt'
+      preLoaderRoute: typeof RatgeberDacheindeckungErneuernZeitpunktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber/dacheindeckung-oder-dachsanierung': {
+      id: '/ratgeber/dacheindeckung-oder-dachsanierung'
+      path: '/ratgeber/dacheindeckung-oder-dachsanierung'
+      fullPath: '/ratgeber/dacheindeckung-oder-dachsanierung'
+      preLoaderRoute: typeof RatgeberDacheindeckungOderDachsanierungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber/dachnotdienst-wann-noetig': {
+      id: '/ratgeber/dachnotdienst-wann-noetig'
+      path: '/ratgeber/dachnotdienst-wann-noetig'
+      fullPath: '/ratgeber/dachnotdienst-wann-noetig'
+      preLoaderRoute: typeof RatgeberDachnotdienstWannNoetigRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber/dachziegel-beschaedigt': {
+      id: '/ratgeber/dachziegel-beschaedigt'
+      path: '/ratgeber/dachziegel-beschaedigt'
+      fullPath: '/ratgeber/dachziegel-beschaedigt'
+      preLoaderRoute: typeof RatgeberDachziegelBeschaedigtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber/flachdach-bitumen-epdm-pvc': {
+      id: '/ratgeber/flachdach-bitumen-epdm-pvc'
+      path: '/ratgeber/flachdach-bitumen-epdm-pvc'
+      fullPath: '/ratgeber/flachdach-bitumen-epdm-pvc'
+      preLoaderRoute: typeof RatgeberFlachdachBitumenEpdmPvcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber/schiefer-dacheindeckung': {
+      id: '/ratgeber/schiefer-dacheindeckung'
+      path: '/ratgeber/schiefer-dacheindeckung'
+      fullPath: '/ratgeber/schiefer-dacheindeckung'
+      preLoaderRoute: typeof RatgeberSchieferDacheindeckungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber/sturmschaden-am-dach': {
+      id: '/ratgeber/sturmschaden-am-dach'
+      path: '/ratgeber/sturmschaden-am-dach'
+      fullPath: '/ratgeber/sturmschaden-am-dach'
+      preLoaderRoute: typeof RatgeberSturmschadenAmDachRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber/tondachziegel-oder-betondachsteine': {
+      id: '/ratgeber/tondachziegel-oder-betondachsteine'
+      path: '/ratgeber/tondachziegel-oder-betondachsteine'
+      fullPath: '/ratgeber/tondachziegel-oder-betondachsteine'
+      preLoaderRoute: typeof RatgeberTondachziegelOderBetondachsteineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber/undichtes-dach': {
+      id: '/ratgeber/undichtes-dach'
+      path: '/ratgeber/undichtes-dach'
+      fullPath: '/ratgeber/undichtes-dach'
+      preLoaderRoute: typeof RatgeberUndichtesDachRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber/welche-dachdaemmung': {
+      id: '/ratgeber/welche-dachdaemmung'
+      path: '/ratgeber/welche-dachdaemmung'
+      fullPath: '/ratgeber/welche-dachdaemmung'
+      preLoaderRoute: typeof RatgeberWelcheDachdaemmungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/dachdaemmung/': {
+      id: '/leistungen/dachdaemmung/'
+      path: '/leistungen/dachdaemmung'
+      fullPath: '/leistungen/dachdaemmung/'
+      preLoaderRoute: typeof LeistungenDachdaemmungIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/dachdaemmung/aufsparrendaemmung': {
+      id: '/leistungen/dachdaemmung/aufsparrendaemmung'
+      path: '/leistungen/dachdaemmung/aufsparrendaemmung'
+      fullPath: '/leistungen/dachdaemmung/aufsparrendaemmung'
+      preLoaderRoute: typeof LeistungenDachdaemmungAufsparrendaemmungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/dachdaemmung/dampfbremse': {
+      id: '/leistungen/dachdaemmung/dampfbremse'
+      path: '/leistungen/dachdaemmung/dampfbremse'
+      fullPath: '/leistungen/dachdaemmung/dampfbremse'
+      preLoaderRoute: typeof LeistungenDachdaemmungDampfbremseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/dachdaemmung/untersparrendaemmung': {
+      id: '/leistungen/dachdaemmung/untersparrendaemmung'
+      path: '/leistungen/dachdaemmung/untersparrendaemmung'
+      fullPath: '/leistungen/dachdaemmung/untersparrendaemmung'
+      preLoaderRoute: typeof LeistungenDachdaemmungUntersparrendaemmungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/dachdaemmung/zwischensparrendaemmung': {
+      id: '/leistungen/dachdaemmung/zwischensparrendaemmung'
+      path: '/leistungen/dachdaemmung/zwischensparrendaemmung'
+      fullPath: '/leistungen/dachdaemmung/zwischensparrendaemmung'
+      preLoaderRoute: typeof LeistungenDachdaemmungZwischensparrendaemmungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/dacheindeckung-erneuern/': {
+      id: '/leistungen/dacheindeckung-erneuern/'
+      path: '/leistungen/dacheindeckung-erneuern'
+      fullPath: '/leistungen/dacheindeckung-erneuern/'
+      preLoaderRoute: typeof LeistungenDacheindeckungErneuernIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/dacheindeckung-erneuern/betondachsteine': {
+      id: '/leistungen/dacheindeckung-erneuern/betondachsteine'
+      path: '/leistungen/dacheindeckung-erneuern/betondachsteine'
+      fullPath: '/leistungen/dacheindeckung-erneuern/betondachsteine'
+      preLoaderRoute: typeof LeistungenDacheindeckungErneuernBetondachsteineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/dacheindeckung-erneuern/bitumenschindeln': {
+      id: '/leistungen/dacheindeckung-erneuern/bitumenschindeln'
+      path: '/leistungen/dacheindeckung-erneuern/bitumenschindeln'
+      fullPath: '/leistungen/dacheindeckung-erneuern/bitumenschindeln'
+      preLoaderRoute: typeof LeistungenDacheindeckungErneuernBitumenschindelnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/dacheindeckung-erneuern/metall-blech': {
+      id: '/leistungen/dacheindeckung-erneuern/metall-blech'
+      path: '/leistungen/dacheindeckung-erneuern/metall-blech'
+      fullPath: '/leistungen/dacheindeckung-erneuern/metall-blech'
+      preLoaderRoute: typeof LeistungenDacheindeckungErneuernMetallBlechRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/dacheindeckung-erneuern/schiefer': {
+      id: '/leistungen/dacheindeckung-erneuern/schiefer'
+      path: '/leistungen/dacheindeckung-erneuern/schiefer'
+      fullPath: '/leistungen/dacheindeckung-erneuern/schiefer'
+      preLoaderRoute: typeof LeistungenDacheindeckungErneuernSchieferRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/dacheindeckung-erneuern/tondachziegel': {
+      id: '/leistungen/dacheindeckung-erneuern/tondachziegel'
+      path: '/leistungen/dacheindeckung-erneuern/tondachziegel'
+      fullPath: '/leistungen/dacheindeckung-erneuern/tondachziegel'
+      preLoaderRoute: typeof LeistungenDacheindeckungErneuernTondachziegelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/flachdach/': {
+      id: '/leistungen/flachdach/'
+      path: '/leistungen/flachdach'
+      fullPath: '/leistungen/flachdach/'
+      preLoaderRoute: typeof LeistungenFlachdachIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/flachdach/bitumen': {
+      id: '/leistungen/flachdach/bitumen'
+      path: '/leistungen/flachdach/bitumen'
+      fullPath: '/leistungen/flachdach/bitumen'
+      preLoaderRoute: typeof LeistungenFlachdachBitumenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/flachdach/epdm': {
+      id: '/leistungen/flachdach/epdm'
+      path: '/leistungen/flachdach/epdm'
+      fullPath: '/leistungen/flachdach/epdm'
+      preLoaderRoute: typeof LeistungenFlachdachEpdmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/flachdach/pvc': {
+      id: '/leistungen/flachdach/pvc'
+      path: '/leistungen/flachdach/pvc'
+      fullPath: '/leistungen/flachdach/pvc'
+      preLoaderRoute: typeof LeistungenFlachdachPvcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/spenglerarbeiten/': {
+      id: '/leistungen/spenglerarbeiten/'
+      path: '/leistungen/spenglerarbeiten'
+      fullPath: '/leistungen/spenglerarbeiten/'
+      preLoaderRoute: typeof LeistungenSpenglerarbeitenIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/spenglerarbeiten/blechverwahrungen': {
+      id: '/leistungen/spenglerarbeiten/blechverwahrungen'
+      path: '/leistungen/spenglerarbeiten/blechverwahrungen'
+      fullPath: '/leistungen/spenglerarbeiten/blechverwahrungen'
+      preLoaderRoute: typeof LeistungenSpenglerarbeitenBlechverwahrungenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/spenglerarbeiten/dachanschluesse': {
+      id: '/leistungen/spenglerarbeiten/dachanschluesse'
+      path: '/leistungen/spenglerarbeiten/dachanschluesse'
+      fullPath: '/leistungen/spenglerarbeiten/dachanschluesse'
+      preLoaderRoute: typeof LeistungenSpenglerarbeitenDachanschluesseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/spenglerarbeiten/dachrinnen': {
+      id: '/leistungen/spenglerarbeiten/dachrinnen'
+      path: '/leistungen/spenglerarbeiten/dachrinnen'
+      fullPath: '/leistungen/spenglerarbeiten/dachrinnen'
+      preLoaderRoute: typeof LeistungenSpenglerarbeitenDachrinnenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/spenglerarbeiten/fallrohre': {
+      id: '/leistungen/spenglerarbeiten/fallrohre'
+      path: '/leistungen/spenglerarbeiten/fallrohre'
+      fullPath: '/leistungen/spenglerarbeiten/fallrohre'
+      preLoaderRoute: typeof LeistungenSpenglerarbeitenFallrohreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/spenglerarbeiten/kehlen': {
+      id: '/leistungen/spenglerarbeiten/kehlen'
+      path: '/leistungen/spenglerarbeiten/kehlen'
+      fullPath: '/leistungen/spenglerarbeiten/kehlen'
+      preLoaderRoute: typeof LeistungenSpenglerarbeitenKehlenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen/spenglerarbeiten/ortgang-first': {
+      id: '/leistungen/spenglerarbeiten/ortgang-first'
+      path: '/leistungen/spenglerarbeiten/ortgang-first'
+      fullPath: '/leistungen/spenglerarbeiten/ortgang-first'
+      preLoaderRoute: typeof LeistungenSpenglerarbeitenOrtgangFirstRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CookieEinstellungenRoute: CookieEinstellungenRoute,
+  DachdeckerBonnRoute: DachdeckerBonnRoute,
+  DachdeckerKoelnRoute: DachdeckerKoelnRoute,
+  DachnotdienstRoute: DachnotdienstRoute,
+  DatenschutzRoute: DatenschutzRoute,
+  ImpressumRoute: ImpressumRoute,
+  KontaktRoute: KontaktRoute,
+  ReferenzenRoute: ReferenzenRoute,
+  UeberUnsRoute: UeberUnsRoute,
+  LeistungenDachreparaturRoute: LeistungenDachreparaturRoute,
+  LeistungenDachsanierungRoute: LeistungenDachsanierungRoute,
+  LeistungenNeubauNeueindeckungRoute: LeistungenNeubauNeueindeckungRoute,
+  RatgeberDacheindeckungErneuernZeitpunktRoute:
+    RatgeberDacheindeckungErneuernZeitpunktRoute,
+  RatgeberDacheindeckungOderDachsanierungRoute:
+    RatgeberDacheindeckungOderDachsanierungRoute,
+  RatgeberDachnotdienstWannNoetigRoute: RatgeberDachnotdienstWannNoetigRoute,
+  RatgeberDachziegelBeschaedigtRoute: RatgeberDachziegelBeschaedigtRoute,
+  RatgeberFlachdachBitumenEpdmPvcRoute: RatgeberFlachdachBitumenEpdmPvcRoute,
+  RatgeberSchieferDacheindeckungRoute: RatgeberSchieferDacheindeckungRoute,
+  RatgeberSturmschadenAmDachRoute: RatgeberSturmschadenAmDachRoute,
+  RatgeberTondachziegelOderBetondachsteineRoute:
+    RatgeberTondachziegelOderBetondachsteineRoute,
+  RatgeberUndichtesDachRoute: RatgeberUndichtesDachRoute,
+  RatgeberWelcheDachdaemmungRoute: RatgeberWelcheDachdaemmungRoute,
+  RatgeberIndexRoute: RatgeberIndexRoute,
+  LeistungenDachdaemmungAufsparrendaemmungRoute:
+    LeistungenDachdaemmungAufsparrendaemmungRoute,
+  LeistungenDachdaemmungDampfbremseRoute:
+    LeistungenDachdaemmungDampfbremseRoute,
+  LeistungenDachdaemmungUntersparrendaemmungRoute:
+    LeistungenDachdaemmungUntersparrendaemmungRoute,
+  LeistungenDachdaemmungZwischensparrendaemmungRoute:
+    LeistungenDachdaemmungZwischensparrendaemmungRoute,
+  LeistungenDacheindeckungErneuernBetondachsteineRoute:
+    LeistungenDacheindeckungErneuernBetondachsteineRoute,
+  LeistungenDacheindeckungErneuernBitumenschindelnRoute:
+    LeistungenDacheindeckungErneuernBitumenschindelnRoute,
+  LeistungenDacheindeckungErneuernMetallBlechRoute:
+    LeistungenDacheindeckungErneuernMetallBlechRoute,
+  LeistungenDacheindeckungErneuernSchieferRoute:
+    LeistungenDacheindeckungErneuernSchieferRoute,
+  LeistungenDacheindeckungErneuernTondachziegelRoute:
+    LeistungenDacheindeckungErneuernTondachziegelRoute,
+  LeistungenFlachdachBitumenRoute: LeistungenFlachdachBitumenRoute,
+  LeistungenFlachdachEpdmRoute: LeistungenFlachdachEpdmRoute,
+  LeistungenFlachdachPvcRoute: LeistungenFlachdachPvcRoute,
+  LeistungenSpenglerarbeitenBlechverwahrungenRoute:
+    LeistungenSpenglerarbeitenBlechverwahrungenRoute,
+  LeistungenSpenglerarbeitenDachanschluesseRoute:
+    LeistungenSpenglerarbeitenDachanschluesseRoute,
+  LeistungenSpenglerarbeitenDachrinnenRoute:
+    LeistungenSpenglerarbeitenDachrinnenRoute,
+  LeistungenSpenglerarbeitenFallrohreRoute:
+    LeistungenSpenglerarbeitenFallrohreRoute,
+  LeistungenSpenglerarbeitenKehlenRoute: LeistungenSpenglerarbeitenKehlenRoute,
+  LeistungenSpenglerarbeitenOrtgangFirstRoute:
+    LeistungenSpenglerarbeitenOrtgangFirstRoute,
+  LeistungenDachdaemmungIndexRoute: LeistungenDachdaemmungIndexRoute,
+  LeistungenDacheindeckungErneuernIndexRoute:
+    LeistungenDacheindeckungErneuernIndexRoute,
+  LeistungenFlachdachIndexRoute: LeistungenFlachdachIndexRoute,
+  LeistungenSpenglerarbeitenIndexRoute: LeistungenSpenglerarbeitenIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
