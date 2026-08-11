@@ -134,7 +134,7 @@ function Index() {
           <ImagePlaceholder
             label="Hero Foto – wird später ersetzt"
             ratio="photo"
-            className="border-navy-foreground/20 bg-navy-soft/40"
+            tone="dark"
           />
         </div>
       </section>
