@@ -4,60 +4,16 @@ import { CtaLink } from "./CtaLink";
 
 export function PromoPopup() {
   const [open, setOpen] = useState(false);
-  const [typedText, setTypedText] = useState("");
 
   const headline = "Diesen Monat haben wir folgende Sonderaktion:";
 
   useEffect(() => {
-    let opened = false;
-
-    const showPopup = () => {
-      if (opened) return;
-
-      opened = true;
+    const timer = window.setTimeout(() => {
       setOpen(true);
-      window.removeEventListener("scroll", handleScroll);
-    };
+    }, 3000);
 
-    const handleScroll = () => {
-      const scrollable =
-        document.documentElement.scrollHeight - window.innerHeight;
-
-      if (scrollable <= 0) return;
-
-      const scrollPercent = window.scrollY / scrollable;
-
-      if (scrollPercent >= 0.4) {
-        showPopup();
-      }
-    };
-
-    const timer = window.setTimeout(showPopup, 3000);
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.clearTimeout(timer);
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    if (!open) return;
-
-    let index = 0;
-
-    const timer = window.setInterval(() => {
-      index += 1;
-      setTypedText(headline.slice(0, index));
-
-      if (index >= headline.length) {
-        window.clearInterval(timer);
-      }
-    }, 35);
-
-    return () => window.clearInterval(timer);
-  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -79,7 +35,7 @@ export function PromoPopup() {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy/70 px-4 py-6 backdrop-blur-sm"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-navy/70 px-4 py-6 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-labelledby="promo-title"
@@ -101,32 +57,37 @@ export function PromoPopup() {
 
           <h2
             id="promo-title"
-            className="mt-3 max-w-[430px] font-[family-name:var(--font-display)] text-2xl font-extrabold leading-tight text-navy sm:text-3xl"
+            className="mt-3 max-w-[430px] pr-10 font-[family-name:var(--font-display)] text-2xl font-extrabold leading-tight text-navy sm:text-3xl"
           >
-            {typedText}
-            <span
-              className="ml-1 inline-block h-7 w-px translate-y-1 bg-copper motion-safe:animate-pulse"
-              aria-hidden="true"
-            />
+            {headline}
           </h2>
 
           <ul className="mt-7 space-y-4">
             <li className="flex gap-3 text-base leading-relaxed text-navy/85">
-              <span className="mt-2 h-2 w-2 shrink-0 rotate-45 bg-copper" />
+              <span
+                aria-hidden="true"
+                className="mt-2 h-2 w-2 shrink-0 rotate-45 bg-copper"
+              />
               <span>
                 Eine <strong>kostenlose Dachinspektion</strong>
               </span>
             </li>
 
             <li className="flex gap-3 text-base leading-relaxed text-navy/85">
-              <span className="mt-2 h-2 w-2 shrink-0 rotate-45 bg-copper" />
+              <span
+                aria-hidden="true"
+                className="mt-2 h-2 w-2 shrink-0 rotate-45 bg-copper"
+              />
               <span>
                 <strong>Kostenloser Materialtransport</strong>
               </span>
             </li>
 
             <li className="flex gap-3 text-base leading-relaxed text-navy/85">
-              <span className="mt-2 h-2 w-2 shrink-0 rotate-45 bg-copper" />
+              <span
+                aria-hidden="true"
+                className="mt-2 h-2 w-2 shrink-0 rotate-45 bg-copper"
+              />
               <span>
                 <strong>15 % Rabatt auf die Arbeitskosten</strong>
               </span>
@@ -134,9 +95,7 @@ export function PromoPopup() {
           </ul>
 
           <div className="mt-8">
-            <CtaLink to="/kontakt">
-              Sonderangebot sichern
-            </CtaLink>
+            <CtaLink to="/kontakt">Sonderangebot sichern</CtaLink>
           </div>
 
           <p className="mt-4 text-xs text-muted-foreground">
