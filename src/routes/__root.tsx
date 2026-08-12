@@ -14,13 +14,16 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { StickyCta } from "@/components/site/StickyCta";
+import { PromoPopup } from "@/components/site/PromoPopup";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">
+          Page not found
+        </h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
@@ -37,11 +40,20 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
   console.error(error);
   const router = useRouter();
+
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    reportLovableError(error, {
+      boundary: "tanstack_root_error_component",
+    });
   }, [error]);
 
   return (
@@ -51,7 +63,8 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           This page didn't load
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Something went wrong on our end. You can try refreshing or head back
+          home.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -75,60 +88,92 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Dachdecker Köln & Bonn | Robert Dachservice" },
-      {
-        name: "description",
-        content:
-          "Robert Dachservice – Dachdeckermeisterbetrieb für Köln, Bonn und Umgebung. Dachreparaturen, Dacheindeckung, Dachsanierung, Flachdach, Dämmung und 24/7 Dachnotdienst.",
-      },
-      { name: "author", content: "Robert Dachservice" },
-      { property: "og:site_name", content: "Robert Dachservice" },
-      { property: "og:type", content: "website" },
-      { property: "og:locale", content: "de_DE" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Dachdecker Köln & Bonn | Robert Dachservice" },
-      { name: "twitter:title", content: "Dachdecker Köln & Bonn | Robert Dachservice" },
-      { property: "og:description", content: "Robert Dachservice – Dachdeckermeisterbetrieb für Köln, Bonn und Umgebung. Dachreparaturen, Dacheindeckung, Dachsanierung, Flachdach, Dämmung und 24/7 Dachnotdienst." },
-      { name: "twitter:description", content: "Robert Dachservice – Dachdeckermeisterbetrieb für Köln, Bonn und Umgebung. Dachreparaturen, Dacheindeckung, Dachsanierung, Flachdach, Dämmung und 24/7 Dachnotdienst." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/f0244069-759a-474b-8776-8c3d9e809784" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/f0244069-759a-474b-8776-8c3d9e809784" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap",
-      },
-    ],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "RoofingContractor",
-          name: "Robert Dachservice",
-          description:
-            "Dachdeckermeisterbetrieb für Köln, Bonn und Umgebung – Dachreparatur, Dacheindeckung erneuern, Dachsanierung, Flachdach, Dachdämmung, Spenglerarbeiten und 24/7 Dachnotdienst.",
-          telephone: "+4915733645077",
-          areaServed: ["Köln", "Bonn", "Umgebung"],
-          openingHours: "Mo-Su 00:00-23:59",
-        }),
-      },
-    ],
-  }),
-  shellComponent: RootShell,
-  component: RootComponent,
-  notFoundComponent: NotFoundComponent,
-  errorComponent: ErrorComponent,
-});
+export const Route =
+  createRootRouteWithContext<{ queryClient: QueryClient }>()({
+    head: () => ({
+      meta: [
+        { charSet: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        {
+          title: "Dachdecker Köln & Bonn | Robert Dachservice",
+        },
+        {
+          name: "description",
+          content:
+            "Robert Dachservice – Dachdeckermeisterbetrieb für Köln, Bonn und Umgebung. Dachreparaturen, Dacheindeckung, Dachsanierung, Flachdach, Dämmung und 24/7 Dachnotdienst.",
+        },
+        { name: "author", content: "Robert Dachservice" },
+        { property: "og:site_name", content: "Robert Dachservice" },
+        { property: "og:type", content: "website" },
+        { property: "og:locale", content: "de_DE" },
+        { name: "twitter:card", content: "summary_large_image" },
+        {
+          property: "og:title",
+          content: "Dachdecker Köln & Bonn | Robert Dachservice",
+        },
+        {
+          name: "twitter:title",
+          content: "Dachdecker Köln & Bonn | Robert Dachservice",
+        },
+        {
+          property: "og:description",
+          content:
+            "Robert Dachservice – Dachdeckermeisterbetrieb für Köln, Bonn und Umgebung. Dachreparaturen, Dacheindeckung, Dachsanierung, Flachdach, Dämmung und 24/7 Dachnotdienst.",
+        },
+        {
+          name: "twitter:description",
+          content:
+            "Robert Dachservice – Dachdeckermeisterbetrieb für Köln, Bonn und Umgebung. Dachreparaturen, Dacheindeckung, Dachsanierung, Flachdach, Dämmung und 24/7 Dachnotdienst.",
+        },
+        {
+          property: "og:image",
+          content:
+            "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/f0244069-759a-474b-8776-8c3d9e809784",
+        },
+        {
+          name: "twitter:image",
+          content:
+            "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/f0244069-759a-474b-8776-8c3d9e809784",
+        },
+      ],
+      links: [
+        { rel: "stylesheet", href: appCss },
+        { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+        {
+          rel: "preconnect",
+          href: "https://fonts.googleapis.com",
+        },
+        {
+          rel: "preconnect",
+          href: "https://fonts.gstatic.com",
+          crossOrigin: "anonymous",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap",
+        },
+      ],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "RoofingContractor",
+            name: "Robert Dachservice",
+            description:
+              "Dachdeckermeisterbetrieb für Köln, Bonn und Umgebung – Dachreparatur, Dacheindeckung erneuern, Dachsanierung, Flachdach, Dachdämmung, Spenglerarbeiten und 24/7 Dachnotdienst.",
+            telephone: "+4915733645077",
+            areaServed: ["Köln", "Bonn", "Umgebung"],
+            openingHours: "Mo-Su 00:00-23:59",
+          }),
+        },
+      ],
+    }),
+    shellComponent: RootShell,
+    component: RootComponent,
+    notFoundComponent: NotFoundComponent,
+    errorComponent: ErrorComponent,
+  });
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
@@ -155,14 +200,16 @@ function RootComponent() {
       >
         Zum Inhalt springen
       </a>
+
       <Header />
+
       <main id="inhalt" className="pb-16 lg:pb-0">
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
       </main>
+
       <Footer />
       <StickyCta />
+      <PromoPopup />
     </QueryClientProvider>
   );
 }
-
