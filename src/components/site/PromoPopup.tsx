@@ -35,7 +35,7 @@ export function PromoPopup() {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-navy/70 px-4 py-6 backdrop-blur-sm"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-labelledby="promo-title"
@@ -95,12 +95,13 @@ export function PromoPopup() {
           </ul>
 
           <div className="mt-8">
-            <CtaLink
-              to="/kontakt"
+            <button
+              type="button"
               onClick={() => setOpen(false)}
+              className="inline-flex items-center justify-center bg-copper px-6 py-3.5 text-sm font-bold text-white transition-all duration-200 hover:bg-copper-deep hover:shadow-lg"
             >
               Sonderangebot sichern
-            </CtaLink>
+            </button>
           </div>
 
           <p className="mt-4 text-xs text-muted-foreground">
