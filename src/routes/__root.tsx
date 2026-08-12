@@ -91,14 +91,8 @@ function ErrorComponent({
 export const Route =
   createRootRouteWithContext<{ queryClient: QueryClient }>()({
     head: () => ({
- links: [
-  {
-    rel: "icon",
-    href: "/robert-logo.png",
-    type: "image/png",
-  },
-],
       meta: [
+
         { charSet: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         {
