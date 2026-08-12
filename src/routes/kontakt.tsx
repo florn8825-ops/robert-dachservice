@@ -245,25 +245,30 @@ function KontaktPage() {
 
             <button
               type="submit"
-              className="inline-flex items-center justify-center bg-copper px-8 py-3.5 font-[family-name:var(--font-display)] text-sm font-semibold text-copper-foreground transition-colors hover:bg-copper-deep"
+              disabled={sending}
+              className="inline-flex items-center justify-center bg-copper px-8 py-3.5 font-[family-name:var(--font-display)] text-sm font-semibold text-copper-foreground transition-colors hover:bg-copper-deep disabled:opacity-60"
             >
-              Anfrage senden
+              {sending ? "Wird gesendet…" : "Anfrage senden"}
             </button>
 
             <p className="text-xs leading-relaxed text-muted-foreground">
-              Hinweis: Das Formular ist derzeit ohne E-Mail-Versand eingerichtet. Für eine
-              verbindliche Anfrage erreichen Sie uns telefonisch unter {business.phonePrimary}.
+              Für dringende Fälle erreichen Sie uns telefonisch unter {business.phonePrimary}.
             </p>
 
             <div aria-live="polite">
               {submitted && (
                 <p className="border border-copper bg-sand/60 px-5 py-4 text-sm text-navy">
-                  Ihre Angaben sind vollständig. Bitte rufen Sie uns für eine verbindliche Anfrage
-                  unter {business.phonePrimary} an – der E-Mail-Versand des Formulars ist noch nicht
-                  eingerichtet.
+                  Vielen Dank! Ihre Anfrage ist bei uns eingegangen. Wir melden uns in Kürze bei
+                  Ihnen.
+                </p>
+              )}
+              {sendError && (
+                <p className="border border-copper bg-sand/60 px-5 py-4 text-sm text-navy">
+                  {sendError}
                 </p>
               )}
             </div>
+
           </form>
         </section>
 
