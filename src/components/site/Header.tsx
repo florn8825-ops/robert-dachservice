@@ -119,42 +119,44 @@ export function Header() {
           {/* =================================================
               LOGO
           ================================================== */}
-          <Link
-            to="/"
-            onClick={closeMobileMenu}
-            className="group relative flex shrink-0 items-center gap-3"
-            aria-label="Robert Dachservice Startseite"
-          >
-           {/* logo image */}
-<span
-  aria-hidden="true"
-  className={[
-    "relative flex items-center justify-center overflow-hidden transition-all duration-500",
-    scrolled ? "h-12 w-12" : "h-14 w-14",
-  ].join(" ")}
+         <Link
+  to="/"
+  onClick={closeMobileMenu}
+  className="group relative flex shrink-0 items-center gap-3"
+  aria-label="Robert Dachservice Startseite"
 >
-  <img
-    src="/robert-logo.png"
-    alt="Robert Dachservice Logo"
-    className="h-full w-full object-contain"
-  />
-            {/* wordmark */}
-            <span className="leading-none">
-              <span
-                className={[
-                  "block font-[family-name:var(--font-display)] font-extrabold uppercase tracking-[0.10em] text-navy transition-all duration-300",
-                  scrolled ? "text-[15px]" : "text-[17px]",
-                ].join(" ")}
-              >
-                Robert
-              </span>
+  {/* logo image */}
+  <span
+    aria-hidden="true"
+    className={[
+      "relative flex items-center justify-center overflow-hidden transition-all duration-500",
+      scrolled ? "h-12 w-12" : "h-14 w-14",
+      "group-hover:-translate-y-0.5",
+    ].join(" ")}
+  >
+    <img
+      src="/robert-logo.png"
+      alt="Robert Dachservice Logo"
+      className="h-full w-full object-contain"
+    />
+  </span>
 
-              <span className="mt-1 block text-[8px] font-bold uppercase tracking-[0.34em] text-muted-foreground">
-                Dachservice
-              </span>
-            </span>
-          </Link>
+  {/* wordmark */}
+  <span className="leading-none">
+    <span
+      className={[
+        "block font-[family-name:var(--font-display)] font-extrabold uppercase tracking-[0.10em] text-navy transition-all duration-300",
+        scrolled ? "text-[15px]" : "text-[17px]",
+      ].join(" ")}
+    >
+      Robert
+    </span>
 
+    <span className="mt-1 block text-[8px] font-bold uppercase tracking-[0.34em] text-muted-foreground">
+      Dachservice
+    </span>
+  </span>
+</Link>
           {/* =================================================
               DESKTOP NAVIGATION
           ================================================== */}
