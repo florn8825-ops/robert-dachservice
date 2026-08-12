@@ -5,6 +5,7 @@ import { Breadcrumbs } from "./Breadcrumbs";
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { CallLink, CtaLink } from "./CtaLink";
 import { business } from "@/content/site";
+import { PromoPopup } from "./PromoPopup";
 
 export function CtaButtons({ cta, secondary }: { cta: CtaRef; secondary?: CtaRef | undefined }) {
   return (
@@ -47,10 +48,7 @@ function BlockView({ block }: { block: Block }) {
           <ul className="mt-6 grid gap-x-8 gap-y-3 sm:grid-cols-2">
             {block.items.map((item) => (
               <li key={item} className="flex gap-3 text-sm text-navy/85">
-                <span
-                  aria-hidden="true"
-                  className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-copper"
-                />
+                <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-copper" />
                 {item}
               </li>
             ))}
@@ -185,9 +183,14 @@ export function PageShell({ page, children }: { page: PageDef; children?: React.
             das Anfrageformular.
           </p>
           <div className="mt-8">
-            <CtaButtons cta={{ label: "Angebot anfordern", to: "/kontakt" }} secondary={{ label: "Jetzt anrufen", tel: true }} />
+            <CtaButtons
+              cta={{ label: "Angebot anfordern", to: "/kontakt" }}
+              secondary={{ label: "Jetzt anrufen", tel: true }}
+            />
           </div>
         </section>
+
+        <PromoPopup />
       </div>
     </>
   );
