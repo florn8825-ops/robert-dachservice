@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { submitLead } from "@/lib/leads.functions";
+
 import { z } from "zod";
 import { business } from "@/content/site";
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
@@ -55,10 +58,14 @@ const labelClass = "block text-sm font-semibold text-navy";
 function KontaktPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const send = useServerFn(submitLead);
 
-  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = Object.fromEntries(new FormData(event.currentTarget).entries());
+    const form = event.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
     const parsed = schema.safeParse({ ...data, datenschutz: data["datenschutz"] === "on" });
     if (!parsed.success) {
       const next: Record<string, string> = {};
@@ -68,8 +75,20 @@ function KontaktPage() {
       return;
     }
     setErrors({});
-    setSubmitted(true);
+    setSendError(null);
+    setSending(true);
+    try {
+      const { datenschutz: _datenschutz, ...lead } = parsed.data;
+      await send({ data: lead });
+      setSubmitted(true);
+      form.reset();
+    } catch {
+      setSendError("Ihre Anfrage konnte nicht gesendet werden. Bitte rufen Sie uns kurz an.");
+    } finally {
+      setSending(false);
+    }
   }
+
 
   return (
     <>
@@ -226,25 +245,30 @@ function KontaktPage() {
 
             <button
               type="submit"
-              className="inline-flex items-center justify-center bg-copper px-8 py-3.5 font-[family-name:var(--font-display)] text-sm font-semibold text-copper-foreground transition-colors hover:bg-copper-deep"
+              disabled={sending}
+              className="inline-flex items-center justify-center bg-copper px-8 py-3.5 font-[family-name:var(--font-display)] text-sm font-semibold text-copper-foreground transition-colors hover:bg-copper-deep disabled:opacity-60"
             >
-              Anfrage senden
+              {sending ? "Wird gesendet…" : "Anfrage senden"}
             </button>
 
             <p className="text-xs leading-relaxed text-muted-foreground">
-              Hinweis: Das Formular ist derzeit ohne E-Mail-Versand eingerichtet. Für eine
-              verbindliche Anfrage erreichen Sie uns telefonisch unter {business.phonePrimary}.
+              Für dringende Fälle erreichen Sie uns telefonisch unter {business.phonePrimary}.
             </p>
 
             <div aria-live="polite">
               {submitted && (
                 <p className="border border-copper bg-sand/60 px-5 py-4 text-sm text-navy">
-                  Ihre Angaben sind vollständig. Bitte rufen Sie uns für eine verbindliche Anfrage
-                  unter {business.phonePrimary} an – der E-Mail-Versand des Formulars ist noch nicht
-                  eingerichtet.
+                  Vielen Dank! Ihre Anfrage ist bei uns eingegangen. Wir melden uns in Kürze bei
+                  Ihnen.
+                </p>
+              )}
+              {sendError && (
+                <p className="border border-copper bg-sand/60 px-5 py-4 text-sm text-navy">
+                  {sendError}
                 </p>
               )}
             </div>
+
           </form>
         </section>
 
