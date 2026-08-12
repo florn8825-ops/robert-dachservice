@@ -95,7 +95,12 @@ export function PromoPopup() {
           </ul>
 
           <div className="mt-8">
-            <CtaLink to="/kontakt">Sonderangebot sichern</CtaLink>
+            <CtaLink
+              to="/kontakt"
+              onClick={() => setOpen(false)}
+            >
+              Sonderangebot sichern
+            </CtaLink>
           </div>
 
           <p className="mt-4 text-xs text-muted-foreground">
