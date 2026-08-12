@@ -125,31 +125,19 @@ export function Header() {
             className="group relative flex shrink-0 items-center gap-3"
             aria-label="Robert Dachservice Startseite"
           >
-            {/* logo mark */}
-            <span
-              aria-hidden="true"
-              className={[
-                "relative flex items-center justify-center overflow-hidden border bg-navy transition-all duration-500",
-                scrolled ? "h-10 w-10" : "h-11 w-11",
-                "border-copper/70 shadow-[0_8px_24px_rgba(180,95,35,0.14)]",
-                "group-hover:-translate-y-0.5 group-hover:shadow-[0_12px_30px_rgba(180,95,35,0.24)]",
-              ].join(" ")}
-            >
-              {/* architectural lines */}
-              <span className="absolute left-2 top-2 h-px w-5 bg-white/20" />
-              <span className="absolute bottom-2 right-2 h-px w-5 bg-white/20" />
-
-              {/* roof */}
-              <span className="absolute left-1/2 top-[10px] h-[1.5px] w-6 -translate-x-1/2 rotate-[25deg] bg-copper" />
-              <span className="absolute left-1/2 top-[10px] h-[1.5px] w-6 -translate-x-1/2 -rotate-[25deg] bg-copper" />
-
-              <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-copper" />
-
-              <span className="relative mt-1 font-[family-name:var(--font-display)] text-[10px] font-black tracking-[0.08em] text-white">
-                RD
-              </span>
-            </span>
-
+           {/* logo image */}
+<span
+  aria-hidden="true"
+  className={[
+    "relative flex items-center justify-center overflow-hidden transition-all duration-500",
+    scrolled ? "h-12 w-12" : "h-14 w-14",
+  ].join(" ")}
+>
+  <img
+    src="/robert-logo.png"
+    alt="Robert Dachservice Logo"
+    className="h-full w-full object-contain"
+  />
             {/* wordmark */}
             <span className="leading-none">
               <span
