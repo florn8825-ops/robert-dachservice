@@ -43,13 +43,14 @@ export function PromoPopup() {
 
         <div className="h-2 bg-[#c46b2b]" />
 
-        <a
-  href="/kontakt"
-  onClick={() => setOpen(false)}
-  className="inline-flex items-center justify-center bg-[#c46b2b] px-6 py-3.5 text-sm font-bold text-white transition hover:bg-[#a95520] hover:shadow-lg"
->
-  Sonderangebot sichern
-</a>
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          aria-label="Popup schließen"
+          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[#142235] text-white transition hover:bg-[#c46b2b]"
+        >
+          <X className="h-5 w-5" />
+        </button>
 
         <div className="px-7 py-9 sm:px-10 sm:py-11">
 
@@ -90,13 +91,13 @@ export function PromoPopup() {
           </ul>
 
           <div className="mt-8">
-            <button
-              type="button"
+            <a
+              href="/kontakt"
               onClick={() => setOpen(false)}
               className="inline-flex items-center justify-center bg-[#c46b2b] px-6 py-3.5 text-sm font-bold text-white transition hover:bg-[#a95520] hover:shadow-lg"
             >
               Sonderangebot sichern
-            </button>
+            </a>
           </div>
 
           <p className="mt-4 text-xs text-gray-500">
