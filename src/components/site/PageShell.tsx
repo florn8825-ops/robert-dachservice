@@ -1,11 +1,17 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Check, Phone, ShieldCheck } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  ChevronRight,
+  Phone,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 import type { Block, CtaRef, PageDef } from "@/content/types";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { CallLink, CtaLink } from "./CtaLink";
 import { business } from "@/content/site";
-import { PromoPopup } from "./PromoPopup";
 
 export function CtaButtons({
   cta,
@@ -15,7 +21,7 @@ export function CtaButtons({
   secondary?: CtaRef | undefined;
 }) {
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="flex flex-col gap-3 sm:flex-row">
       {cta.tel ? (
         <CallLink variant="primary">{cta.label}</CallLink>
       ) : (
@@ -34,35 +40,64 @@ export function CtaButtons({
   );
 }
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function SectionHeading({
+  eyebrow,
+  title,
+  intro,
+}: {
+  eyebrow?: string;
+  title?: string;
+  intro?: string;
+}) {
   return (
-    <p className="mb-4 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-copper">
-      <span className="h-px w-8 bg-copper" aria-hidden="true" />
-      {children}
-    </p>
+    <div className="mb-10 max-w-3xl">
+      {eyebrow && (
+        <div className="mb-4 flex items-center gap-3">
+          <span className="h-px w-10 bg-copper" />
+          <span className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-copper-deep">
+            {eyebrow}
+          </span>
+        </div>
+      )}
+
+      {title && (
+        <h2 className="text-3xl font-extrabold leading-[1.08] tracking-tight text-navy sm:text-4xl lg:text-5xl">
+          {title}
+        </h2>
+      )}
+
+      {intro && (
+        <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
+          {intro}
+        </p>
+      )}
+    </div>
   );
 }
 
-function BlockView({ block }: { block: Block }) {
+function BlockView({ block, index }: { block: Block; index: number }) {
   switch (block.type) {
     case "text":
       return (
-        <section className="mx-auto max-w-5xl">
-          <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16">
+        <section className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-navy/10 bg-background px-6 py-10 shadow-[0_20px_70px_-45px_rgba(15,23,42,0.35)] sm:px-10 sm:py-14 lg:px-16 lg:py-16">
+          <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-copper/10 blur-3xl" />
+
+          <div className="relative grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
             <div>
+              <span className="text-7xl font-black leading-none text-navy/[0.06]">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
               {block.h2 && (
-                <>
-                  <SectionLabel>Überblick</SectionLabel>
-                  <h2 className="max-w-md text-2xl font-extrabold leading-tight text-navy sm:text-3xl lg:text-4xl">
-                    {block.h2}
-                  </h2>
-                </>
+                <h2 className="mt-[-2.2rem] max-w-md text-3xl font-extrabold leading-tight tracking-tight text-navy sm:text-4xl">
+                  {block.h2}
+                </h2>
               )}
             </div>
 
-            <div className="space-y-5 text-[1rem] leading-8 text-muted-foreground">
+            <div className="space-y-5 border-l-2 border-copper/30 pl-6 text-[1rem] leading-8 text-muted-foreground sm:pl-8">
               {block.paragraphs.map((p) => (
-                <p key={p.slice(0, 40)}>{p}</p>
+                <p key={p.slice(0, 24)}>{p}</p>
               ))}
             </div>
           </div>
@@ -71,117 +106,90 @@ function BlockView({ block }: { block: Block }) {
 
     case "list":
       return (
-        <section className="mx-auto max-w-5xl">
-          {block.h2 && (
-            <div className="max-w-3xl">
-              <SectionLabel>Leistungsumfang</SectionLabel>
-              <h2 className="text-2xl font-extrabold leading-tight text-navy sm:text-3xl lg:text-4xl">
-                {block.h2}
-              </h2>
-            </div>
-          )}
+        <section className="mx-auto max-w-6xl">
+          <SectionHeading title={block.h2} intro={block.intro} />
 
-          {block.intro && (
-            <p className="mt-5 max-w-3xl text-base leading-7 text-muted-foreground">
-              {block.intro}
-            </p>
-          )}
-
-          <ul className="mt-10 grid gap-3 sm:grid-cols-2">
-            {block.items.map((item) => (
-              <li
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {block.items.map((item, i) => (
+              <div
                 key={item}
-                className="group flex items-start gap-4 border border-navy/10 bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-copper/50 hover:shadow-lg"
+                className="group relative overflow-hidden rounded-2xl border border-navy/10 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-copper/50 hover:shadow-[0_20px_50px_-30px_rgba(15,23,42,0.5)]"
               >
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center bg-copper text-background">
-                  <Check className="h-4 w-4" strokeWidth={3} aria-hidden="true" />
-                </span>
+                <div className="absolute right-0 top-0 h-20 w-20 rounded-full bg-copper/10 blur-2xl transition-transform duration-500 group-hover:scale-150" />
 
-                <span className="pt-0.5 text-sm font-medium leading-6 text-navy/85">
-                  {item}
-                </span>
-              </li>
+                <div className="relative flex gap-4">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-navy text-xs font-bold text-navy-foreground">
+                    <Check className="h-4 w-4" />
+                  </span>
+
+                  <span className="pt-1 text-sm font-medium leading-6 text-navy/85">
+                    {item}
+                  </span>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </section>
       );
 
     case "steps":
       return (
-        <section className="mx-auto max-w-6xl">
-          {block.h2 && (
-            <div className="max-w-3xl">
-              <SectionLabel>So läuft es ab</SectionLabel>
-              <h2 className="text-2xl font-extrabold leading-tight text-navy sm:text-3xl lg:text-4xl">
-                {block.h2}
-              </h2>
-            </div>
-          )}
+        <section className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] bg-navy px-6 py-12 text-navy-foreground shadow-[0_30px_80px_-45px_rgba(15,23,42,0.7)] sm:px-10 sm:py-16 lg:px-16">
+          <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-copper/20 blur-3xl" />
+          <div className="absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
 
-          {block.intro && (
-            <p className="mt-5 max-w-3xl text-base leading-7 text-muted-foreground">
-              {block.intro}
-            </p>
-          )}
+          <div className="relative">
+            <SectionHeading
+              title={block.h2}
+              intro={block.intro}
+            />
 
-          <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {block.steps.map((step, i) => (
-              <li
-                key={step}
-                className="relative overflow-hidden border border-navy/10 bg-card p-7"
-              >
-                <span className="absolute right-4 top-1 font-[family-name:var(--font-display)] text-7xl font-extrabold leading-none text-navy/[0.045]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+            <div className="mt-10 grid gap-3 lg:grid-cols-4">
+              {block.steps.map((step, i) => (
+                <div
+                  key={step}
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.08]"
+                >
+                  <div className="flex items-start justify-between">
+                    <span className="font-[family-name:var(--font-display)] text-4xl font-black text-copper">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
 
-                <div className="relative">
-                  <span className="inline-flex h-9 w-9 items-center justify-center bg-navy font-[family-name:var(--font-display)] text-sm font-bold text-navy-foreground">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                    <ChevronRight className="mt-2 h-5 w-5 text-white/25 transition-transform group-hover:translate-x-1 group-hover:text-copper" />
+                  </div>
 
-                  <p className="mt-6 text-sm font-medium leading-7 text-navy/80">
+                  <p className="mt-8 text-sm leading-7 text-white/75">
                     {step}
                   </p>
+
+                  <div className="absolute bottom-0 left-0 h-1 w-0 bg-copper transition-all duration-500 group-hover:w-full" />
                 </div>
-              </li>
-            ))}
-          </ol>
+              ))}
+            </div>
+          </div>
         </section>
       );
 
     case "cards":
       return (
         <section className="mx-auto max-w-6xl">
-          {block.h2 && (
-            <div className="max-w-3xl">
-              <SectionLabel>Weitere Leistungen</SectionLabel>
-              <h2 className="text-2xl font-extrabold leading-tight text-navy sm:text-3xl lg:text-4xl">
-                {block.h2}
-              </h2>
-            </div>
-          )}
+          <SectionHeading title={block.h2} intro={block.intro} />
 
-          {block.intro && (
-            <p className="mt-5 max-w-3xl text-base leading-7 text-muted-foreground">
-              {block.intro}
-            </p>
-          )}
-
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {block.cards.map((card, index) => (
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {block.cards.map((card, i) => (
               <Link
                 key={card.to}
                 to={card.to as never}
-                className="group relative flex min-h-[250px] flex-col overflow-hidden border border-navy/10 bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:border-copper/50 hover:shadow-xl"
+                className="group relative flex min-h-[270px] flex-col overflow-hidden rounded-[1.5rem] border border-navy/10 bg-background p-7 shadow-[0_15px_50px_-40px_rgba(15,23,42,0.5)] transition-all duration-300 hover:-translate-y-2 hover:border-copper/50 hover:shadow-[0_30px_70px_-40px_rgba(15,23,42,0.65)]"
               >
-                <span className="absolute right-5 top-4 font-[family-name:var(--font-display)] text-6xl font-extrabold text-navy/[0.04]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
+                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-copper/10 blur-2xl transition-transform duration-500 group-hover:scale-150" />
 
-                <div className="relative flex h-full flex-col">
-                  <span className="mb-6 h-1 w-10 bg-copper transition-all duration-300 group-hover:w-16" />
+                <div className="relative">
+                  <span className="font-[family-name:var(--font-display)] text-sm font-bold text-copper">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
 
-                  <h3 className="max-w-[85%] font-[family-name:var(--font-display)] text-xl font-extrabold leading-tight text-navy">
+                  <h3 className="mt-6 font-[family-name:var(--font-display)] text-xl font-extrabold leading-tight text-navy">
                     {card.title}
                   </h3>
 
@@ -191,10 +199,7 @@ function BlockView({ block }: { block: Block }) {
 
                   <span className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-copper-deep">
                     {card.cta}
-                    <ArrowRight
-                      className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
-                      aria-hidden="true"
-                    />
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-2" />
                   </span>
                 </div>
               </Link>
@@ -206,11 +211,14 @@ function BlockView({ block }: { block: Block }) {
     case "placeholder":
       return (
         <section className="mx-auto max-w-6xl">
-          <div className="overflow-hidden">
+          <div className="relative overflow-hidden rounded-[2rem]">
             <ImagePlaceholder
               label={block.label}
               ratio={block.ratio ?? "photo"}
+              className="min-h-[300px]"
             />
+
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/35 via-transparent to-transparent" />
           </div>
         </section>
       );
@@ -218,111 +226,82 @@ function BlockView({ block }: { block: Block }) {
     case "faq":
       return (
         <section className="mx-auto max-w-5xl">
-          <div className="max-w-3xl">
-            <SectionLabel>FAQ</SectionLabel>
+          <SectionHeading title={block.h2} />
 
-            <h2 className="text-2xl font-extrabold leading-tight text-navy sm:text-3xl lg:text-4xl">
-              {block.h2}
-            </h2>
-          </div>
-
-          <dl className="mt-10 border-y border-navy/10">
-            {block.items.map((item, index) => (
-              <div
+          <div className="overflow-hidden rounded-[1.5rem] border border-navy/10 bg-background shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]">
+            {block.items.map((item, i) => (
+              <details
                 key={item.q}
-                className="grid gap-4 border-b border-navy/10 py-7 last:border-b-0 md:grid-cols-[70px_1fr]"
+                className="group border-b border-navy/10 last:border-b-0"
               >
-                <span className="font-[family-name:var(--font-display)] text-sm font-bold text-copper">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
+                <summary className="flex cursor-pointer list-none items-center gap-5 px-6 py-6 font-[family-name:var(--font-display)] text-base font-bold text-navy transition-colors hover:bg-sand/30 sm:px-8"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-navy text-xs font-bold text-navy-foreground">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
 
-                <div>
-                  <dt className="text-base font-bold leading-6 text-navy sm:text-lg">
-                    {item.q}
-                  </dt>
+                  <span className="flex-1">{item.q}</span>
 
-                  <dd className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
-                    {item.a}
-                  </dd>
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-navy/15 transition-transform duration-300 group-open:rotate-45">
+                    <span className="relative block h-3 w-3">
+                      <span className="absolute left-0 top-1.5 h-px w-3 bg-navy" />
+                      <span className="absolute left-1.5 top-0 h-3 w-px bg-navy" />
+                    </span>
+                  </span>
+                </summary>
+
+                <div className="px-6 pb-7 pl-[4.5rem] pr-8 text-sm leading-7 text-muted-foreground sm:pr-12">
+                  {item.a}
                 </div>
-              </div>
+              </details>
             ))}
-          </dl>
+          </div>
         </section>
       );
 
     case "callout":
       return (
-        <section className="relative mx-auto max-w-6xl overflow-hidden bg-navy px-7 py-12 text-navy-foreground sm:px-12 sm:py-16 lg:px-16">
-          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full border border-copper/20" />
-          <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full border border-copper/10" />
+        <section className="mx-auto max-w-6xl">
+          <div className="relative overflow-hidden rounded-[2rem] bg-navy px-7 py-12 text-navy-foreground shadow-[0_30px_90px_-50px_rgba(15,23,42,0.8)] sm:px-12 sm:py-16 lg:px-16">
+            <div className="absolute right-[-8rem] top-[-8rem] h-80 w-80 rounded-full bg-copper/20 blur-3xl" />
+            <div className="absolute bottom-[-8rem] left-[-5rem] h-64 w-64 rounded-full bg-white/5 blur-3xl" />
 
-          <div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div>
-              <SectionLabel>
-                <span className="text-copper">Wichtig</span>
-              </SectionLabel>
+            <div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
+              <div>
+                <div className="mb-5 flex items-center gap-3">
+                  <Sparkles className="h-4 w-4 text-copper" />
+                  <span className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-copper">
+                    Robert Dachservice
+                  </span>
+                </div>
 
-              <h2 className="max-w-3xl text-2xl font-extrabold leading-tight sm:text-3xl lg:text-4xl">
-                {block.h2}
-              </h2>
+                <h2 className="max-w-2xl text-3xl font-extrabold leading-tight sm:text-4xl">
+                  {block.h2}
+                </h2>
 
-              <div className="mt-5 max-w-2xl space-y-4 text-sm leading-7 text-navy-foreground/70">
-                {block.paragraphs.map((p) => (
-                  <p key={p.slice(0, 40)}>{p}</p>
-                ))}
+                <div className="mt-5 max-w-2xl space-y-4 text-sm leading-7 text-white/70 sm:text-base">
+                  {block.paragraphs.map((p) => (
+                    <p key={p.slice(0, 24)}>{p}</p>
+                  ))}
+                </div>
               </div>
+
+              {block.cta && (
+                <div className="lg:shrink-0">
+                  {block.cta.tel ? (
+                    <CallLink variant="primary">{block.cta.label}</CallLink>
+                  ) : (
+                    <CtaLink to={block.cta.to ?? "/kontakt"}>
+                      {block.cta.label}
+                    </CtaLink>
+                  )}
+                </div>
+              )}
             </div>
-
-            {block.cta && (
-              <div className="lg:pb-1">
-                {block.cta.tel ? (
-                  <CallLink variant="primary">{block.cta.label}</CallLink>
-                ) : (
-                  <CtaLink to={block.cta.to ?? "/kontakt"}>
-                    {block.cta.label}
-                  </CtaLink>
-                )}
-              </div>
-            )}
           </div>
         </section>
       );
   }
-}
-
-function TrustStrip() {
-  return (
-    <div className="border-y border-navy/10 bg-card">
-      <div className="container-site grid divide-y divide-navy/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-        <div className="flex items-center gap-4 px-0 py-5 sm:px-6">
-          <ShieldCheck className="h-5 w-5 text-copper" aria-hidden="true" />
-          <div>
-            <p className="text-sm font-bold text-navy">Meisterbetrieb</p>
-            <p className="text-xs text-muted-foreground">Fachgerechte Dacharbeiten</p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-4 px-0 py-5 sm:px-6">
-          <Phone className="h-5 w-5 text-copper" aria-hidden="true" />
-          <div>
-            <p className="text-sm font-bold text-navy">Direkter Kontakt</p>
-            <p className="text-xs text-muted-foreground">{business.phonePrimary}</p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-4 px-0 py-5 sm:px-6">
-          <span className="flex h-5 w-5 items-center justify-center text-copper">
-            <span className="h-2 w-2 rounded-full bg-copper" />
-          </span>
-          <div>
-            <p className="text-sm font-bold text-navy">Regional</p>
-            <p className="text-xs text-muted-foreground">Köln · Bonn · Umgebung</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
 }
 
 export function PageShell({
@@ -334,103 +313,145 @@ export function PageShell({
 }) {
   return (
     <>
-      {/* Premium Page Hero */}
+      {/* PREMIUM HERO */}
       <section className="relative overflow-hidden bg-navy text-navy-foreground">
-        <div
-          className="absolute inset-0 opacity-[0.035]"
-          aria-hidden="true"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
-            backgroundSize: "42px 42px",
-          }}
-        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(197,137,67,0.18),transparent_30%),radial-gradient(circle_at_10%_100%,rgba(255,255,255,0.05),transparent_30%)]" />
 
-        <div className="absolute -right-32 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full border border-copper/10" />
-        <div className="absolute -right-20 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full border border-copper/10" />
+        <div className="absolute right-[8%] top-1/2 hidden h-[28rem] w-[28rem] -translate-y-1/2 rounded-full border border-white/5 lg:block" />
+        <div className="absolute right-[14%] top-1/2 hidden h-[20rem] w-[20rem] -translate-y-1/2 rounded-full border border-copper/10 lg:block" />
 
-        <div className="container-site relative py-10 lg:py-16">
+        <div className="relative container-site py-10 sm:py-14 lg:py-20">
           <Breadcrumbs items={page.breadcrumbs} />
 
-          <div className="mt-10 max-w-5xl">
-            {page.eyebrow && (
-              <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-copper">
-                <span className="h-px w-10 bg-copper" aria-hidden="true" />
-                {page.eyebrow}
+          <div className="mt-12 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+            <div>
+              {page.eyebrow && (
+                <div className="mb-6 flex items-center gap-3">
+                  <span className="h-px w-12 bg-copper" />
+                  <span className="text-[0.7rem] font-bold uppercase tracking-[0.25em] text-copper">
+                    {page.eyebrow}
+                  </span>
+                </div>
+              )}
+
+              <h1 className="max-w-4xl text-4xl font-black leading-[0.98] tracking-[-0.035em] sm:text-5xl lg:text-7xl">
+                {page.h1}
+              </h1>
+
+              <p className="mt-7 max-w-2xl text-base leading-8 text-white/65 sm:text-lg">
+                {page.intro}
               </p>
-            )}
 
-            <h1 className="mt-5 max-w-4xl text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl lg:text-6xl">
-              {page.h1}
-            </h1>
-
-            <p className="mt-7 max-w-2xl text-base leading-7 text-navy-foreground/70 sm:text-lg">
-              {page.intro}
-            </p>
-
-            <div className="mt-9">
-              <CtaButtons
-                cta={page.cta}
-                secondary={page.secondaryCta}
-              />
+              <div className="mt-9">
+                <CtaButtons
+                  cta={page.cta}
+                  secondary={page.secondaryCta}
+                />
+              </div>
             </div>
+
+            <div className="relative hidden lg:block">
+              <div className="relative ml-auto max-w-sm rounded-[2rem] border border-white/10 bg-white/[0.045] p-7 backdrop-blur-sm">
+                <div className="absolute -right-4 -top-4 flex h-12 w-12 items-center justify-center rounded-full bg-copper text-navy shadow-lg">
+                  <ShieldCheck className="h-6 w-6" />
+                </div>
+
+                <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-white/45">
+                  Robert Dachservice
+                </p>
+
+                <div className="mt-6 grid gap-4">
+                  <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+                    <span className="h-2 w-2 rounded-full bg-copper" />
+                    <span className="text-sm text-white/75">
+                      Dachdeckermeisterbetrieb
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+                    <span className="h-2 w-2 rounded-full bg-copper" />
+                    <span className="text-sm text-white/75">
+                      Köln · Bonn · Umgebung
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="h-2 w-2 rounded-full bg-copper" />
+                    <span className="text-sm text-white/75">
+                      24/7 Dachnotdienst
+                    </span>
+                  </div>
+                </div>
+
+                <a
+                  href={business.phonePrimaryHref}
+                  className="mt-7 flex items-center gap-3 text-sm font-bold text-white transition-colors hover:text-copper"
+                >
+                  <Phone className="h-4 w-4 text-copper" />
+                  {business.phonePrimary}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-white/10 pt-6 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/40">
+            <span>Dachreparatur</span>
+            <span>Dacheindeckung</span>
+            <span>Dachsanierung</span>
+            <span>Notdienst</span>
           </div>
         </div>
       </section>
 
-      <TrustStrip />
+      {/* CONTENT */}
+      <main className="relative overflow-hidden bg-background">
+        <div className="absolute left-[-12rem] top-[20rem] h-96 w-96 rounded-full bg-copper/[0.035] blur-3xl" />
+        <div className="absolute right-[-12rem] top-[65rem] h-96 w-96 rounded-full bg-navy/[0.035] blur-3xl" />
 
-      {/* Main content */}
-      <main className="container-site py-16 lg:py-24">
-        <div className="space-y-20 lg:space-y-28">
+        <div className="relative container-site space-y-20 py-16 sm:space-y-24 sm:py-20 lg:space-y-28 lg:py-28">
           {page.blocks.map((block, i) => (
-            <BlockView key={i} block={block} />
+            <BlockView key={i} block={block} index={i} />
           ))}
 
           {children}
 
-          {/* Final CTA */}
-          <section className="relative overflow-hidden bg-sand px-7 py-12 sm:px-12 sm:py-16 lg:px-16">
-            <div className="absolute right-0 top-0 h-full w-1/3 bg-copper/[0.035]" />
+          {/* FINAL CTA */}
+          <section className="relative overflow-hidden rounded-[2rem] bg-sand px-7 py-12 sm:px-12 sm:py-16 lg:px-16">
+            <div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-copper/10 blur-3xl" />
 
             <div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
-                <SectionLabel>Nächster Schritt</SectionLabel>
+                <div className="mb-5 flex items-center gap-3">
+                  <span className="h-px w-10 bg-copper" />
+                  <span className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-copper-deep">
+                    Nächster Schritt
+                  </span>
+                </div>
 
-                <h2 className="max-w-3xl text-2xl font-extrabold leading-tight text-navy sm:text-3xl lg:text-4xl">
+                <h2 className="max-w-3xl text-3xl font-black leading-tight tracking-tight text-navy sm:text-4xl lg:text-5xl">
                   Ihr Anliegen rund ums Dach besprechen
                 </h2>
 
-                <p className="mt-5 max-w-2xl text-sm leading-7 text-navy/65 sm:text-base">
+                <p className="mt-5 max-w-2xl text-base leading-8 text-navy/65">
                   Beschreiben Sie kurz Ihr Vorhaben – telefonisch unter{" "}
-                  <a
-                    href={business.phonePrimaryHref}
-                    className="font-bold text-navy underline decoration-copper underline-offset-4"
-                  >
+                  <strong className="text-navy">
                     {business.phonePrimary}
-                  </a>{" "}
-                  oder direkt über unser Anfrageformular.
+                  </strong>{" "}
+                  oder über das Anfrageformular.
                 </p>
               </div>
 
-              <div className="shrink-0">
-                <CtaButtons
-                  cta={{
-                    label: "Angebot anfordern",
-                    to: "/kontakt",
-                  }}
-                  secondary={{
-                    label: "Jetzt anrufen",
-                    tel: true,
-                  }}
-                />
+              <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+                <CtaLink to="/kontakt">Angebot anfordern</CtaLink>
+                <CallLink>
+                  <Phone className="h-4 w-4" />
+                  Jetzt anrufen
+                </CallLink>
               </div>
             </div>
           </section>
         </div>
       </main>
-
-      <PromoPopup />
     </>
   );
 }
