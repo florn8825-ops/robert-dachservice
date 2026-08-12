@@ -20,18 +20,21 @@ export function CtaLink({
   variant = "primary",
   children,
   className,
+  onClick,
 }: {
   to: string;
   variant?: Variant;
   children: ReactNode;
   className?: string;
+  onClick?: () => void;
 }) {
   return (
-    <Link to={to as never} className={cn(base, variants[variant], className)}>
+    <Link to={to as never} onClick={onClick} className={cn(base, variants[variant], className)}>
       {children}
     </Link>
   );
 }
+
 
 export function CallLink({
   variant = "ghost",
