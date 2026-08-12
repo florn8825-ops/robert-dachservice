@@ -1,17 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  Check,
-  ChevronRight,
-  Phone,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
+import { ArrowRight, Check, Phone, ShieldCheck } from "lucide-react";
 import type { Block, CtaRef, PageDef } from "@/content/types";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { ImagePlaceholder } from "./ImagePlaceholder";
 import { CallLink, CtaLink } from "./CtaLink";
 import { business } from "@/content/site";
+import { PromoPopup } from "./PromoPopup";
 
 export function CtaButtons({
   cta,
@@ -21,9 +15,12 @@ export function CtaButtons({
   secondary?: CtaRef | undefined;
 }) {
   return (
-    <div className="flex flex-col gap-3 sm:flex-row">
+    <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
       {cta.tel ? (
-        <CallLink variant="primary">{cta.label}</CallLink>
+        <CallLink variant="primary">
+          <Phone className="h-4 w-4" aria-hidden="true" />
+          {cta.label}
+        </CallLink>
       ) : (
         <CtaLink to={cta.to ?? "/kontakt"}>{cta.label}</CtaLink>
       )}
@@ -40,168 +37,150 @@ export function CtaButtons({
   );
 }
 
-function SectionHeading({
-  eyebrow,
-  title,
-  intro,
-}: {
-  eyebrow?: string;
-  title?: string;
-  intro?: string;
-}) {
-  return (
-    <div className="mb-10 max-w-3xl">
-      {eyebrow && (
-        <div className="mb-4 flex items-center gap-3">
-          <span className="h-px w-10 bg-copper" />
-          <span className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-copper-deep">
-            {eyebrow}
-          </span>
-        </div>
-      )}
-
-      {title && (
-        <h2 className="text-3xl font-extrabold leading-[1.08] tracking-tight text-navy sm:text-4xl lg:text-5xl">
-          {title}
-        </h2>
-      )}
-
-      {intro && (
-        <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
-          {intro}
-        </p>
-      )}
-    </div>
-  );
-}
-
-function BlockView({ block, index }: { block: Block; index: number }) {
+function BlockView({ block }: { block: Block }) {
   switch (block.type) {
     case "text":
       return (
-        <section className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-navy/10 bg-background px-6 py-10 shadow-[0_20px_70px_-45px_rgba(15,23,42,0.35)] sm:px-10 sm:py-14 lg:px-16 lg:py-16">
-          <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-copper/10 blur-3xl" />
+        <section className="relative mx-auto max-w-4xl">
+          <div className="absolute -left-5 top-1 hidden h-12 w-1 bg-copper lg:block" />
 
-          <div className="relative grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-            <div>
-              <span className="text-7xl font-black leading-none text-navy/[0.06]">
-                {String(index + 1).padStart(2, "0")}
-              </span>
+          {block.h2 && (
+            <h2 className="max-w-3xl text-3xl font-extrabold leading-tight tracking-tight text-navy sm:text-4xl">
+              {block.h2}
+            </h2>
+          )}
 
-              {block.h2 && (
-                <h2 className="mt-[-2.2rem] max-w-md text-3xl font-extrabold leading-tight tracking-tight text-navy sm:text-4xl">
-                  {block.h2}
-                </h2>
-              )}
-            </div>
-
-            <div className="space-y-5 border-l-2 border-copper/30 pl-6 text-[1rem] leading-8 text-muted-foreground sm:pl-8">
-              {block.paragraphs.map((p) => (
-                <p key={p.slice(0, 24)}>{p}</p>
-              ))}
-            </div>
+          <div className="mt-7 space-y-5 text-[1rem] leading-8 text-muted-foreground">
+            {block.paragraphs.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
           </div>
         </section>
       );
 
     case "list":
       return (
-        <section className="mx-auto max-w-6xl">
-          <SectionHeading title={block.h2} intro={block.intro} />
+        <section className="mx-auto max-w-5xl">
+          {block.h2 && (
+            <h2 className="max-w-3xl text-3xl font-extrabold leading-tight text-navy sm:text-4xl">
+              {block.h2}
+            </h2>
+          )}
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {block.items.map((item, i) => (
-              <div
+          {block.intro && (
+            <p className="mt-5 max-w-3xl text-base leading-7 text-muted-foreground">
+              {block.intro}
+            </p>
+          )}
+
+          <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+            {block.items.map((item) => (
+              <li
                 key={item}
-                className="group relative overflow-hidden rounded-2xl border border-navy/10 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-copper/50 hover:shadow-[0_20px_50px_-30px_rgba(15,23,42,0.5)]"
+                className="group flex gap-4 border border-navy/10 bg-card p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-copper/50 hover:shadow-lg"
               >
-                <div className="absolute right-0 top-0 h-20 w-20 rounded-full bg-copper/10 blur-2xl transition-transform duration-500 group-hover:scale-150" />
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-copper/10 text-copper">
+                  <Check className="h-4 w-4" aria-hidden="true" />
+                </span>
 
-                <div className="relative flex gap-4">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-navy text-xs font-bold text-navy-foreground">
-                    <Check className="h-4 w-4" />
-                  </span>
-
-                  <span className="pt-1 text-sm font-medium leading-6 text-navy/85">
-                    {item}
-                  </span>
-                </div>
-              </div>
+                <span className="pt-0.5 text-sm font-medium leading-6 text-navy/85">
+                  {item}
+                </span>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
       );
 
     case "steps":
       return (
-        <section className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] bg-navy px-6 py-12 text-navy-foreground shadow-[0_30px_80px_-45px_rgba(15,23,42,0.7)] sm:px-10 sm:py-16 lg:px-16">
-          <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-copper/20 blur-3xl" />
-          <div className="absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
+        <section className="mx-auto max-w-6xl">
+          {block.h2 && (
+            <h2 className="max-w-3xl text-3xl font-extrabold leading-tight text-navy sm:text-4xl">
+              {block.h2}
+            </h2>
+          )}
 
-          <div className="relative">
-            <SectionHeading
-              title={block.h2}
-              intro={block.intro}
-            />
+          {block.intro && (
+            <p className="mt-5 max-w-3xl text-base leading-7 text-muted-foreground">
+              {block.intro}
+            </p>
+          )}
 
-            <div className="mt-10 grid gap-3 lg:grid-cols-4">
-              {block.steps.map((step, i) => (
-                <div
-                  key={step}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.045] p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.08]"
-                >
-                  <div className="flex items-start justify-between">
-                    <span className="font-[family-name:var(--font-display)] text-4xl font-black text-copper">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
+          <ol className="relative mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {block.steps.map((step, i) => (
+              <li
+                key={step}
+                className="group relative overflow-hidden border border-navy/10 bg-card p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-copper/50 hover:shadow-xl"
+              >
+                <span className="absolute right-4 top-2 font-[family-name:var(--font-display)] text-6xl font-extrabold text-navy/[0.045]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
 
-                    <ChevronRight className="mt-2 h-5 w-5 text-white/25 transition-transform group-hover:translate-x-1 group-hover:text-copper" />
-                  </div>
+                <div className="relative">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-copper text-sm font-bold text-white">
+                    {i + 1}
+                  </span>
 
-                  <p className="mt-8 text-sm leading-7 text-white/75">
+                  <p className="mt-6 text-sm font-medium leading-7 text-navy/80">
                     {step}
                   </p>
-
-                  <div className="absolute bottom-0 left-0 h-1 w-0 bg-copper transition-all duration-500 group-hover:w-full" />
                 </div>
-              ))}
-            </div>
-          </div>
+
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-copper transition-all duration-300 group-hover:w-full" />
+              </li>
+            ))}
+          </ol>
         </section>
       );
 
     case "cards":
       return (
         <section className="mx-auto max-w-6xl">
-          <SectionHeading title={block.h2} intro={block.intro} />
+          {block.h2 && (
+            <h2 className="max-w-3xl text-3xl font-extrabold leading-tight text-navy sm:text-4xl">
+              {block.h2}
+            </h2>
+          )}
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {block.cards.map((card, i) => (
+          {block.intro && (
+            <p className="mt-5 max-w-3xl text-base leading-7 text-muted-foreground">
+              {block.intro}
+            </p>
+          )}
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {block.cards.map((card, index) => (
               <Link
                 key={card.to}
                 to={card.to as never}
-                className="group relative flex min-h-[270px] flex-col overflow-hidden rounded-[1.5rem] border border-navy/10 bg-background p-7 shadow-[0_15px_50px_-40px_rgba(15,23,42,0.5)] transition-all duration-300 hover:-translate-y-2 hover:border-copper/50 hover:shadow-[0_30px_70px_-40px_rgba(15,23,42,0.65)]"
+                className="group relative flex min-h-[250px] flex-col overflow-hidden border border-navy/10 bg-card p-7 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-copper/40 hover:shadow-2xl"
               >
-                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-copper/10 blur-2xl transition-transform duration-500 group-hover:scale-150" />
+                <span className="absolute -right-5 -top-8 font-[family-name:var(--font-display)] text-8xl font-extrabold text-navy/[0.035]">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
 
-                <div className="relative">
-                  <span className="font-[family-name:var(--font-display)] text-sm font-bold text-copper">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-
-                  <h3 className="mt-6 font-[family-name:var(--font-display)] text-xl font-extrabold leading-tight text-navy">
-                    {card.title}
-                  </h3>
-
-                  <p className="mt-4 flex-1 text-sm leading-7 text-muted-foreground">
-                    {card.text}
-                  </p>
-
-                  <span className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-copper-deep">
-                    {card.cta}
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-2" />
-                  </span>
+                <div className="relative flex h-10 w-10 items-center justify-center bg-copper/10 text-copper">
+                  <ArrowRight className="h-5 w-5" aria-hidden="true" />
                 </div>
+
+                <h3 className="relative mt-7 font-[family-name:var(--font-display)] text-xl font-extrabold text-navy">
+                  {card.title}
+                </h3>
+
+                <p className="relative mt-3 flex-1 text-sm leading-6 text-muted-foreground">
+                  {card.text}
+                </p>
+
+                <span className="relative mt-7 inline-flex items-center gap-2 text-sm font-bold text-copper-deep">
+                  {card.cta}
+                  <ArrowRight
+                    className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-2"
+                    aria-hidden="true"
+                  />
+                </span>
+
+                <span className="absolute bottom-0 left-0 h-1 w-0 bg-copper transition-all duration-500 group-hover:w-full" />
               </Link>
             ))}
           </div>
@@ -211,93 +190,83 @@ function BlockView({ block, index }: { block: Block; index: number }) {
     case "placeholder":
       return (
         <section className="mx-auto max-w-6xl">
-          <div className="relative overflow-hidden rounded-[2rem]">
+          <div className="overflow-hidden border border-navy/10 bg-card p-2 shadow-xl">
             <ImagePlaceholder
               label={block.label}
               ratio={block.ratio ?? "photo"}
-              className="min-h-[300px]"
             />
-
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/35 via-transparent to-transparent" />
           </div>
         </section>
       );
 
     case "faq":
       return (
-        <section className="mx-auto max-w-5xl">
-          <SectionHeading title={block.h2} />
-
-          <div className="overflow-hidden rounded-[1.5rem] border border-navy/10 bg-background shadow-[0_20px_60px_-45px_rgba(15,23,42,0.4)]">
-            {block.items.map((item, i) => (
-              <details
-                key={item.q}
-                className="group border-b border-navy/10 last:border-b-0"
-              >
-                <summary className="flex cursor-pointer list-none items-center gap-5 px-6 py-6 font-[family-name:var(--font-display)] text-base font-bold text-navy transition-colors hover:bg-sand/30 sm:px-8"
-                >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-navy text-xs font-bold text-navy-foreground">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-
-                  <span className="flex-1">{item.q}</span>
-
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-navy/15 transition-transform duration-300 group-open:rotate-45">
-                    <span className="relative block h-3 w-3">
-                      <span className="absolute left-0 top-1.5 h-px w-3 bg-navy" />
-                      <span className="absolute left-1.5 top-0 h-3 w-px bg-navy" />
-                    </span>
-                  </span>
-                </summary>
-
-                <div className="px-6 pb-7 pl-[4.5rem] pr-8 text-sm leading-7 text-muted-foreground sm:pr-12">
-                  {item.a}
-                </div>
-              </details>
-            ))}
+        <section className="mx-auto max-w-4xl">
+          <div className="mb-10">
+            <span className="eyebrow">FAQ</span>
+            <h2 className="mt-3 text-3xl font-extrabold leading-tight text-navy sm:text-4xl">
+              {block.h2}
+            </h2>
           </div>
+
+          <dl className="overflow-hidden border border-navy/10 bg-card shadow-lg">
+            {block.items.map((item, index) => (
+              <div
+                key={item.q}
+                className="group border-b border-navy/10 p-6 last:border-b-0 sm:p-8"
+              >
+                <dt className="flex gap-4 text-base font-bold leading-6 text-navy sm:text-lg">
+                  <span className="font-[family-name:var(--font-display)] text-sm font-extrabold text-copper">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  {item.q}
+                </dt>
+
+                <dd className="mt-4 pl-9 text-sm leading-7 text-muted-foreground">
+                  {item.a}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </section>
       );
 
     case "callout":
       return (
-        <section className="mx-auto max-w-6xl">
-          <div className="relative overflow-hidden rounded-[2rem] bg-navy px-7 py-12 text-navy-foreground shadow-[0_30px_90px_-50px_rgba(15,23,42,0.8)] sm:px-12 sm:py-16 lg:px-16">
-            <div className="absolute right-[-8rem] top-[-8rem] h-80 w-80 rounded-full bg-copper/20 blur-3xl" />
-            <div className="absolute bottom-[-8rem] left-[-5rem] h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+        <section className="relative mx-auto max-w-6xl overflow-hidden bg-navy px-7 py-10 text-navy-foreground shadow-2xl sm:px-12 sm:py-14 lg:px-16 lg:py-16">
+          <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border border-copper/20" />
+          <div className="absolute -bottom-32 -left-20 h-72 w-72 rounded-full border border-white/5" />
 
-            <div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
-              <div>
-                <div className="mb-5 flex items-center gap-3">
-                  <Sparkles className="h-4 w-4 text-copper" />
-                  <span className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-copper">
-                    Robert Dachservice
-                  </span>
-                </div>
-
-                <h2 className="max-w-2xl text-3xl font-extrabold leading-tight sm:text-4xl">
-                  {block.h2}
-                </h2>
-
-                <div className="mt-5 max-w-2xl space-y-4 text-sm leading-7 text-white/70 sm:text-base">
-                  {block.paragraphs.map((p) => (
-                    <p key={p.slice(0, 24)}>{p}</p>
-                  ))}
-                </div>
-              </div>
-
-              {block.cta && (
-                <div className="lg:shrink-0">
-                  {block.cta.tel ? (
-                    <CallLink variant="primary">{block.cta.label}</CallLink>
-                  ) : (
-                    <CtaLink to={block.cta.to ?? "/kontakt"}>
-                      {block.cta.label}
-                    </CtaLink>
-                  )}
-                </div>
-              )}
+          <div className="relative max-w-3xl">
+            <div className="flex items-center gap-3">
+              <span className="h-px w-10 bg-copper" />
+              <span className="eyebrow text-copper">Robert Dachservice</span>
             </div>
+
+            <h2 className="mt-5 text-3xl font-extrabold leading-tight sm:text-4xl">
+              {block.h2}
+            </h2>
+
+            <div className="mt-6 space-y-4 text-base leading-7 text-navy-foreground/70">
+              {block.paragraphs.map((p) => (
+                <p key={p.slice(0, 24)}>{p}</p>
+              ))}
+            </div>
+
+            {block.cta && (
+              <div className="mt-9">
+                {block.cta.tel ? (
+                  <CallLink variant="primary">
+                    <Phone className="h-4 w-4" aria-hidden="true" />
+                    {block.cta.label}
+                  </CallLink>
+                ) : (
+                  <CtaLink to={block.cta.to ?? "/kontakt"}>
+                    {block.cta.label}
+                  </CtaLink>
+                )}
+              </div>
+            )}
           </div>
         </section>
       );
@@ -313,32 +282,28 @@ export function PageShell({
 }) {
   return (
     <>
-      {/* PREMIUM HERO */}
+      {/* Premium page hero */}
       <section className="relative overflow-hidden bg-navy text-navy-foreground">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(197,137,67,0.18),transparent_30%),radial-gradient(circle_at_10%_100%,rgba(255,255,255,0.05),transparent_30%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_20%,rgba(200,117,61,0.16),transparent_30%)]" />
+        <div className="absolute right-0 top-0 h-full w-px bg-copper/20" />
 
-        <div className="absolute right-[8%] top-1/2 hidden h-[28rem] w-[28rem] -translate-y-1/2 rounded-full border border-white/5 lg:block" />
-        <div className="absolute right-[14%] top-1/2 hidden h-[20rem] w-[20rem] -translate-y-1/2 rounded-full border border-copper/10 lg:block" />
-
-        <div className="relative container-site py-10 sm:py-14 lg:py-20">
+        <div className="container-site relative py-12 lg:py-20">
           <Breadcrumbs items={page.breadcrumbs} />
 
-          <div className="mt-12 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-            <div>
+          <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+            <div className="max-w-4xl">
               {page.eyebrow && (
-                <div className="mb-6 flex items-center gap-3">
-                  <span className="h-px w-12 bg-copper" />
-                  <span className="text-[0.7rem] font-bold uppercase tracking-[0.25em] text-copper">
-                    {page.eyebrow}
-                  </span>
+                <div className="flex items-center gap-3">
+                  <span className="h-px w-10 bg-copper" />
+                  <p className="eyebrow text-copper">{page.eyebrow}</p>
                 </div>
               )}
 
-              <h1 className="max-w-4xl text-4xl font-black leading-[0.98] tracking-[-0.035em] sm:text-5xl lg:text-7xl">
+              <h1 className="mt-5 text-4xl font-extrabold leading-[1.02] tracking-[-0.04em] sm:text-5xl lg:text-6xl">
                 {page.h1}
               </h1>
 
-              <p className="mt-7 max-w-2xl text-base leading-8 text-white/65 sm:text-lg">
+              <p className="mt-7 max-w-3xl text-base leading-7 text-navy-foreground/70 sm:text-lg sm:leading-8">
                 {page.intro}
               </p>
 
@@ -350,89 +315,45 @@ export function PageShell({
               </div>
             </div>
 
-            <div className="relative hidden lg:block">
-              <div className="relative ml-auto max-w-sm rounded-[2rem] border border-white/10 bg-white/[0.045] p-7 backdrop-blur-sm">
-                <div className="absolute -right-4 -top-4 flex h-12 w-12 items-center justify-center rounded-full bg-copper text-navy shadow-lg">
-                  <ShieldCheck className="h-6 w-6" />
-                </div>
-
-                <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-white/45">
-                  Robert Dachservice
-                </p>
-
-                <div className="mt-6 grid gap-4">
-                  <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-                    <span className="h-2 w-2 rounded-full bg-copper" />
-                    <span className="text-sm text-white/75">
-                      Dachdeckermeisterbetrieb
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-                    <span className="h-2 w-2 rounded-full bg-copper" />
-                    <span className="text-sm text-white/75">
-                      Köln · Bonn · Umgebung
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <span className="h-2 w-2 rounded-full bg-copper" />
-                    <span className="text-sm text-white/75">
-                      24/7 Dachnotdienst
-                    </span>
-                  </div>
-                </div>
-
-                <a
-                  href={business.phonePrimaryHref}
-                  className="mt-7 flex items-center gap-3 text-sm font-bold text-white transition-colors hover:text-copper"
-                >
-                  <Phone className="h-4 w-4 text-copper" />
-                  {business.phonePrimary}
-                </a>
-              </div>
+            <div className="hidden border-l border-navy-foreground/15 pl-8 lg:block">
+              <ShieldCheck className="h-8 w-8 text-copper" aria-hidden="true" />
+              <p className="mt-3 max-w-[150px] text-xs font-semibold uppercase leading-5 tracking-[0.14em] text-navy-foreground/60">
+                Dachdeckermeisterbetrieb
+              </p>
             </div>
           </div>
-
-          <div className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-white/10 pt-6 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/40">
-            <span>Dachreparatur</span>
-            <span>Dacheindeckung</span>
-            <span>Dachsanierung</span>
-            <span>Notdienst</span>
-          </div>
         </div>
+
+        <div className="absolute bottom-0 left-0 h-1 w-32 bg-copper" />
       </section>
 
-      {/* CONTENT */}
+      {/* Content */}
       <main className="relative overflow-hidden bg-background">
-        <div className="absolute left-[-12rem] top-[20rem] h-96 w-96 rounded-full bg-copper/[0.035] blur-3xl" />
-        <div className="absolute right-[-12rem] top-[65rem] h-96 w-96 rounded-full bg-navy/[0.035] blur-3xl" />
+        <div className="absolute left-0 top-0 h-80 w-80 rounded-full bg-copper/[0.025] blur-3xl" />
 
-        <div className="relative container-site space-y-20 py-16 sm:space-y-24 sm:py-20 lg:space-y-28 lg:py-28">
+        <div className="container-site relative space-y-20 py-16 lg:space-y-28 lg:py-24">
           {page.blocks.map((block, i) => (
-            <BlockView key={i} block={block} index={i} />
+            <BlockView key={i} block={block} />
           ))}
 
           {children}
 
-          {/* FINAL CTA */}
-          <section className="relative overflow-hidden rounded-[2rem] bg-sand px-7 py-12 sm:px-12 sm:py-16 lg:px-16">
-            <div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-copper/10 blur-3xl" />
+          {/* Final conversion section */}
+          <section className="relative mx-auto max-w-6xl overflow-hidden bg-sand px-7 py-12 sm:px-12 sm:py-14 lg:px-16 lg:py-16">
+            <div className="absolute right-0 top-0 h-full w-1/3 bg-copper/[0.05]" />
 
             <div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
-                <div className="mb-5 flex items-center gap-3">
+                <div className="flex items-center gap-3">
                   <span className="h-px w-10 bg-copper" />
-                  <span className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-copper-deep">
-                    Nächster Schritt
-                  </span>
+                  <span className="eyebrow">Kontakt</span>
                 </div>
 
-                <h2 className="max-w-3xl text-3xl font-black leading-tight tracking-tight text-navy sm:text-4xl lg:text-5xl">
+                <h2 className="mt-4 max-w-2xl text-3xl font-extrabold leading-tight text-navy sm:text-4xl">
                   Ihr Anliegen rund ums Dach besprechen
                 </h2>
 
-                <p className="mt-5 max-w-2xl text-base leading-8 text-navy/65">
+                <p className="mt-5 max-w-2xl text-base leading-7 text-navy/65">
                   Beschreiben Sie kurz Ihr Vorhaben – telefonisch unter{" "}
                   <strong className="text-navy">
                     {business.phonePrimary}
@@ -441,17 +362,22 @@ export function PageShell({
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-                <CtaLink to="/kontakt">Angebot anfordern</CtaLink>
-                <CallLink>
-                  <Phone className="h-4 w-4" />
-                  Jetzt anrufen
-                </CallLink>
-              </div>
+              <CtaButtons
+                cta={{
+                  label: "Angebot anfordern",
+                  to: "/kontakt",
+                }}
+                secondary={{
+                  label: "Jetzt anrufen",
+                  tel: true,
+                }}
+              />
             </div>
           </section>
         </div>
       </main>
+
+      <PromoPopup />
     </>
   );
 }
