@@ -55,10 +55,14 @@ const labelClass = "block text-sm font-semibold text-navy";
 function KontaktPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const send = useServerFn(submitLead);
 
-  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = Object.fromEntries(new FormData(event.currentTarget).entries());
+    const form = event.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
     const parsed = schema.safeParse({ ...data, datenschutz: data["datenschutz"] === "on" });
     if (!parsed.success) {
       const next: Record<string, string> = {};
@@ -68,8 +72,20 @@ function KontaktPage() {
       return;
     }
     setErrors({});
-    setSubmitted(true);
+    setSendError(null);
+    setSending(true);
+    try {
+      const { datenschutz: _datenschutz, ...lead } = parsed.data;
+      await send({ data: lead });
+      setSubmitted(true);
+      form.reset();
+    } catch {
+      setSendError("Ihre Anfrage konnte nicht gesendet werden. Bitte rufen Sie uns kurz an.");
+    } finally {
+      setSending(false);
+    }
   }
+
 
   return (
     <>
