@@ -18,10 +18,7 @@ const siteLinks = [
 const regionLinks = [
   { label: "Dachdecker Köln", to: "/dachdecker-koeln" },
   { label: "Dachdecker Bonn", to: "/dachdecker-bonn" },
-  {
-    label: "Neubau / Neueindeckung",
-    to: "/leistungen/neubau-neueindeckung",
-  },
+  { label: "Neubau / Neueindeckung", to: "/leistungen/neubau-neueindeckung" },
 ];
 
 const legalLinks = [
@@ -33,8 +30,8 @@ const legalLinks = [
 export function Footer() {
   return (
     <footer className="mt-24 bg-navy text-navy-foreground">
-      {/* CTA */}
-      <section className="border-b border-navy-foreground/10">
+      {/* CTA Banner */}
+      <div className="border-b border-navy-foreground/10">
         <div className="container-site py-12 lg:py-16">
           <div className="relative overflow-hidden border border-copper/30 bg-navy-foreground/[0.035] px-6 py-8 sm:px-8 lg:px-10">
             <div
@@ -50,10 +47,7 @@ export function Footer() {
               <div className="max-w-2xl">
                 <div className="mb-4 flex items-center gap-3">
                   <span className="h-px w-8 bg-copper" />
-
-                  <p className="eyebrow text-copper">
-                    Robert Dachservice
-                  </p>
+                  <p className="eyebrow text-copper">Robert Dachservice</p>
                 </div>
 
                 <h2 className="font-[family-name:var(--font-display)] text-2xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl">
@@ -69,19 +63,15 @@ export function Footer() {
               <div className="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
                 <Link
                   to="/kontakt"
-                  className="btn-premium btn-copper group"
+                  className="inline-flex items-center justify-center gap-2 bg-copper px-6 py-3.5 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-copper-deep hover:shadow-lg"
                 >
                   Angebot anfordern
-
-                  <ArrowUpRight
-                    className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                    aria-hidden="true"
-                  />
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
 
                 <a
                   href={business.phonePrimaryHref}
-                  className="inline-flex min-h-14 items-center justify-center gap-2 border border-navy-foreground/20 px-6 py-3.5 text-sm font-bold text-navy-foreground transition-all duration-200 hover:border-copper hover:bg-copper hover:text-white"
+                  className="inline-flex items-center justify-center gap-2 border border-navy-foreground/20 px-6 py-3.5 text-sm font-bold text-navy-foreground transition-colors hover:border-copper hover:text-copper"
                 >
                   <Phone className="h-4 w-4" aria-hidden="true" />
                   Jetzt anrufen
@@ -90,12 +80,12 @@ export function Footer() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* MAIN FOOTER */}
+      {/* Main Footer */}
       <div className="container-site py-14 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-10">
-          {/* BRAND */}
+          {/* Brand / Contact */}
           <div>
             <Link
               to="/"
@@ -104,18 +94,15 @@ export function Footer() {
             >
               <span
                 aria-hidden="true"
-                className="relative flex h-12 w-12 items-center justify-center overflow-hidden border border-copper bg-navy transition-all duration-300 group-hover:bg-copper"
+                className="flex h-12 w-12 items-center justify-center border border-copper transition-colors group-hover:bg-copper"
               >
-                <span className="absolute inset-x-0 bottom-0 h-1 bg-copper transition-colors group-hover:bg-white" />
-
-                <span className="relative block h-0 w-0 border-x-[11px] border-b-[12px] border-x-transparent border-b-copper transition-colors group-hover:border-b-white" />
+                <span className="block h-0 w-0 border-x-[11px] border-b-[12px] border-x-transparent border-b-copper group-hover:border-b-white" />
               </span>
 
               <span className="leading-tight">
                 <span className="block font-[family-name:var(--font-display)] text-lg font-extrabold uppercase tracking-[0.12em]">
                   Robert
                 </span>
-
                 <span className="block text-[0.62rem] uppercase tracking-[0.32em] text-navy-foreground/50">
                   Dachservice
                 </span>
@@ -141,8 +128,7 @@ export function Footer() {
                   <span className="block text-[0.65rem] uppercase tracking-[0.18em] text-navy-foreground/40">
                     Telefon
                   </span>
-
-                  <span className="block font-[family-name:var(--font-display)] text-base font-bold transition-colors group-hover:text-copper">
+                  <span className="block font-[family-name:var(--font-display)] text-base font-bold group-hover:text-copper">
                     {business.phonePrimary}
                   </span>
                 </span>
@@ -150,21 +136,18 @@ export function Footer() {
 
               <a
                 href={business.phoneSecondaryHref}
-                className="ml-12 block text-sm text-navy-foreground/55 transition-colors hover:text-copper"
+                className="ml-12 block text-sm text-navy-foreground/55 hover:text-copper"
               >
                 {business.phoneSecondary}
               </a>
             </div>
           </div>
 
-          {/* LEISTUNGEN */}
+          {/* Leistungen */}
           <div>
             <div className="flex items-center gap-3">
               <span className="h-px w-6 bg-copper" />
-
-              <p className="eyebrow text-copper">
-                Leistungen
-              </p>
+              <p className="eyebrow text-copper">Leistungen</p>
             </div>
 
             <ul className="mt-5 space-y-3">
@@ -174,8 +157,7 @@ export function Footer() {
                     to={service.to as never}
                     className="group inline-flex items-center gap-2 text-sm text-navy-foreground/65 transition-colors hover:text-copper"
                   >
-                    <span className="h-1 w-1 bg-copper/60 transition-all duration-200 group-hover:w-2" />
-
+                    <span className="h-1 w-1 bg-copper/60 transition-all group-hover:w-2" />
                     {service.title}
                   </Link>
                 </li>
@@ -183,25 +165,21 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* UNTERNEHMEN */}
+          {/* Unternehmen */}
           <div>
             <div className="flex items-center gap-3">
               <span className="h-px w-6 bg-copper" />
-
-              <p className="eyebrow text-copper">
-                Unternehmen
-              </p>
+              <p className="eyebrow text-copper">Unternehmen</p>
             </div>
 
             <ul className="mt-5 space-y-3">
               {siteLinks.map((item) => (
-                <li key={item.to}>
+                <li key={item.label}>
                   <Link
                     to={item.to as never}
                     className="group inline-flex items-center gap-2 text-sm text-navy-foreground/65 transition-colors hover:text-copper"
                   >
-                    <span className="h-1 w-1 bg-copper/60 transition-all duration-200 group-hover:w-2" />
-
+                    <span className="h-1 w-1 bg-copper/60 transition-all group-hover:w-2" />
                     {item.label}
                   </Link>
                 </li>
@@ -209,14 +187,11 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* REGION */}
+          {/* Region */}
           <div>
             <div className="flex items-center gap-3">
               <span className="h-px w-6 bg-copper" />
-
-              <p className="eyebrow text-copper">
-                Region
-              </p>
+              <p className="eyebrow text-copper">Region</p>
             </div>
 
             <ul className="mt-5 space-y-3">
@@ -226,8 +201,7 @@ export function Footer() {
                     to={item.to as never}
                     className="group inline-flex items-center gap-2 text-sm text-navy-foreground/65 transition-colors hover:text-copper"
                   >
-                    <span className="h-1 w-1 bg-copper/60 transition-all duration-200 group-hover:w-2" />
-
+                    <span className="h-1 w-1 bg-copper/60 transition-all group-hover:w-2" />
                     {item.label}
                   </Link>
                 </li>
@@ -236,19 +210,17 @@ export function Footer() {
           </div>
         </div>
 
-        {/* TRUST */}
+        {/* Trust row */}
         <div className="mt-14 grid gap-px border border-navy-foreground/10 bg-navy-foreground/10 sm:grid-cols-2 lg:grid-cols-3">
           <div className="flex items-center gap-3 bg-navy px-5 py-4">
             <ShieldCheck
               className="h-5 w-5 shrink-0 text-copper"
               aria-hidden="true"
             />
-
             <div>
               <p className="text-sm font-semibold">
                 Dachdeckermeisterbetrieb
               </p>
-
               <p className="mt-0.5 text-xs text-navy-foreground/45">
                 Fachgerechte Dacharbeiten
               </p>
@@ -260,38 +232,38 @@ export function Footer() {
               className="h-5 w-5 shrink-0 text-copper"
               aria-hidden="true"
             />
-
             <div>
               <p className="text-sm font-semibold">
                 Köln · Bonn · Umgebung
               </p>
-
               <p className="mt-0.5 text-xs text-navy-foreground/45">
                 Regional für Sie da
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 bg-navy px-5 py-4 sm:col-span-2 lg:col-span-1">
+          <a
+            href={business.phonePrimaryHref}
+            className="group flex items-center gap-3 bg-navy px-5 py-4 transition-colors hover:bg-navy/80 sm:col-span-2 lg:col-span-1"
+            aria-label={`24/7 Dachnotdienst anrufen unter ${business.phonePrimary}`}
+          >
             <Phone
               className="h-5 w-5 shrink-0 text-copper"
               aria-hidden="true"
             />
-
             <div>
               <p className="text-sm font-semibold">
                 24/7 Dachnotdienst
               </p>
-
               <p className="mt-0.5 text-xs text-navy-foreground/45">
                 Bei akuten Dachschäden
               </p>
             </div>
-          </div>
+          </a>
         </div>
       </div>
 
-      {/* BOTTOM BAR */}
+      {/* Bottom bar */}
       <div className="border-t border-navy-foreground/10">
         <div className="container-site flex flex-col gap-4 py-6 text-xs text-navy-foreground/45 sm:flex-row sm:items-center sm:justify-between">
           <p>
