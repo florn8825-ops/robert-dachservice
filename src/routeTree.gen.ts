@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CookieEinstellungenRouteImport } from './routes/cookie-einstellungen'
 import { Route as DachdeckerBonnRouteImport } from './routes/dachdecker-bonn'
 import { Route as DachdeckerKoelnRouteImport } from './routes/dachdecker-koeln'
@@ -19,6 +21,7 @@ import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as ReferenzenRouteImport } from './routes/referenzen'
 import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as LeistungenDachreparaturRouteImport } from './routes/leistungen/dachreparatur'
 import { Route as LeistungenDachsanierungRouteImport } from './routes/leistungen/dachsanierung'
 import { Route as LeistungenNeubauNeueindeckungRouteImport } from './routes/leistungen/neubau-neueindeckung'
@@ -59,6 +62,15 @@ import { Route as LeistungenSpenglerarbeitenOrtgangFirstRouteImport } from './ro
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CookieEinstellungenRoute = CookieEinstellungenRouteImport.update({
@@ -105,6 +117,11 @@ const UeberUnsRoute = UeberUnsRouteImport.update({
   id: '/ueber-uns',
   path: '/ueber-uns',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const LeistungenDachreparaturRoute = LeistungenDachreparaturRouteImport.update({
   id: '/leistungen/dachreparatur',
@@ -319,6 +336,7 @@ const LeistungenSpenglerarbeitenOrtgangFirstRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/cookie-einstellungen': typeof CookieEinstellungenRoute
   '/dachdecker-bonn': typeof DachdeckerBonnRoute
   '/dachdecker-koeln': typeof DachdeckerKoelnRoute
@@ -328,6 +346,7 @@ export interface FileRoutesByFullPath {
   '/kontakt': typeof KontaktRoute
   '/referenzen': typeof ReferenzenRoute
   '/ueber-uns': typeof UeberUnsRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/leistungen/dachreparatur': typeof LeistungenDachreparaturRoute
   '/leistungen/dachsanierung': typeof LeistungenDachsanierungRoute
   '/leistungen/neubau-neueindeckung': typeof LeistungenNeubauNeueindeckungRoute
@@ -367,6 +386,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/cookie-einstellungen': typeof CookieEinstellungenRoute
   '/dachdecker-bonn': typeof DachdeckerBonnRoute
   '/dachdecker-koeln': typeof DachdeckerKoelnRoute
@@ -376,6 +396,7 @@ export interface FileRoutesByTo {
   '/kontakt': typeof KontaktRoute
   '/referenzen': typeof ReferenzenRoute
   '/ueber-uns': typeof UeberUnsRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/leistungen/dachreparatur': typeof LeistungenDachreparaturRoute
   '/leistungen/dachsanierung': typeof LeistungenDachsanierungRoute
   '/leistungen/neubau-neueindeckung': typeof LeistungenNeubauNeueindeckungRoute
@@ -416,6 +437,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/cookie-einstellungen': typeof CookieEinstellungenRoute
   '/dachdecker-bonn': typeof DachdeckerBonnRoute
   '/dachdecker-koeln': typeof DachdeckerKoelnRoute
@@ -425,6 +448,7 @@ export interface FileRoutesById {
   '/kontakt': typeof KontaktRoute
   '/referenzen': typeof ReferenzenRoute
   '/ueber-uns': typeof UeberUnsRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/leistungen/dachreparatur': typeof LeistungenDachreparaturRoute
   '/leistungen/dachsanierung': typeof LeistungenDachsanierungRoute
   '/leistungen/neubau-neueindeckung': typeof LeistungenNeubauNeueindeckungRoute
@@ -466,6 +490,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/cookie-einstellungen'
     | '/dachdecker-bonn'
     | '/dachdecker-koeln'
@@ -475,6 +500,7 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/referenzen'
     | '/ueber-uns'
+    | '/admin'
     | '/leistungen/dachreparatur'
     | '/leistungen/dachsanierung'
     | '/leistungen/neubau-neueindeckung'
@@ -514,6 +540,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/cookie-einstellungen'
     | '/dachdecker-bonn'
     | '/dachdecker-koeln'
@@ -523,6 +550,7 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/referenzen'
     | '/ueber-uns'
+    | '/admin'
     | '/leistungen/dachreparatur'
     | '/leistungen/dachsanierung'
     | '/leistungen/neubau-neueindeckung'
@@ -562,6 +590,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
+    | '/auth'
     | '/cookie-einstellungen'
     | '/dachdecker-bonn'
     | '/dachdecker-koeln'
@@ -571,6 +601,7 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/referenzen'
     | '/ueber-uns'
+    | '/_authenticated/admin'
     | '/leistungen/dachreparatur'
     | '/leistungen/dachsanierung'
     | '/leistungen/neubau-neueindeckung'
@@ -611,6 +642,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   CookieEinstellungenRoute: typeof CookieEinstellungenRoute
   DachdeckerBonnRoute: typeof DachdeckerBonnRoute
   DachdeckerKoelnRoute: typeof DachdeckerKoelnRoute
@@ -665,6 +698,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cookie-einstellungen': {
@@ -729,6 +776,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/ueber-uns'
       preLoaderRoute: typeof UeberUnsRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/leistungen/dachreparatur': {
       id: '/leistungen/dachreparatur'
@@ -985,8 +1039,21 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   CookieEinstellungenRoute: CookieEinstellungenRoute,
   DachdeckerBonnRoute: DachdeckerBonnRoute,
   DachdeckerKoelnRoute: DachdeckerKoelnRoute,
