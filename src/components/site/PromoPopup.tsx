@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { CtaLink } from "./CtaLink";
 
-const STORAGE_KEY = "robert-dachservice-promo-seen";
-
 export function PromoPopup() {
   const [open, setOpen] = useState(false);
   const [typedText, setTypedText] = useState("");
@@ -11,8 +9,6 @@ export function PromoPopup() {
   const headline = "Diesen Monat haben wir folgende Sonderaktion:";
 
   useEffect(() => {
-    if (sessionStorage.getItem(STORAGE_KEY)) return;
-
     let opened = false;
 
     const showPopup = () => {
@@ -20,8 +16,6 @@ export function PromoPopup() {
 
       opened = true;
       setOpen(true);
-      sessionStorage.setItem(STORAGE_KEY, "true");
-
       window.removeEventListener("scroll", handleScroll);
     };
 
