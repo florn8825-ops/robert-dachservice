@@ -15,6 +15,7 @@ import {
 import { business, mainServices, materialLinks } from "@/content/site";
 import { CallLink, CtaLink } from "@/components/site/CtaLink";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
+import heroImage from "@/assets/professionelles-dachdecker-foto.jpeg.asset.json";
 
 const TITLE = "Dachdecker Köln & Bonn | Robert Dachservice";
 
