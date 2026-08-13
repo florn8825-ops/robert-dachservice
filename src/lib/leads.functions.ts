@@ -1,6 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
+import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import type { Database } from "@/integrations/supabase/types";
 
 const leadSchema = z.object({
   vorname: z.string().trim().min(1).max(60),
@@ -18,8 +20,20 @@ export type LeadInput = z.infer<typeof leadSchema>;
 export const submitLead = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => leadSchema.parse(input))
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { error } = await supabaseAdmin.from("leads").insert({
+    const key = process.env["SUPABASE_PUBLISHABLE_KEY"]!;
+    const supabasePublic = createClient<Database>(process.env["SUPABASE_URL"]!, key, {
+      auth: { persistSession: false, autoRefreshToken: false },
+      global: {
+        fetch: (input, init) => {
+          const h = new Headers(init?.headers);
+          if (key.startsWith("sb_") && h.get("Authorization") === `Bearer ${key}`) h.delete("Authorization");
+          h.set("apikey", key);
+          return fetch(input, { ...init, headers: h });
+        },
+      },
+    });
+
+    const { error } = await supabasePublic.from("leads").insert({
       ...data,
       quelle: "website",
       status: "neu",
@@ -34,11 +48,14 @@ export const submitLead = createServerFn({ method: "POST" })
 export const listLeads = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const { data: isAdmin } = await context.supabase.rpc("has_role", {
-      _user_id: context.userId,
-      _role: "admin",
-    });
-    if (!isAdmin) return { isAdmin: false as const, leads: [] };
+    const { data: roleRow } = await context.supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", context.userId)
+      .eq("role", "admin")
+      .maybeSingle();
+    if (!roleRow) return { isAdmin: false as const, leads: [] };
+
 
     const { data, error } = await context.supabase
       .from("leads")
