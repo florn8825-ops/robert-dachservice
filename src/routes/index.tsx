@@ -15,6 +15,7 @@ import {
 import { business, mainServices, materialLinks } from "@/content/site";
 import { CallLink, CtaLink } from "@/components/site/CtaLink";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
+import heroImage from "@/assets/professionelles-dachdecker-foto.jpeg.asset.json";
 
 const TITLE = "Dachdecker Köln & Bonn | Robert Dachservice";
 
@@ -250,13 +251,15 @@ function Index() {
             <div className="absolute -inset-4 rounded-[2rem] bg-copper/10 blur-2xl" />
 
             <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5 p-3 shadow-2xl backdrop-blur-sm">
-              <div className="overflow-hidden rounded-[1rem]">
-                <ImagePlaceholder
-                  label="Professionelles Dachdecker-Foto"
-                  ratio="photo"
-                  tone="dark"
-                />
-              </div>
+            <div className="overflow-hidden rounded-[1rem]">
+              <img
+                src={heroImage.url}
+                alt="Professionelles Dachdecker-Foto: Echtes Baustellenbild mit Gerüst und LKW"
+                className="aspect-[4/3] w-full object-cover"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
 
               <div className="absolute bottom-8 left-8 right-8 rounded-xl border border-white/10 bg-navy/90 p-5 shadow-xl backdrop-blur-md">
                 <div className="flex items-start gap-4">
