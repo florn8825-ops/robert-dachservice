@@ -15,6 +15,10 @@ import {
 import { business, mainServices, materialLinks } from "@/content/site";
 import { CallLink, CtaLink } from "@/components/site/CtaLink";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
+import heroImage from "@/assets/professionelles-dachdecker-foto.jpeg.asset.json";
+import dacheindeckungImage from "@/assets/Dacheindeckung.jpeg.asset.json";
+import tondachziegelImage from "@/assets/tondachziegel.png.asset.json";
+import schieferImage from "@/assets/schiefer.jpg.asset.json";
 
 
 const TITLE = "Dachdecker Köln & Bonn | Robert Dachservice";
@@ -441,6 +445,14 @@ function Index() {
   />
 </div>
             
+              <img
+                src={dacheindeckungImage.url}
+                alt="Neue Dacheindeckung: Fachgerecht verlegte Dachziegel in Anthrazit"
+                className="aspect-[4/3] w-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
 
             <div className="absolute -bottom-6 -right-4 hidden rounded-xl border border-navy/10 bg-background p-5 shadow-xl sm:block">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-copper">
@@ -534,23 +546,58 @@ function Index() {
   className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105"
 />
                 </div>
+            {materialLinks.map((material) => {
+              const materialImageSrc: Record<string, string> = {
+                Tondachziegel: tondachziegelImage.url,
+                Betondachsteine: "/Betondachstein.jpg",
+                Schiefer: schieferImage.url,
+                Bitumenschindeln: "/bitumenschindeln.jpg",
+                "Metall / Blech": "/metall blech dach.jpg",
+              };
 
-                <div className="p-7">
-                  <h3 className="font-[family-name:var(--font-display)] text-lg font-bold uppercase tracking-wide text-navy">
-                    {material.title}
-                  </h3>
+              const imageSrc = materialImageSrc[material.title];
 
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {material.text}
-                  </p>
+              return (
+                <Link
+                  key={material.to}
+                  to={material.to as never}
+                  className="group overflow-hidden rounded-2xl border border-navy/10 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-copper/40 hover:shadow-xl"
+                >
+                  <div className="overflow-hidden">
+                    {imageSrc ? (
+                      <img
+                        src={imageSrc}
+                        alt={`${material.title} Foto`}
+                        className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <ImagePlaceholder
+                        label={`${material.title} Foto`}
+                        ratio="square"
+                        className="aspect-[16/10] transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                    )}
+                  </div>
 
-                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-copper-deep">
-                    {material.cta}
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </Link>
-            ))}
+                  <div className="p-7">
+                    <h3 className="font-[family-name:var(--font-display)] text-lg font-bold uppercase tracking-wide text-navy">
+                      {material.title}
+                    </h3>
+
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {material.text}
+                    </p>
+
+                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-copper-deep">
+                      {material.cta}
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
