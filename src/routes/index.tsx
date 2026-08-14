@@ -16,6 +16,7 @@ import { business, mainServices, materialLinks } from "@/content/site";
 import { CallLink, CtaLink } from "@/components/site/CtaLink";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import heroImage from "@/assets/professionelles-dachdecker-foto.jpeg.asset.json";
+import dacheindeckungImage from "@/assets/Dacheindeckung.jpeg.asset.json";
 
 const TITLE = "Dachdecker Köln & Bonn | Robert Dachservice";
 
@@ -434,9 +435,12 @@ function Index() {
             <div className="absolute -left-5 -top-5 h-28 w-28 rounded-full bg-copper/10 blur-2xl" />
 
             <div className="relative overflow-hidden rounded-2xl border border-navy/10 bg-card p-3 shadow-xl">
-              <ImagePlaceholder
-                label="Dacheindeckung – professionelles Foto"
-                ratio="photo"
+              <img
+                src={dacheindeckungImage.url}
+                alt="Neue Dacheindeckung: Fachgerecht verlegte Dachziegel in Anthrazit"
+                className="aspect-[4/3] w-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
 
