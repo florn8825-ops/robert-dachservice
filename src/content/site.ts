@@ -24,7 +24,7 @@ export const materialLinks = [
     text: "Robuste und vielseitige Dachsteine mit unterschiedlichen Formen und Oberflächen.",
     cta: "Betondachsteine entdecken",
     to: "/leistungen/dacheindeckung-erneuern/betondachsteine",
-   image: "/Betondachstein.jpg" },
+   image: "/betondachstein.jpg" },
   {
     title: "Schiefer",
     text: "Hochwertige, charaktervolle Dacheindeckung mit traditioneller Optik und vielfältigen Gestaltungsmöglichkeiten.",
