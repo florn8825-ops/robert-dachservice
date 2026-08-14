@@ -15,7 +15,7 @@ import {
 import { business, mainServices, materialLinks } from "@/content/site";
 import { CallLink, CtaLink } from "@/components/site/CtaLink";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
-import heroImage from "@/assets/professionelles-dachdecker-foto.jpeg.asset.json";
+
 
 const TITLE = "Dachdecker Köln & Bonn | Robert Dachservice";
 
@@ -23,6 +23,7 @@ const DESCRIPTION =
   "Robert Dachservice – Dachdeckermeisterbetrieb für Köln, Bonn und Umgebung. Dachreparaturen, Dacheindeckung, Dachsanierung, Flachdach, Dämmung und 24/7 Dachnotdienst.";
 
 const SITE_URL = "https://robert-dachservice.vercel.app";
+
 
 const faq = [
   {
@@ -253,8 +254,7 @@ function Index() {
             <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5 p-3 shadow-2xl backdrop-blur-sm">
             <div className="overflow-hidden rounded-[1rem]">
               <img
-                src={heroImage.url}
-                alt="Professionelles Dachdecker-Foto: Echtes Baustellenbild mit Gerüst und LKW"
+                src="/Professionelles Dachdecker-Foto.jpeg"                alt="Professionelles Dachdecker-Foto: Echtes Baustellenbild mit Gerüst und LKW"
                 className="aspect-[4/3] w-full object-cover"
                 loading="eager"
                 decoding="async"
@@ -434,11 +434,13 @@ function Index() {
             <div className="absolute -left-5 -top-5 h-28 w-28 rounded-full bg-copper/10 blur-2xl" />
 
             <div className="relative overflow-hidden rounded-2xl border border-navy/10 bg-card p-3 shadow-xl">
-              <ImagePlaceholder
-                label="Dacheindeckung – professionelles Foto"
-                ratio="photo"
-              />
-            </div>
+  <img
+    src="/Dacheindeckung.jpeg"
+    alt="Dacheindeckung – professionelles Foto"
+    className="w-full h-full object-cover"
+  />
+</div>
+            
 
             <div className="absolute -bottom-6 -right-4 hidden rounded-xl border border-navy/10 bg-background p-5 shadow-xl sm:block">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-copper">
@@ -526,11 +528,11 @@ function Index() {
                 className="group overflow-hidden rounded-2xl border border-navy/10 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-copper/40 hover:shadow-xl"
               >
                 <div className="overflow-hidden">
-                  <ImagePlaceholder
-                    label={`${material.title} Foto`}
-                    ratio="square"
-                    className="aspect-[16/10] transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
+                 <img
+  src={material.image}
+  alt={material.title}
+  className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105"
+/>
                 </div>
 
                 <div className="p-7">

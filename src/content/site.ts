@@ -14,33 +14,36 @@ export const CTA_CALL = { label: "Jetzt anrufen", tel: true };
 export const materialLinks = [
   {
     title: "Tondachziegel",
-    text: "Natürliche Optik und vielseitige Gestaltungsmöglichkeiten für klassische und moderne Steildächer.",
-    cta: "Tondachziegel entdecken",
-    to: "/leistungen/dacheindeckung-erneuern/tondachziegel",
-  },
+  text: "Natürliche Optik und vielseitige Gestaltungsmöglichkeiten für klassische und moderne Dächer.",
+  cta: "Tondachziegel entdecken",
+  to: "/leistungen/dacheindeckung-erneuern/tondachziegel",
+  image: "/tondachziegel.png"
+},
   {
     title: "Betondachsteine",
     text: "Robuste und vielseitige Dachsteine mit unterschiedlichen Formen und Oberflächen.",
     cta: "Betondachsteine entdecken",
     to: "/leistungen/dacheindeckung-erneuern/betondachsteine",
-  },
+   image: "/Betondachstein.jpg" },
   {
     title: "Schiefer",
     text: "Hochwertige, charaktervolle Dacheindeckung mit traditioneller Optik und vielfältigen Gestaltungsmöglichkeiten.",
     cta: "Schiefer entdecken",
     to: "/leistungen/dacheindeckung-erneuern/schiefer",
-  },
+  image: "/schiefer.jpg" },
   {
     title: "Bitumenschindeln",
     text: "Leichte und flexible Lösung für geeignete Dachformen und Einsatzbereiche.",
     cta: "Bitumenschindeln entdecken",
     to: "/leistungen/dacheindeckung-erneuern/bitumenschindeln",
+    image: "/bitumenschindeln.jpg"
   },
   {
     title: "Metall / Blech",
     text: "Moderne, langlebige und leichte Lösung für unterschiedliche Gebäude und Dachkonzepte.",
     cta: "Metall / Blech entdecken",
     to: "/leistungen/dacheindeckung-erneuern/metall-blech",
+     image: "/metal blech dach.jpg"
   },
 ];
 
