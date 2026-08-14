@@ -43,7 +43,7 @@ export const materialLinks = [
     text: "Moderne, langlebige und leichte Lösung für unterschiedliche Gebäude und Dachkonzepte.",
     cta: "Metall / Blech entdecken",
     to: "/leistungen/dacheindeckung-erneuern/metall-blech",
-     image: "/metal-blech-dach.jpg"
+     image: "/metall-blech-dach.jpg"
   },
 ];
 
