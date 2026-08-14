@@ -17,6 +17,7 @@ import { CallLink, CtaLink } from "@/components/site/CtaLink";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import heroImage from "@/assets/professionelles-dachdecker-foto.jpeg.asset.json";
 import dacheindeckungImage from "@/assets/Dacheindeckung.jpeg.asset.json";
+import tondachziegelImage from "@/assets/tondachziegel.png.asset.json";
 
 const TITLE = "Dachdecker Köln & Bonn | Robert Dachservice";
 
@@ -525,6 +526,7 @@ function Index() {
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {materialLinks.map((material) => {
               const materialImageSrc: Record<string, string> = {
+                Tondachziegel: tondachziegelImage.url,
                 Betondachsteine: "/Betondachstein.jpg",
                 Bitumenschindeln: "/bitumenschindeln.jpg",
                 "Metall / Blech": "/metall blech dach.jpg",
