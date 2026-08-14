@@ -20,7 +20,7 @@ export const materialLinks = [
   image: "/tondachziegel.png"
 },
   {
-    title: "Betondachsteine",
+    title: "betondachsteine",
     text: "Robuste und vielseitige Dachsteine mit unterschiedlichen Formen und Oberflächen.",
     cta: "Betondachsteine entdecken",
     to: "/leistungen/dacheindeckung-erneuern/betondachsteine",
@@ -43,7 +43,7 @@ export const materialLinks = [
     text: "Moderne, langlebige und leichte Lösung für unterschiedliche Gebäude und Dachkonzepte.",
     cta: "Metall / Blech entdecken",
     to: "/leistungen/dacheindeckung-erneuern/metall-blech",
-     image: "/metal blech dach.jpg"
+     image: "/metal-blech-dach.jpg"
   },
 ];
 

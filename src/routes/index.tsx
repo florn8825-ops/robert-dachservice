@@ -438,19 +438,9 @@ function Index() {
             <div className="absolute -left-5 -top-5 h-28 w-28 rounded-full bg-copper/10 blur-2xl" />
 
             <div className="relative overflow-hidden rounded-2xl border border-navy/10 bg-card p-3 shadow-xl">
-  <img
-    src="/Dacheindeckung.jpeg"
-    alt="Dacheindeckung – professionelles Foto"
-    className="w-full h-full object-cover"
-  />
-</div>
-            
-              <img
-                src={dacheindeckungImage.url}
-                alt="Neue Dacheindeckung: Fachgerecht verlegte Dachziegel in Anthrazit"
-                className="aspect-[4/3] w-full object-cover"
-                loading="lazy"
-                decoding="async"
+              <ImagePlaceholder
+                label="Dacheindeckung – professionelles Foto"
+                ratio="photo"
               />
             </div>
 
@@ -540,46 +530,12 @@ function Index() {
                 className="group overflow-hidden rounded-2xl border border-navy/10 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-copper/40 hover:shadow-xl"
               >
                 <div className="overflow-hidden">
-                 <img
-  src={material.image}
-  alt={material.title}
-  className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105"
-/>
+                  <ImagePlaceholder
+                    label={`${material.title} Foto`}
+                    ratio="square"
+                    className="aspect-[16/10] transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
                 </div>
-            {materialLinks.map((material) => {
-              const materialImageSrc: Record<string, string> = {
-                Tondachziegel: tondachziegelImage.url,
-                Betondachsteine: "/Betondachstein.jpg",
-                Schiefer: schieferImage.url,
-                Bitumenschindeln: "/bitumenschindeln.jpg",
-                "Metall / Blech": "/metall blech dach.jpg",
-              };
-
-              const imageSrc = materialImageSrc[material.title];
-
-              return (
-                <Link
-                  key={material.to}
-                  to={material.to as never}
-                  className="group overflow-hidden rounded-2xl border border-navy/10 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-copper/40 hover:shadow-xl"
-                >
-                  <div className="overflow-hidden">
-                    {imageSrc ? (
-                      <img
-                        src={imageSrc}
-                        alt={`${material.title} Foto`}
-                        className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    ) : (
-                      <ImagePlaceholder
-                        label={`${material.title} Foto`}
-                        ratio="square"
-                        className="aspect-[16/10] transition-transform duration-500 group-hover:scale-[1.03]"
-                      />
-                    )}
-                  </div>
 
                   <div className="p-7">
                     <h3 className="font-[family-name:var(--font-display)] text-lg font-bold uppercase tracking-wide text-navy">
