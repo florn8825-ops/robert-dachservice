@@ -523,36 +523,56 @@ function Index() {
           </div>
 
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {materialLinks.map((material) => (
-              <Link
-                key={material.to}
-                to={material.to as never}
-                className="group overflow-hidden rounded-2xl border border-navy/10 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-copper/40 hover:shadow-xl"
-              >
-                <div className="overflow-hidden">
-                  <ImagePlaceholder
-                    label={`${material.title} Foto`}
-                    ratio="square"
-                    className="aspect-[16/10] transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
-                </div>
+            {materialLinks.map((material) => {
+              const materialImageSrc: Record<string, string> = {
+                Betondachsteine: "/Betondachstein.jpg",
+                Bitumenschindeln: "/bitumenschindeln.jpg",
+                "Metall / Blech": "/metall blech dach.jpg",
+              };
 
-                <div className="p-7">
-                  <h3 className="font-[family-name:var(--font-display)] text-lg font-bold uppercase tracking-wide text-navy">
-                    {material.title}
-                  </h3>
+              const imageSrc = materialImageSrc[material.title];
 
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {material.text}
-                  </p>
+              return (
+                <Link
+                  key={material.to}
+                  to={material.to as never}
+                  className="group overflow-hidden rounded-2xl border border-navy/10 bg-background shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-copper/40 hover:shadow-xl"
+                >
+                  <div className="overflow-hidden">
+                    {imageSrc ? (
+                      <img
+                        src={imageSrc}
+                        alt={`${material.title} Foto`}
+                        className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <ImagePlaceholder
+                        label={`${material.title} Foto`}
+                        ratio="square"
+                        className="aspect-[16/10] transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                    )}
+                  </div>
 
-                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-copper-deep">
-                    {material.cta}
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </Link>
-            ))}
+                  <div className="p-7">
+                    <h3 className="font-[family-name:var(--font-display)] text-lg font-bold uppercase tracking-wide text-navy">
+                      {material.title}
+                    </h3>
+
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {material.text}
+                    </p>
+
+                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-copper-deep">
+                      {material.cta}
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
