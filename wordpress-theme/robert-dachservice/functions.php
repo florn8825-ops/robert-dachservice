@@ -9,7 +9,16 @@ function robert_dachservice_setup(): void {
     register_nav_menus(['primary'=>__('Primary Menu','robert-dachservice'),'footer-services'=>__('Footer Services','robert-dachservice'),'footer-company'=>__('Footer Company','robert-dachservice'),'footer-region'=>__('Footer Region','robert-dachservice')]);
 }
 add_action('after_setup_theme','robert_dachservice_setup');
-function robert_dachservice_assets(): void {$uri=get_template_directory_uri();$version=wp_get_theme()->get('Version');wp_enqueue_style('robert-dachservice-style',$uri.'/style.css',[],$version);wp_enqueue_script('robert-dachservice-header',$uri.'/assets/header.js',[],$version,true);}
+function robert_dachservice_assets(): void {
+    $uri=get_template_directory_uri();
+    $version=wp_get_theme()->get('Version');
+    wp_enqueue_style('robert-dachservice-style',$uri.'/style.css',[],$version);
+    wp_enqueue_style('robert-dachservice-fonts','https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap',[],null);
+    if (is_front_page()) {
+        wp_enqueue_style('robert-dachservice-home',$uri.'/assets/home.css',['robert-dachservice-style'],$version);
+    }
+    wp_enqueue_script('robert-dachservice-header',$uri.'/assets/header.js',[],$version,true);
+}
 add_action('wp_enqueue_scripts','robert_dachservice_assets');
 function robert_dachservice_widgets(): void {register_sidebar(['name'=>__('Footer','robert-dachservice'),'id'=>'footer','description'=>__('Optional footer widget area.','robert-dachservice'),'before_widget'=>'<div class="rd-widget">','after_widget'=>'</div>','before_title'=>'<h3>','after_title'=>'</h3>']);}
 add_action('widgets_init','robert_dachservice_widgets');
