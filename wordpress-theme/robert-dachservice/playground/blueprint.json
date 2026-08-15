@@ -1,0 +1,35 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "meta": {
+    "title": "Robert Dachservice – WordPress Theme Preview",
+    "description": "Preview of the robert-dachservice WordPress theme from the wordpress-conversion branch.",
+    "author": "florn8825-ops"
+  },
+  "landingPage": "/",
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "features": {
+    "networking": true
+  },
+  "steps": [
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "git:directory",
+        "url": "https://github.com/florn8825-ops/robert-dachservice",
+        "ref": "wordpress-conversion",
+        "refType": "branch",
+        "path": "wordpress-theme/robert-dachservice"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php update_option('permalink_structure', '/%postname%/'); flush_rewrite_rules(false); ?>"
+    }
+  ]
+}
