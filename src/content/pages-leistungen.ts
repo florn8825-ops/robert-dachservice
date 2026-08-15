@@ -1,5 +1,5 @@
 import type { PageDef } from "./types";
-import dachreparaturImage from "@/assets/dachreparatur.jpeg.asset.json";
+import dachreparaturImage from "@/assets/dachreparaturen2.jpeg.asset.json";
 import { daemmungLinks, flachdachLinks, materialLinks, spenglerLinks } from "./site";
 
 const bc = (...items: { label: string; to?: string }[]) => [
