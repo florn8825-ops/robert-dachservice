@@ -25,7 +25,12 @@ export const leistungenPages: PageDef[] = [
     cta: { label: "Dachreparatur anfragen", to: "/kontakt" },
     secondaryCta: CALL,
     blocks: [
-      { type: "placeholder", label: "Dachreparatur Foto – wird später ersetzt", ratio: "wide" },
+      {
+        type: "placeholder",
+        label: "Dachreparatur in Köln und Bonn",
+        ratio: "wide",
+        image: dachreparaturImage.url,
+      },
       {
         type: "text",
         h2: "Nicht jeder Dachschaden erfordert eine komplette Sanierung",

@@ -10,7 +10,7 @@ export type Block =
   | { type: "list"; h2?: string; intro?: string; items: string[] }
   | { type: "cards"; h2?: string; intro?: string; cards: CardLink[] }
   | { type: "steps"; h2?: string; intro?: string; steps: string[] }
-  | { type: "placeholder"; label: string; ratio?: "wide" | "photo" | "square" }
+  | { type: "placeholder"; label: string; ratio?: "wide" | "photo" | "square"; image?: string }
   | { type: "faq"; h2: string; items: { q: string; a: string }[] }
   | { type: "callout"; h2: string; paragraphs: string[]; cta?: CtaRef };
 

@@ -483,7 +483,16 @@ function BlockView({
               </div>
             </div>
 
-            <RoofVisual />
+            {block.image ? (
+              <img
+                src={block.image}
+                alt={block.label}
+                loading="lazy"
+                className="h-full w-full rounded-[1.5rem] object-cover shadow-xl"
+              />
+            ) : (
+              <RoofVisual />
+            )}
           </div>
         </section>
       );
