@@ -21,6 +21,7 @@ export const leistungenPages: PageDef[] = [
     intro:
       "Ein beschädigter Dachziegel, eine undichte Stelle oder ein Sturmschaden sollte möglichst früh geprüft werden. Robert Dachservice übernimmt auch kleinere Dachreparaturen und gezielte Instandsetzungen.",
     breadcrumbs: bc({ label: "Dachreparatur" }),
+    heroImage: dachreparaturImage.url,
     cta: { label: "Dachreparatur anfragen", to: "/kontakt" },
     secondaryCta: CALL,
     blocks: [
