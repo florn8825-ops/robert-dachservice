@@ -6,7 +6,6 @@ const routes = [
   '/leistungen/',
   '/leistungen/dachreparatur/', '/leistungen/dachsanierung/', '/leistungen/dacheindeckung-erneuern/',
   '/leistungen/dachdaemmung/', '/leistungen/flachdach/', '/leistungen/spenglerarbeiten/', '/leistungen/neubau-neueindeckung/',
-  '/leistungen/dachisolierung/', '/leistungen/flachdachsanierung/', '/leistungen/dachentwaesserung/',
   '/leistungen/dacheindeckung-erneuern/tondachziegel/', '/leistungen/dacheindeckung-erneuern/betondachsteine/',
   '/leistungen/dacheindeckung-erneuern/schiefer/', '/leistungen/dacheindeckung-erneuern/bitumenschindeln/',
   '/leistungen/dacheindeckung-erneuern/metall-blech/', '/leistungen/flachdach/bitumen/', '/leistungen/flachdach/epdm/',
