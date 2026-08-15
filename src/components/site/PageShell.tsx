@@ -568,6 +568,7 @@ export function PageShell({
             ) : (
               <RoofVisual />
             )}
+          </div>
         </div>
       </section>
 
