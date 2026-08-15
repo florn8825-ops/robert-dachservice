@@ -1,0 +1,38 @@
+name: WordPress theme E2E
+
+on:
+  push:
+    branches: [wordpress-conversion]
+  workflow_dispatch:
+
+jobs:
+  wordpress-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: wordpress-theme/robert-dachservice/package-lock.json
+
+      - name: Install Playwright test dependency
+        working-directory: wordpress-theme/robert-dachservice
+        run: npm install --no-save @playwright/test @wordpress/env
+
+      - name: Start WordPress
+        working-directory: wordpress-theme/robert-dachservice
+        run: npx wp-env start --update
+
+      - name: Run WordPress browser tests
+        working-directory: wordpress-theme/robert-dachservice
+        run: npx playwright test
+
+      - name: Stop WordPress
+        if: always()
+        working-directory: wordpress-theme/robert-dachservice
+        run: npx wp-env stop
