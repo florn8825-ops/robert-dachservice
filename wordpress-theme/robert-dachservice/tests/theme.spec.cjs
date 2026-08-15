@@ -9,11 +9,14 @@ const routes = [
   '/leistungen/dacheindeckung-erneuern/metall-blech/', '/leistungen/dachdaemmung/',
   '/leistungen/dachdaemmung/aufsparrendaemmung/', '/leistungen/dachdaemmung/zwischensparrendaemmung/',
   '/leistungen/dachdaemmung/untersparrendaemmung/', '/leistungen/dachdaemmung/dampfbremse/',
-  '/leistungen/flachdach/', '/leistungen/spenglerarbeiten/', '/leistungen/neubau-neueindeckung/',
-  '/leistungen/dachisolierung/', '/leistungen/flachdachsanierung/', '/leistungen/dachentwaesserung/',
+  '/leistungen/flachdach/', '/leistungen/flachdach/bitumen/', '/leistungen/flachdach/epdm/', '/leistungen/flachdach/pvc/',
+  '/leistungen/spenglerarbeiten/', '/leistungen/spenglerarbeiten/dachrinnen/', '/leistungen/spenglerarbeiten/fallrohre/',
+  '/leistungen/spenglerarbeiten/dachanschluesse/', '/leistungen/spenglerarbeiten/blechverwahrungen/',
+  '/leistungen/spenglerarbeiten/kehlen/', '/leistungen/spenglerarbeiten/ortgang-first/',
+  '/leistungen/neubau-neueindeckung/',
 ];
 
-test('all primary theme routes respond without server errors', async ({ request }) => {
+test('all known primary theme routes respond without server errors', async ({ request }) => {
   for (const route of routes) {
     const response = await request.get(route);
     expect(response.status(), route).toBe(200);
