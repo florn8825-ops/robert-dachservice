@@ -24,6 +24,7 @@ export type PageDef = {
   h1: string;
   intro: string;
   breadcrumbs: { label: string; to?: string }[];
+  heroImage?: string;
   blocks: Block[];
   cta: CtaRef;
   secondaryCta?: CtaRef;

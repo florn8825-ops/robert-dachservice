@@ -557,7 +557,17 @@ export function PageShell({
               </div>
             </div>
 
-            <RoofVisual />
+            {page.heroImage ? (
+              <div className="relative min-h-[430px] overflow-hidden rounded-[2rem] shadow-2xl shadow-navy/20">
+                <img
+                  src={page.heroImage}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </div>
+            ) : (
+              <RoofVisual />
+            )}
           </div>
         </div>
       </section>
