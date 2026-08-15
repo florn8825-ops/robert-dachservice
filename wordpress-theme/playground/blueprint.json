@@ -1,7 +1,7 @@
 {
   "$schema": "https://playground.wordpress.net/blueprint-schema.json",
   "meta": {
-    "title": "Robert Dachservice – Theme Test v3",
+    "title": "Robert Dachservice – Theme Test v4",
     "description": "Fresh WordPress Playground test instance for the wordpress-conversion branch.",
     "author": "Robert Dachservice"
   },
@@ -28,12 +28,13 @@
         "path": "wordpress-theme/robert-dachservice"
       },
       "options": {
-        "activate": true
+        "activate": true,
+        "targetFolderName": "robert-dachservice"
       }
     },
     {
       "step": "runPHP",
-      "code": "<?php\n// runPHP is an isolated PHP process; explicitly bootstrap WordPress before calling WP APIs.\nrequire_once '/wordpress/wp-load.php';\n\nif (!function_exists('wp_get_theme')) {\n    fwrite(STDERR, \"WordPress bootstrap failed: wp_get_theme() is unavailable.\\n\");\n    exit(1);\n}\n\n$theme = wp_get_theme();\n$checks = [];\n$checks['theme_active'] = get_template() === 'robert-dachservice';\n$checks['front_page_template'] = file_exists(get_template_directory() . '/front-page.php');\n$checks['header'] = file_exists(get_template_directory() . '/header.php');\n$checks['footer'] = file_exists(get_template_directory() . '/footer.php');\n$checks['contact_template'] = file_exists(get_template_directory() . '/page-kontakt.php');\n$checks['service_template'] = file_exists(get_template_directory() . '/page-leistung.php');\n$checks['region_template'] = file_exists(get_template_directory() . '/page-region.php');\n$checks['lead_cpt'] = post_type_exists('rd_lead');\n\necho 'ACTIVE_THEME_NAME ' . $theme->get('Name') . PHP_EOL;\necho 'ACTIVE_THEME_SLUG ' . get_template() . PHP_EOL;\n\nforeach ($checks as $name => $ok) {\n    echo ($ok ? 'PASS ' : 'FAIL ') . $name . PHP_EOL;\n}\n\nif (in_array(false, $checks, true)) {\n    exit(1);\n}\n"
+      "code": "<?php\n// runPHP is an isolated PHP process; explicitly bootstrap WordPress before calling WP APIs.\nrequire_once '/wordpress/wp-load.php';\n\nif (!function_exists('wp_get_theme')) {\n    fwrite(STDERR, \"WordPress bootstrap failed: wp_get_theme() is unavailable.\\n\");\n    exit(1);\n}\n\n$theme = wp_get_theme();\n$checks = [];\n$checks['theme_active'] = get_stylesheet() === 'robert-dachservice';\n$checks['front_page_template'] = file_exists(get_template_directory() . '/front-page.php');\n$checks['header'] = file_exists(get_template_directory() . '/header.php');\n$checks['footer'] = file_exists(get_template_directory() . '/footer.php');\n$checks['contact_template'] = file_exists(get_template_directory() . '/page-kontakt.php');\n$checks['service_template'] = file_exists(get_template_directory() . '/page-leistung.php');\n$checks['region_template'] = file_exists(get_template_directory() . '/page-region.php');\n$checks['lead_cpt'] = post_type_exists('rd_lead');\n\necho 'ACTIVE_THEME_NAME ' . $theme->get('Name') . PHP_EOL;\necho 'ACTIVE_THEME_SLUG ' . get_stylesheet() . PHP_EOL;\n\nforeach ($checks as $name => $ok) {\n    echo ($ok ? 'PASS ' : 'FAIL ') . $name . PHP_EOL;\n}\n\nif (in_array(false, $checks, true)) {\n    exit(1);\n}\n"
     }
   ]
 }
