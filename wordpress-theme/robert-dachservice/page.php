@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) { exit; }
 
 $slug = get_post_field('post_name', get_the_ID());
 $region_slugs = ['dachdecker-koeln','dachdecker-bonn'];
-$service_slugs = ['dachreparatur','dachsanierung','dacheindeckung-erneuern','dachdaemmung','flachdach','spenglerarbeiten','neubau-neueindeckung','tondachziegel','betondachsteine','schiefer','bitumenschindeln','metall-blech','aufsparrendaemmung','zwischensparrendaemmung','untersparrendaemmung','dampfbremse'];
+$service_slugs = ['dachreparatur','dachsanierung','dacheindeckung-erneuern','dachdaemmung','flachdach','spenglerarbeiten','neubau-neueindeckung','dachisolierung','flachdachsanierung','dachentwaesserung','tondachziegel','betondachsteine','schiefer','bitumenschindeln','metall-blech','aufsparrendaemmung','zwischensparrendaemmung','untersparrendaemmung','dampfbremse'];
 if (in_array($slug,$region_slugs,true) || in_array($slug,$service_slugs,true)) {
     wp_enqueue_style('robert-dachservice-service-region',get_template_directory_uri().'/assets/service-region.css',[],wp_get_theme()->get('Version'));
 }
