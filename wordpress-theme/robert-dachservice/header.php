@@ -3,14 +3,43 @@ declare(strict_types=1);
 if (!defined('ABSPATH')) { exit; }
 $phone_primary = '+49 1573 3645077';
 $phone_href = 'tel:+4915733645077';
-$services_url = home_url('/leistungen/dacheindeckung-erneuern/');
+$services_url = home_url('/leistungen/');
 $kontakt_url = home_url('/kontakt/');
 $logo_url = robert_dachservice_asset_url('robert-logo.png');
 $service_groups = [
-    'Dach' => [['Dacheindeckung erneuern','/leistungen/dacheindeckung-erneuern/'],['Dachsanierung','/leistungen/dachsanierung/'],['Dachreparatur','/leistungen/dachreparatur/']],
-    'Dämmung' => [['Dachdämmung','/leistungen/dachdaemmung/'],['Dachisolierung','/leistungen/dachisolierung/']],
-    'Flachdach' => [['Flachdach','/leistungen/flachdach/'],['Flachdachsanierung','/leistungen/flachdachsanierung/']],
-    'Spengler' => [['Spenglerarbeiten','/leistungen/spenglerarbeiten/'],['Dachentwässerung','/leistungen/dachentwaesserung/']],
+    'Dach' => [
+        ['Dachreparatur','/leistungen/dachreparatur/'],
+        ['Dachsanierung','/leistungen/dachsanierung/'],
+        ['Neubau / Neueindeckung','/leistungen/neubau-neueindeckung/'],
+    ],
+    'Dacheindeckung' => [
+        ['Dacheindeckung erneuern','/leistungen/dacheindeckung-erneuern/'],
+        ['Tondachziegel','/leistungen/dacheindeckung-erneuern/tondachziegel/'],
+        ['Betondachsteine','/leistungen/dacheindeckung-erneuern/betondachsteine/'],
+        ['Schiefer','/leistungen/dacheindeckung-erneuern/schiefer/'],
+        ['Bitumenschindeln','/leistungen/dacheindeckung-erneuern/bitumenschindeln/'],
+        ['Metall / Blech','/leistungen/dacheindeckung-erneuern/metall-blech/'],
+    ],
+    'Flachdach & Dämmung' => [
+        ['Flachdach','/leistungen/flachdach/'],
+        ['Bitumen','/leistungen/flachdach/bitumen/'],
+        ['EPDM','/leistungen/flachdach/epdm/'],
+        ['PVC','/leistungen/flachdach/pvc/'],
+        ['Dachdämmung','/leistungen/dachdaemmung/'],
+        ['Aufsparrendämmung','/leistungen/dachdaemmung/aufsparrendaemmung/'],
+        ['Zwischensparrendämmung','/leistungen/dachdaemmung/zwischensparrendaemmung/'],
+        ['Untersparrendämmung','/leistungen/dachdaemmung/untersparrendaemmung/'],
+        ['Dampfbremse / Luftdichtheit','/leistungen/dachdaemmung/dampfbremse/'],
+    ],
+    'Spenglerarbeiten' => [
+        ['Spenglerarbeiten','/leistungen/spenglerarbeiten/'],
+        ['Dachrinnen','/leistungen/spenglerarbeiten/dachrinnen/'],
+        ['Fallrohre','/leistungen/spenglerarbeiten/fallrohre/'],
+        ['Dachanschlüsse','/leistungen/spenglerarbeiten/dachanschluesse/'],
+        ['Blechverwahrungen','/leistungen/spenglerarbeiten/blechverwahrungen/'],
+        ['Kehlen','/leistungen/spenglerarbeiten/kehlen/'],
+        ['Ortgang & First','/leistungen/spenglerarbeiten/ortgang-first/'],
+    ],
 ];
 $main_links = [['Dachnotdienst','/dachnotdienst/'],['Über uns','/ueber-uns/'],['Referenzen','/referenzen/'],['Ratgeber','/ratgeber/'],['Kontakt','/kontakt/']];
 ?><!doctype html>
