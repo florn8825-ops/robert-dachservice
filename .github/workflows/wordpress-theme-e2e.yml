@@ -30,6 +30,13 @@ jobs:
         working-directory: wordpress-theme/robert-dachservice
         run: npx wp-env start --update
 
+      - name: Activate Robert Dachservice theme
+        working-directory: wordpress-theme/robert-dachservice
+        run: |
+          npx wp-env run cli wp theme activate robert-dachservice
+          npx wp-env run cli wp rewrite structure '/%postname%/' --hard
+          npx wp-env run cli wp rewrite flush --hard
+
       - name: Run WordPress browser tests
         working-directory: wordpress-theme/robert-dachservice
         run: npx playwright test
