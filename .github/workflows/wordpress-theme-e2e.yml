@@ -17,12 +17,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: wordpress-theme/robert-dachservice/package-lock.json
 
-      - name: Install Playwright test dependency
+      - name: Install Playwright and wp-env
         working-directory: wordpress-theme/robert-dachservice
         run: npm install --no-save @playwright/test @wordpress/env
+
+      - name: Install Chromium
+        working-directory: wordpress-theme/robert-dachservice
+        run: npx playwright install --with-deps chromium
 
       - name: Start WordPress
         working-directory: wordpress-theme/robert-dachservice
