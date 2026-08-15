@@ -1,43 +1,17 @@
 <?php
-/**
- * Site footer.
- */
-
 declare(strict_types=1);
-
-if (!defined('ABSPATH')) {
-    exit;
-}
+if (!defined('ABSPATH')) { exit; }
+$phone_primary = '+49 1573 3645077';
+$phone_secondary = '+49 177 8005899';
+$phone_href = 'tel:+4915733645077';
 ?>
 <footer class="rd-footer">
-    <div class="rd-container">
-        <?php if (is_active_sidebar('footer')) : ?>
-            <?php dynamic_sidebar('footer'); ?>
-        <?php endif; ?>
-
-        <nav aria-label="Footer">
-            <?php
-            wp_nav_menu([
-                'theme_location' => 'footer-services',
-                'container' => false,
-                'fallback_cb' => false,
-            ]);
-            wp_nav_menu([
-                'theme_location' => 'footer-company',
-                'container' => false,
-                'fallback_cb' => false,
-            ]);
-            wp_nav_menu([
-                'theme_location' => 'footer-region',
-                'container' => false,
-                'fallback_cb' => false,
-            ]);
-            ?>
-        </nav>
-
-        <p>&copy; <?php echo esc_html((string) gmdate('Y')); ?> <?php bloginfo('name'); ?></p>
-    </div>
-</footer>
-<?php wp_footer(); ?>
-</body>
-</html>
+<div class="rd-footer-cta"><div class="rd-container rd-footer-cta__inner"><div><div class="rd-eyebrow"><span></span> Robert Dachservice</div><h2>Sie haben ein Problem mit Ihrem Dach?</h2><p>Ob Reparatur, Dacheindeckung, Sanierung oder akuter Schaden: Besprechen Sie Ihr Vorhaben direkt mit uns.</p></div><div class="rd-footer-cta__actions"><a class="rd-cta-button" href="<?php echo esc_url(home_url('/kontakt/')); ?>">Angebot anfordern <span>↗</span></a><a class="rd-phone-button" href="<?php echo esc_url($phone_href); ?>">☎ Jetzt anrufen</a></div></div></div>
+<div class="rd-container rd-footer-main"><div class="rd-footer-grid">
+<div class="rd-footer-brand"><a class="rd-footer-logo" href="<?php echo esc_url(home_url('/')); ?>"><span class="rd-footer-logo-mark">⌂</span><span><strong>Robert</strong><small>Dachservice</small></span></a><p>Dachdeckermeisterbetrieb für Köln, Bonn und Umgebung. Fachgerechte Dacharbeiten von der Reparatur bis zur Neueindeckung.</p><a class="rd-footer-phone" href="<?php echo esc_url($phone_href); ?>"><span>☎</span><span><small>Telefon</small><strong><?php echo esc_html($phone_primary); ?></strong></span></a><a class="rd-footer-secondary-phone" href="tel:+491778005899"><?php echo esc_html($phone_secondary); ?></a></div>
+<div><div class="rd-footer-heading">Leistungen</div><?php wp_nav_menu(['theme_location'=>'footer-services','container'=>false,'fallback_cb'=>function(){echo '<ul><li><a href="'.esc_url(home_url('/leistungen/dachreparatur/')).'">Dachreparatur</a></li><li><a href="'.esc_url(home_url('/leistungen/dacheindeckung-erneuern/')).'">Dacheindeckung erneuern</a></li><li><a href="'.esc_url(home_url('/leistungen/dachsanierung/')).'">Dachsanierung</a></li><li><a href="'.esc_url(home_url('/leistungen/flachdach/')).'">Flachdach</a></li><li><a href="'.esc_url(home_url('/leistungen/dachdaemmung/')).'">Dachdämmung</a></li><li><a href="'.esc_url(home_url('/leistungen/spenglerarbeiten/')).'">Spenglerarbeiten</a></li></ul>'; }]); ?></div>
+<div><div class="rd-footer-heading">Unternehmen</div><?php wp_nav_menu(['theme_location'=>'footer-company','container'=>false,'fallback_cb'=>function(){echo '<ul><li><a href="'.esc_url(home_url('/dachnotdienst/')).'">Dachnotdienst</a></li><li><a href="'.esc_url(home_url('/ueber-uns/')).'">Über uns</a></li><li><a href="'.esc_url(home_url('/referenzen/')).'">Referenzen</a></li><li><a href="'.esc_url(home_url('/ratgeber/')).'">Ratgeber</a></li><li><a href="'.esc_url(home_url('/kontakt/')).'">Kontakt</a></li></ul>'; }]); ?></div>
+<div><div class="rd-footer-heading">Region</div><?php wp_nav_menu(['theme_location'=>'footer-region','container'=>false,'fallback_cb'=>function(){echo '<ul><li><a href="'.esc_url(home_url('/dachdecker-koeln/')).'">Dachdecker Köln</a></li><li><a href="'.esc_url(home_url('/dachdecker-bonn/')).'">Dachdecker Bonn</a></li><li><a href="'.esc_url(home_url('/leistungen/neubau-neueindeckung/')).'">Neubau / Neueindeckung</a></li></ul>'; }]); ?></div>
+</div><div class="rd-footer-trust"><div>✓ <strong>Dachdeckermeisterbetrieb</strong><small>Fachgerechte Dacharbeiten</small></div><div>✓ <strong>Köln · Bonn · Umgebung</strong><small>Regional für Sie da</small></div><a href="<?php echo esc_url($phone_href); ?>">☎ <strong>24/7 Dachnotdienst</strong><small>Bei akuten Dachschäden</small></a></div></div>
+<div class="rd-footer-bottom"><div class="rd-container"><span>© <?php echo esc_html((string)gmdate('Y')); ?> Robert Dachservice · Dachdeckermeisterbetrieb</span><span><a href="<?php echo esc_url(home_url('/impressum/')); ?>">Impressum</a><a href="<?php echo esc_url(home_url('/datenschutz/')); ?>">Datenschutz</a><a href="<?php echo esc_url(home_url('/cookie-einstellungen/')); ?>">Cookie-Einstellungen</a></span></div></div>
+</footer><?php wp_footer(); ?></body></html>
