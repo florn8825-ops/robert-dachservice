@@ -1,0 +1,83 @@
+/*
+Theme Name: Robert Dachservice
+Theme URI: https://robert-dachservice.vercel.app/
+Author: Robert Dachservice
+Description: WordPress theme based on the existing Robert Dachservice website.
+Version: 0.1.0
+Text Domain: robert-dachservice
+*/
+
+:root {
+  --rd-navy: #102238;
+  --rd-copper: #b87333;
+  --rd-copper-deep: #945923;
+  --rd-sand: #f3eee7;
+  --rd-card: #ffffff;
+  --rd-text: #102238;
+  --rd-muted: #657181;
+  --rd-border: rgba(16, 34, 56, 0.12);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--rd-text);
+  background: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+a { color: inherit; }
+img { max-width: 100%; height: auto; }
+
+.rd-container {
+  width: min(1180px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.rd-skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 10px;
+}
+.rd-skip-link:focus {
+  left: 10px;
+  z-index: 9999;
+  padding: 10px 14px;
+  background: var(--rd-navy);
+  color: #fff;
+}
+
+.rd-main { min-height: 50vh; }
+
+/* Initial WordPress conversion scaffold. Existing Lovable styling will be migrated section-by-section. */
+.rd-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border: 0;
+  background: var(--rd-copper);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+.rd-button:hover { background: var(--rd-copper-deep); }
+
+.rd-section { padding: 64px 0; }
+.rd-section--sand { background: var(--rd-sand); }
+.rd-eyebrow {
+  margin: 0;
+  color: var(--rd-copper-deep);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 767px) {
+  .rd-container { width: min(100% - 28px, 1180px); }
+  .rd-section { padding: 48px 0; }
+}
